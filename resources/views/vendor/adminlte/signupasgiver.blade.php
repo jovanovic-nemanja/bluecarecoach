@@ -93,8 +93,8 @@
 
                     <!--begin::Group-->
                     <div class="form-group row {{ $errors->has('username') ? 'has-error' : '' }}">
-                        <label class="col-xl-3 col-lg-3 col-form-label">UserName</label>
-                        <div class="col-lg-9 col-xl-9">
+                        <label class="font-size-h6 font-weight-bolder text-dark">UserName</label>
+                        <div class="">
                             <input class="form-control form-control-solid form-control-lg" name="username" type="text" />
                         </div>
 
@@ -110,8 +110,8 @@
 
                     <!--begin::Group-->
                     <div class="form-group row {{ $errors->has('phone_number') ? 'has-error' : '' }}">
-                        <label class="col-xl-3 col-lg-3 col-form-label">Phone Number</label>
-                        <div class="col-lg-9 col-xl-9">
+                        <label class="font-size-h6 font-weight-bolder text-dark">Phone Number</label>
+                        <div class="">
                             <input class="form-control form-control-solid form-control-lg" name="phone_number" type="text" />
                         </div>
 
@@ -120,6 +120,43 @@
                         @if ($errors->has('phone_number'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('phone_number') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                    <!--end::Group-->
+
+                    <!--begin::Group-->
+                    <div class="form-group row {{ $errors->has('birthday') ? 'has-error' : '' }}">
+                        <label class="font-size-h6 font-weight-bolder text-dark">Birthday</label>
+                        <div class="">
+                            <input class="form-control form-control-solid form-control-lg" name="birthday" type="date" />
+                        </div>
+
+                        <div class="fv-plugins-message-container"></div>
+
+                        @if ($errors->has('birthday'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('birthday') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                    <!--end::Group-->
+
+                    <!--begin::Group-->
+                    <div class="form-group row {{ $errors->has('gender') ? 'has-error' : '' }}">
+                        <label class="font-size-h6 font-weight-bolder text-dark">Gender</label>
+                        <div class="">
+                            <select class="form-control form-control-solid form-control-lg" name="gender">
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+
+                        <div class="fv-plugins-message-container"></div>
+
+                        @if ($errors->has('gender'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('gender') }}</strong>
                             </span>
                         @endif
                     </div>

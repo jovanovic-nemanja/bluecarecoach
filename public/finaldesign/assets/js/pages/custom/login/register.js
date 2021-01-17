@@ -59,7 +59,21 @@ var KTAddUser = function () {
 								message: 'Phone Number is required'
 							}
 						}
-					}
+					},
+                    birthday: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Birthday is required'
+                            }
+                        }
+                    },
+                    gender: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Gender is required'
+                            }
+                        }
+                    }
                 },
                 plugins: {
                     trigger: new FormValidation.plugins.Trigger(),

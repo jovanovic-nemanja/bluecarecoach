@@ -125,6 +125,43 @@
                     </div>
                     <!--end::Group-->
 
+                    <!--begin::Group-->
+                    <div class="form-group row {{ $errors->has('birthday') ? 'has-error' : '' }}">
+                        <label class="font-size-h6 font-weight-bolder text-dark">Birthday</label>
+                        <div class="col-lg-9 col-xl-9">
+                            <input class="form-control form-control-solid form-control-lg" name="birthday" type="date" />
+                        </div>
+
+                        <div class="fv-plugins-message-container"></div>
+
+                        @if ($errors->has('birthday'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('birthday') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                    <!--end::Group-->
+
+                    <!--begin::Group-->
+                    <div class="form-group row {{ $errors->has('gender') ? 'has-error' : '' }}">
+                        <label class="font-size-h6 font-weight-bolder text-dark">Gender</label>
+                        <div class="">
+                            <select class="form-control form-control-solid form-control-lg" name="gender">
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+
+                        <div class="fv-plugins-message-container"></div>
+
+                        @if ($errors->has('gender'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('gender') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                    <!--end::Group-->
+
                     <input type="hidden" name="role" id="role" value="2" />
 
                     <!--begin::Action-->
