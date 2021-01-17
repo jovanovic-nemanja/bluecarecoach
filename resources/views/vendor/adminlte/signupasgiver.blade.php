@@ -61,7 +61,6 @@
                         <input type="email" class="form-control" id="email" name="email" value="{{ $useremail }}" required readonly>
                     </div>
 
-                    <input type="hidden" name="role" value="{{ $role }}" />
                     <input type="hidden" name="email" value="{{ $useremail }}" />
 
                     <!--begin::Form group-->
