@@ -31,8 +31,8 @@
 
                     <!--begin::Group-->
                     <div class="form-group row {{ $errors->has('profile_logo') ? 'has-error' : '' }}">
-                        <label class="font-size-h6 font-weight-bolder text-dark">Avatar</label>
-                        <div class="">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Avatar</label>
+                        <div class="col-lg-9 col-xl-9">
                             <div class="image-input image-input-outline" id="kt_user_add_avatar">
                                 <div class="image-input-wrapper"></div>
                                 <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
@@ -56,17 +56,15 @@
                     </div>
                     <!--end::Group-->
 
-                    <div class="form-group">
-                        <label class="font-size-h6 font-weight-bolder text-dark">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" value="{{ $useremail }}" required readonly>
-                    </div>
-
                     <input type="hidden" name="email" value="{{ $useremail }}" />
 
                     <!--begin::Form group-->
                     <div class="form-group {{ $errors->has('firstname') ? 'has-error' : '' }}">
-                        <label class="font-size-h6 font-weight-bolder text-dark">First Name</label>
-                        <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Name*" value="{{ old('firstname') }}" required>
+                        <label class="col-xl-3 col-lg-3 col-form-label">First Name</label>
+                        <div class="col-lg-9 col-xl-9">
+                            <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Name*" value="{{ old('firstname') }}" required>    
+                        </div>
+                        
                         <div class="fv-plugins-message-container"></div>
 
                         @if ($errors->has('firstname'))
@@ -79,8 +77,10 @@
 
                     <!--begin::Form group-->
                     <div class="form-group {{ $errors->has('lastname') ? 'has-error' : '' }}">
-                        <label class="font-size-h6 font-weight-bolder text-dark">Last Name</label>
-                        <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Name*" value="{{ old('lastname') }}" required>
+                        <label class="col-xl-3 col-lg-3 col-form-label">Last Name</label>
+                        <div class="col-lg-9 col-xl-9">
+                            <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Name*" value="{{ old('lastname') }}" required>
+                        </div>
                         <div class="fv-plugins-message-container"></div>
                         
                         @if ($errors->has('lastname'))
@@ -127,7 +127,7 @@
 
                     <!--begin::Group-->
                     <div class="form-group row {{ $errors->has('birthday') ? 'has-error' : '' }}">
-                        <label class="font-size-h6 font-weight-bolder text-dark">Birthday</label>
+                        <label class="col-xl-3 col-lg-3 col-form-label">Birthday</label>
                         <div class="col-lg-9 col-xl-9">
                             <input class="form-control form-control-solid form-control-lg" name="birthday" type="date" />
                         </div>
@@ -144,8 +144,8 @@
 
                     <!--begin::Group-->
                     <div class="form-group row {{ $errors->has('gender') ? 'has-error' : '' }}">
-                        <label class="font-size-h6 font-weight-bolder text-dark">Gender</label>
-                        <div class="">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Gender</label>
+                        <div class="col-lg-9 col-xl-9">
                             <select class="form-control form-control-solid form-control-lg" name="gender">
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
