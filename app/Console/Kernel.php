@@ -30,22 +30,22 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $enable = Switchreminder::first();
-        if (@$enable) { //disabled case
-            # code...
-        }else{  //enabled case
-            $schedule->command('medications:checkdata')
-                     ->everyMinute(); //Run the task every minute
+        // $enable = Switchreminder::first();
+        // if (@$enable) { //disabled case
+        //     # code...
+        // }else{  //enabled case
+        //     $schedule->command('medications:checkdata')
+        //              ->everyMinute(); //Run the task every minute
 
-            $schedule->command('activitydaily:checkdata')
-                     ->everyMinute(); //Run the task every minute
+        //     $schedule->command('activitydaily:checkdata')
+        //              ->everyMinute(); //Run the task every minute
 
-            $schedule->command('activityweekly:checkdata')
-                     ->everyMinute(); //Run the task every minute
+        //     $schedule->command('activityweekly:checkdata')
+        //              ->everyMinute(); //Run the task every minute
 
-            $schedule->command('activitymonthly:checkdata')
-                     ->everyMinute(); //Run the task every minute
-        }
+        //     $schedule->command('activitymonthly:checkdata')
+        //              ->everyMinute(); //Run the task every minute
+        // }
     }
 
     /**
