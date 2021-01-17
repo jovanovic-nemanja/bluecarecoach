@@ -15,7 +15,7 @@
         <div class="d-flex flex-column-auto flex-column pt-lg-40 pt-15" style="padding-top: 0px !important;">
             <!--begin::Aside header-->
             <a href="{{ route('home') }}" class="text-center mb-10">
-                <img src="{{ asset('images/logo1.jpg') }}" class="" alt="" style="width: 100%; height: 100%;" />
+                <img src="{{ asset('images/logo1.jpg') }}" class="" alt="" style="width: 20%; height: 100%;" />
             </a>
             <!--end::Aside header-->
         </div>
@@ -59,7 +59,7 @@
                     <input type="hidden" name="email" value="{{ $useremail }}" />
 
                     <!--begin::Form group-->
-                    <div class="form-group {{ $errors->has('firstname') ? 'has-error' : '' }}">
+                    <div class="form-group row {{ $errors->has('firstname') ? 'has-error' : '' }}">
                         <label class="col-xl-3 col-lg-3 col-form-label">First Name</label>
                         <div class="col-lg-9 col-xl-9">
                             <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Name*" value="{{ old('firstname') }}" required>
@@ -76,7 +76,7 @@
                     <!--end::Form group-->
 
                     <!--begin::Form group-->
-                    <div class="form-group {{ $errors->has('lastname') ? 'has-error' : '' }}">
+                    <div class="form-group row {{ $errors->has('lastname') ? 'has-error' : '' }}">
                         <label class="col-xl-3 col-lg-3 col-form-label">Last Name</label>
                         <div class="col-lg-9 col-xl-9">
                             <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Name*" value="{{ old('lastname') }}" required>
