@@ -27,3 +27,13 @@ Route::get('/changepass', 'Frontend\AccountController@changepass')->name('change
 Route::put('/account/update', 'Frontend\AccountController@update')->name('account.update');
 Route::put('/account/updatePassword', 'Frontend\AccountController@updatePassword')->name('account.updatePassword');
 
+Route::get('/emailverifyowner', 'Auth\RegisterController@emailverifyowner')->name('emailverifyowner');
+Route::get('/emailverifygiver', 'Auth\RegisterController@emailverifygiver')->name('emailverifygiver');
+
+Route::POST('/sendverifycode', 'Auth\RegisterController@sendverifycode')->name('sendverifycode');
+Route::get('/emailverifyforresend/{email}/{role}', 'Auth\RegisterController@emailverifyforresend')->name('emailverifyforresend');
+Route::get('/directconfirmpage/{email}/{role}/{codes}', 'Auth\RegisterController@directconfirmpage')->name('directconfirmpage');
+Route::post('/validatecode', 'Auth\RegisterController@validatecode')->name('validatecode');
+
+Route::get('/signupasowner', 'Auth\RegisterController@signupasowner')->name('signupasowner');
+Route::get('/signupasgiver', 'Auth\RegisterController@signupasgiver')->name('signupasgiver');

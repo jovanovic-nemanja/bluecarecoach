@@ -31,7 +31,7 @@
 
                     <!--begin::Title-->
                     <div class="pb-13 pt-lg-0 pt-5">
-                        <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">Welcome to Bluecarehub</h3>
+                        <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">Welcome to Bluecare Coach</h3>
                     </div>
                     <!--begin::Title-->
                     <!--begin::Form group-->
@@ -65,8 +65,8 @@
                     <div class="pb-lg-0 pb-5">
                         <button type="submit" id="kt_login_signin_submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">Sign In</button>
 
-                        <a href="{{ route('sinupasowner') }}" class="btn btn-success font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">SignUp as Owner</a>
-                        <a href="{{ route('sinupasgiver') }}" class="btn btn-info font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">SignUp as Giver</a>
+                        <a href="{{ route('emailverifyowner') }}" class="btn btn-success font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">SignUp as Owner</a>
+                        <a href="{{ route('emailverifygiver') }}" class="btn btn-info font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">SignUp as Giver</a>
                     </div>
                     <!--end::Action-->
                 </form>
@@ -115,3 +115,7 @@
     </div>
     <!--end::Content-->
 @stop
+
+@section('script')
+    <script src="{{ asset('finaldesign/assets/js/pages/custom/login/login-general.js') }}"></script>
+@endsection

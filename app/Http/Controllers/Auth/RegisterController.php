@@ -7,7 +7,7 @@ use Session;
 use App\User;
 use App\Role;
 use App\RoleUser;
-
+use App\Verifyemails;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -131,23 +131,28 @@ class RegisterController extends Controller
         }
     }
 
-    public function sellerregister() 
+    public function signupasowner() 
     {
-        return view('auth.sellerregister');
+        return view('auth.signupasowner');
     }
 
-    public function emailverify() 
+    public function signupasgiver() 
     {
-        Session::put('role', 'buyer');
-        $role = "buyer";
+        return view('auth.signupasgiver');
+    }
+
+    public function emailverifyowner() 
+    {
+        Session::put('role', 'careowner');
+        $role = "careowner";
         $email = '';
         return view('auth.emailverify', compact('role', 'email'));
     }
 
-    public function emailverifyseller() 
+    public function emailverifygiver() 
     {
-        Session::put('role', 'seller');
-        $role = "seller";
+        Session::put('role', 'caregiver');
+        $role = "caregiver";
         $email = '';
         return view('auth.emailverify', compact('role', 'email'));
     }
@@ -157,5 +162,87 @@ class RegisterController extends Controller
         $role = $role;
 
         return view('auth.emailverify', compact('role', 'email'));
+    }
+
+    public function sendverifycode(Request $request)
+    {
+        $this->validate(request(), [
+            'email'        => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+
+        DB::beginTransaction();
+
+        $str = rand(100000, 999999);
+        $url = "https://bluecarecoach.com/directconfirmpage/".$request['email']."/".$request['role']."/".$str;
+        $data = [];
+        $data['name'] = 'Welcome User,';
+        $data['body'] = 'Thank you for registering with us. <br> To complete your registration, please verify your email by clicking on this <a href="'.$url.'">link</a> and entering the following code '.$str.'.<br><br><br><a href="'.$url.'" style="padding: 10px 30px; text-decoration: none; font-size: 24px; border-radius: 0; background-color: #476B91; color: #ffffff;">Verify</a>';
+
+        $useremail = $request['email'];
+        $role = $request['role'];
+        $username = 'BlueCare Coach';
+        $subject = "Verify your email for BlueCare Coach";
+
+        try {
+            Mail::send('frontend.mail.maillogin', $data, function($message) use ($username, $useremail, $subject) {
+                $message->to($useremail, $username)->subject($subject);
+                $message->from('solaris.dubai@gmail.com', 'Administrator');
+            });
+
+            $verify = Verifyemails::where('email', $request['email'])->first();
+            if (@$verify) {
+                $verify->verify_code = $str;
+                $verify->password = $request['password'];
+                $verify->update();
+            }else{
+                $Verifyemails = Verifyemails::create([
+                    'email' => $useremail,
+                    'verify_code' => $str,
+                    'password' => $request['password'],
+                ]);
+            }
+
+            $id = '';
+            $msg = '';
+
+            DB::commit();
+            return view('auth.confirmverifycode', compact('useremail', 'role', 'id', 'msg'));
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }   
+    }
+
+    public function directconfirmpage($email, $role, $id, $msg = null)
+    {
+        if (@$id && @$role && @$email) {
+            $useremail = $email;
+
+            return view('auth.confirmverifycode', compact('useremail', 'role', 'id', 'msg'));
+        }
+    }
+
+    public function validatecode(Request $request)
+    {
+        $useremail = $request['email'];
+        $role = $request['role'];
+        $verify_code = $request['verify_code'];
+        $validate = Verifyemails::where('email', $useremail)->first();
+
+        if (@$validate) {
+            if ($validate->verify_code == $verify_code) {
+                if ($role == 'careowner') {
+                    return view('auth/signupasowner', compact('useremail'));
+                }
+                if ($role == 'seller') {
+                    return view('auth/signupasgiver', compact('useremail'));
+                }
+            }else{
+                $msg = "Verify codes is failed. ";
+                $id = '';
+                return view('auth.confirmverifycode', compact('useremail', 'role', 'id', 'msg'));
+            }
+        }
     }
 }
