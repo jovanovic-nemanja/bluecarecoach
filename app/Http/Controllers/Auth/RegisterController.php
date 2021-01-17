@@ -234,7 +234,7 @@ class RegisterController extends Controller
         if (@$validate) {
             if ($validate->verify_code == $verify_code) {
                 if ($role == 'careowner') {
-                    return view('auth/signupasowner', compact('useremail'));
+                    return view('auth/register', compact('useremail'));
                 }
                 if ($role == 'caregiver') {
                     return view('auth/signupasgiver', compact('useremail'));
