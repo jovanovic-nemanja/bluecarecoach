@@ -53,9 +53,7 @@
                                                 <!--begin::Pic-->
                                                 <div class="flex-shrink-0 mr-4 mt-lg-0 mt-3">
                                                     <div class="symbol symbol-circle symbol-lg-75">
-                                                        <!-- <a href="{{ route('resident.show', $resident->id) }}"> -->
-                                                            <img src="{{ asset('uploads/').'/'.$user->profile_logo }}" class="rad-50 center-block custom_img_tag" alt="image">
-                                                        <!-- </a> -->
+                                                        <img src="{{ asset('uploads/').'/'.$user->profile_logo }}" class="rad-50 center-block custom_img_tag" alt="image">
                                                     </div>
                                                     <div class="symbol symbol-lg-75 symbol-circle symbol-primary d-none">
                                                         <span class="font-size-h3 font-weight-boldest">JM</span>
