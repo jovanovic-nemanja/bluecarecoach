@@ -234,7 +234,7 @@ class RegisterController extends Controller
                 if ($role == 'careowner') {
                     return view('auth/signupasowner', compact('useremail'));
                 }
-                if ($role == 'seller') {
+                if ($role == 'caregiver') {
                     return view('auth/signupasgiver', compact('useremail'));
                 }
             }else{
