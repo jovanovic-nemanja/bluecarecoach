@@ -28,7 +28,7 @@
                 <!--begin::Form-->
                 <form class="form" novalidate="novalidate" id="kt_login_validatecode_form" action="{{ route('validatecode') }}" method="POST">
                     {!! csrf_field() !!}
-                    <h5>{{ $useremail }}</h5>
+                    <h5>{{ $useremail }}</h5><br>
 
                     <input type="hidden" name="role" value="{{ $role }}" />
                     <input type="hidden" name="email" value="{{ $useremail }}" />
