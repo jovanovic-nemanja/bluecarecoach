@@ -153,5 +153,5 @@
 @stop
 
 @section('script')
-    <script src="{{ asset('finaldesign/assets/js/pages/custom/user/register.js') }}"></script>
+    <script src="{{ asset('finaldesign/assets/js/pages/custom/login/register.js') }}"></script>
 @endsection
