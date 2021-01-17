@@ -24,7 +24,7 @@ var KTLogin = function() {
             form,
             {
                 fields: {
-                    verify_codes: {
+                    verify_code: {
                         validators: {
                             notEmpty: {
                                 message: 'Verification code is required'
