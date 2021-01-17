@@ -1,0 +1,51 @@
+.custom_a_tag {
+	overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.custom_img_tag {
+	object-fit: cover;
+}
+.custom_div_tag {
+	width: 100%;
+}
+.btn-custom {
+	background-color: #4CAF50;
+	color: #fff;
+}
+.btn-custom:hover {
+	background-color: #3da941;
+	color: #fff;	
+}
+.custom_drop_down {
+	margin-bottom: 2%;
+}
+.custom_span_tag_flex {
+	flex: 0 0 35px;
+}
+.custom_img_width {
+    height: calc(1.35em + 1.1rem + 2px);
+    width: calc(1.35em + 1.1rem + 2px);
+}
+.wave.wave-custom {
+	background-color: rgb(170 216 172)!important;
+}
+.circle {
+	text-align: center;
+    border-radius: 50%;
+    background-color: #1cc6d8;
+}
+.circle_form {
+    padding-top: 40%;
+}
+.padding-bottom-30 {
+	text-align: center;
+    padding-top: 5%;
+}
+#Daily_area {
+	display: inline-flex;
+	width: inherit;
+}
+.custom_col-3 {
+	flex: initial;
+}
