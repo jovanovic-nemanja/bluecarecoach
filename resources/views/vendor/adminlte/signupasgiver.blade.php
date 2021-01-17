@@ -126,7 +126,7 @@
                     </div>
                     <!--end::Group-->
 
-                    <input type="hidden" name="role" id="role" value="2" />
+                    <input type="hidden" name="role" id="role" value="3" />
 
                     <!--begin::Action-->
                     <div class="pb-lg-0 pb-5">

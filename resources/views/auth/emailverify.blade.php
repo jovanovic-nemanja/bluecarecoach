@@ -32,7 +32,11 @@
 
                     <!--begin::Title-->
                     <div class="pb-13 pt-lg-0 pt-5">
-                        <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">Please verify your email</h3>
+                        @if($role == 'careowner')
+                            <h3 class="font-weight-bolder font-size-h4 font-size-h1-lg" style="color: #ee2d41;">Care Home Owner Registeration</h3>
+                        @else
+                            <h3 class="font-weight-bolder font-size-h4 font-size-h1-lg" style="color: #1bc5bd;">Caregiver Registeration</h3>
+                        @endif
                     </div>
                     <!--begin::Title-->
                     <!--begin::Form group-->
@@ -79,7 +83,8 @@
                     <!--begin::Action-->
                     <div class="pb-lg-0 pb-5">
                         <button type="button" id="kt_login_signup_submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">Sign In</button>
-                        <button type="button" id="kt_login_signup_cancel" class="btn btn-light-primary font-weight-bolder font-size-h6 px-8 py-4 my-3">Cancel</button>
+                        <button type="button" id="kt_login_signup_cancel" class="btn btn-light-primary font-weight-bolder font-size-h6 px-8 py-4 my-3">Cancel</button>&nbsp;&nbsp;&nbsp;
+                        <a href="{{ url(config('adminlte.login_url', 'login')) }}" class="btn btn-light-success font-weight-bolder font-size-h6 px-8 py-4 my-3">Sign In</a>
                     </div>
                     <!--end::Action-->
                 </form>

@@ -62,10 +62,14 @@ class User extends Authenticatable
     }
 
     /**
+    * file upload
     * @param user_id
+    * @author Nemanja
+    * @since 2021-01-18
     * This is a feature to upload a profile logo
     */
-    public static function upload_logo_img($user_id, $existings = null) {
+    public static function Upload_avatar($user_id, $existings = null) 
+    {
         if(!request()->hasFile('profile_logo')) {
             return false;
         }
@@ -79,7 +83,7 @@ class User extends Authenticatable
     * file upload
     * @param userid and photo file
     * @return boolean true or false
-    * @since 2020-10-16
+    * @since 2021-01-18
     * @author Nemanja
     */
     public static function save_logo_img($user_id, $image) {

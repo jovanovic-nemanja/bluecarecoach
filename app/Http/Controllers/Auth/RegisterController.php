@@ -58,12 +58,10 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'username' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'gender' => 'required|integer',
-            'birthday' => 'required|date',
-            'address' => 'required|string',
-            'password' => 'string|min:6|confirmed',
             'phone_number' => 'string|max:255',
         ]);
     }
@@ -79,50 +77,50 @@ class RegisterController extends Controller
         if(!@$data['role']) {
             return false;
         }else{
-            if($data['role'] == 1) {    //seller
+            if($data['role'] == 2) {    //careowner
                 $role = 2;
-            }else if($data['role'] == 2) {    //buyer
+            }else if($data['role'] == 3) {    //caregiver
                 $role = 3;
             }else{
                 
             }
 
-            $verify = VerifyEmailcodes::where('email', $data['email'])->first();
+            $verify = Verifyemails::where('email', $data['email'])->first();
             $data['password'] = $verify->password;
 
             DB::beginTransaction();
 
             try {
                 $user = User::create([
-                    'name' => $data['name'],
-                    'company_name' => $data['company_name'],
-                    'company_logo' => @$data['company_logo'],
+                    'firstname' => $data['firstname'],
+                    'lastname' => $data['lastname'],
+                    'username' => $data['username'],
                     'email' => $data['email'],
-                    'block' => 0,
                     'password' => Hash::make($data['password']),
                     'phone_number' => @$data['phone_number'],
                     'sign_date' => date('Y-m-d h:i:s'),
                 ]);
 
-                Image::upload_logo_img($user->id);
+                User::Upload_avatar($user->id);
 
                 RoleUser::create([
                     'user_id' => $user->id,
                     'role_id' => $role,
                 ]);
-                DB::commit();
 
+                DB::commit();
 
                 $controller = new EmailsController;
                 $array = [];
                 
-                $array['username'] = $data['name'];
+                $array['username'] = $data['firstname'];
                 $array['receiver_address'] = $data['email'];
                 $array['data'] = array('name' => $array['username'], "body" => "Welcome for sign up our site!");
                 $array['subject'] = "Successfully sign up your account.";
                 $array['sender_address'] = "jovanovic.nemanja.1029@gmail.com";
 
                 $controller->save($array);
+
                 return $user;
             } catch (\Exception $e) {
                 DB::rollback();
@@ -133,7 +131,7 @@ class RegisterController extends Controller
 
     public function signupasowner() 
     {
-        return view('auth.signupasowner');
+        return view('auth.register');
     }
 
     public function signupasgiver() 

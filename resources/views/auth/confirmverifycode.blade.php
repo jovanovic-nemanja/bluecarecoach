@@ -52,6 +52,7 @@
                     <div class="pb-lg-0 pb-5">
                         <button type="button" id="kt_login_validate_submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">Submit</button>
                         <button type="button" id="kt_login_validate_cancel" class="btn btn-light-primary font-weight-bolder font-size-h6 px-8 py-4 my-3">Cancel</button>
+                        <a href="{{ url(config('adminlte.login_url', 'login')) }}" class="btn btn-light-success font-weight-bolder font-size-h6 px-8 py-4 my-3">Sign In</a>
                     </div>
                     <!--end::Action-->
                 </form>
