@@ -82,7 +82,7 @@ var KTAddUser = function () {
                             confirmButton: "btn font-weight-bold btn-light-primary"
                         }
                     }).then(function() {
-                        KTUtil.scrollTop();
+                        $('#kt_login_register_form').submit();
                     });
                 } else {
                     swal.fire({
