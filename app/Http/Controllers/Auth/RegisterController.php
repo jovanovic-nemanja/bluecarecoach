@@ -8,6 +8,7 @@ use App\User;
 use App\Role;
 use App\RoleUser;
 use App\Verifyemails;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
