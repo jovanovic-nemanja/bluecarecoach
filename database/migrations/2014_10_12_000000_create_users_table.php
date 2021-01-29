@@ -15,13 +15,15 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('firstname');
+            $table->string('firstname')->nullable();
             $table->string('middlename')->nullable();
-            $table->string('lastname');
-            $table->string('username')->unique()->nullable();
-            $table->string('email')->unique();
+            $table->string('lastname')->nullable();
+            // $table->string('username')->unique()->nullable();
+            $table->string('email')->unique()->nullable();
             $table->integer('gender')->nullable();
             $table->date('birthday')->nullable();
+            $table->integer('care_giving_license')->nullable();
+            $table->string('care_giving_experience')->nullable();
 
             $table->text('street1')->nullable();
             $table->text('street2')->nullable();
@@ -29,9 +31,22 @@ class CreateUsersTable extends Migration
             $table->text('zip_code')->nullable();
             $table->text('state')->nullable();
 
-            $table->string('profile_logo', '256');
+            $table->text('skill1')->nullable();
+            $table->text('skill2')->nullable();
+            $table->text('skill3')->nullable();
+            $table->text('skill4')->nullable();
+            $table->text('skill5')->nullable();
+
+            $table->text('hobby1')->nullable();
+            $table->text('hobby2')->nullable();
+            $table->text('hobby3')->nullable();
+            $table->text('hobby4')->nullable();
+            $table->text('hobby5')->nullable();
+
+            $table->string('profile_logo', '256')->nullable();
             $table->integer('email_verified_at')->nullable();
             $table->string('password')->nullable();
+            $table->string('apple_id')->nullable();
             $table->string('phone_number')->nullable();
             $table->datetime('sign_date');
             $table->rememberToken();

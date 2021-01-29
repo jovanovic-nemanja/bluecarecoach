@@ -35,13 +35,13 @@
                     </div>
                     <!--begin::Title-->
                     <!--begin::Form group-->
-                    <div class="form-group {{ $errors->has('username') ? 'has-error' : '' }}">
-                        <label class="font-size-h6 font-weight-bolder text-dark">Name</label>
-                        <input class="form-control form-control-solid h-auto py-6 px-6 rounded-lg" type="text" name="username" autocomplete="off" />
+                    <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
+                        <label class="font-size-h6 font-weight-bolder text-dark">Email</label>
+                        <input class="form-control form-control-solid h-auto py-6 px-6 rounded-lg" type="email" name="email" autocomplete="off" />
 
-                        @if ($errors->has('username'))
+                        @if ($errors->has('email'))
                             <span class="help-block">
-                                <strong>{{ $errors->first('username') }}</strong>
+                                <strong>{{ $errors->first('email') }}</strong>
                             </span>
                         @endif
                     </div>

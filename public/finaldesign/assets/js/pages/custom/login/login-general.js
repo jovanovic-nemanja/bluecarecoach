@@ -25,11 +25,14 @@ var KTLogin = function() {
 			KTUtil.getById('kt_login_signin_form'),
 			{
 				fields: {
-					username: {
+					email: {
 						validators: {
 							notEmpty: {
-								message: 'Username is required'
-							}
+								message: 'Email is required'
+							},
+                            emailAddress: {
+                                message: 'The value is not a valid email address'
+                            }
 						}
 					},
 					password: {
