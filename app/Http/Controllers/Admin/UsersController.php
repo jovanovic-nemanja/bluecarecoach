@@ -209,8 +209,8 @@ class UsersController extends Controller
 
         try {
             $user = User::create([
-                'firstname' => $request['firstname'],
-                'lastname' => $request['lastname'],
+                'firstname' => $request['first_name'],
+                'lastname' => $request['last_name'],
                 'email' => $request['email'],
                 'birthday' => $request['birthday'],
                 'care_giving_license' => $request['care_giving_license'],

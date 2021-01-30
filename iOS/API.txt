@@ -1,0 +1,43 @@
+- Email verification
+
+	https://bluecarecoach.com/api/v1/emailverify
+
+	{
+	    "status": "success",
+	    "data": "jovanovic.nemanja.1029@gmail.com",
+	    "msg": "We sent a verification code now. Please check your inbox."
+	}
+
+	{
+	    "status": "failed",
+	    "msg": "The email field is required."
+	}
+
+
+- Validation Code
+
+	https://bluecarecoach.com/api/v1/validateCode
+
+	{
+	    "status": "success",
+	    "data": "jovanovic.nemanja.1029@gmail.com",
+	    "msg": "Successfully validated now."
+	}
+
+	{
+	    "status": "failed",
+	    "data": "jovanovic.nemanja.1029@gmail.com",
+	    "msg": "Your verification code is invalid. "
+	}
+
+
+
+- Register user
+
+	https://bluecarecoach.com/api/v1/register
+
+	{
+	    "status": "failed",
+	    "msg": "The first name field is required.",
+	    "path": "https://bluecarecoach.com/uploads/"
+	}
