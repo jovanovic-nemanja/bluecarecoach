@@ -217,6 +217,16 @@ class UsersController extends Controller
                 'zip_code' => $request['zip_code'],
                 'password' => Hash::make($request['password']),
                 'phone_number' => $request['phone_number'],
+                'skill1' => @$request['skill1'],
+                'skill2' => @$request['skill2'],
+                'skill3' => @$request['skill3'],
+                'skill4' => @$request['skill4'],
+                'skill5' => @$request['skill5'],
+                'hobby1' => @$request['hobby1'],
+                'hobby2' => @$request['hobby2'],
+                'hobby3' => @$request['hobby3'],
+                'hobby4' => @$request['hobby4'],
+                'hobby5' => @$request['hobby5'],
                 'sign_date' => date('Y-m-d h:i:s'),
             ]);
 
