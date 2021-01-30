@@ -3,7 +3,6 @@
 namespace App\Console;
 
 use Carbon\Carbon;
-use App\Switchreminder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -16,10 +15,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\MedicationsCommand::class,
-        Commands\DailyActivityCommand::class,
-        Commands\WeeklyActivityCommand::class,
-        Commands\MonthlyActivityCommand::class,
+        // Commands\MedicationsCommand::class,
     ];
 
     /**

@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Validator;
 class UsersController extends Controller
 {
     public function __construct(){
-        $this->middleware(['auth', 'admin'])->except(['store', 'emailverify', 'validateCode', 'loginUserwithApple', 'loginUser', 'logout', 'uploadCredentialFile', 'getCredentials']);
+        $this->middleware(['auth', 'admin'])->except(['store', 'emailverify', 'validateCode', 'loginUserwithApple', 'loginUser', 'logout', 'uploadCredentialFile']);
     }
 
     /**
@@ -196,7 +196,7 @@ class UsersController extends Controller
             'password' => 'required|string|min:6|confirmed'
         ]);
 
-        $path = env('APP_URL')."uploads/";
+        $path = env('APP_URL')."/uploads/";
 
         if ($validator->fails()) {
             $messages = $validator->messages();
@@ -378,6 +378,8 @@ class UsersController extends Controller
             'expire_date' => 'required'
         ]);
 
+        $path = env('APP_URL')."/uploads/";
+
         if ($validator->fails()) {
             $messages = $validator->messages();
 
@@ -388,13 +390,20 @@ class UsersController extends Controller
         DB::beginTransaction();
 
         try {
-            $credential = Credentialusers::create([
-                'userid' => $request['userid'],
-                'credentialid' => $request['credentialid'],
-                'file_name' => $request['credentialfile'],
-                'expire_date' => $request['expire_date'],
-                'sign_date' => date('Y-m-d h:i:s'),
-            ]);
+            $credential = Credentialusers::where('userid', $request->userid)->where('credentialid', $request->credentialid)->first();
+            if (@$credential) {
+                $credential->file_name = $request['credentialfile'];
+                $credential->expire_date = $request['expire_date'];
+                $credential->update();
+            }else{
+                $credential = Credentialusers::create([
+                    'userid' => $request['userid'],
+                    'credentialid' => $request['credentialid'],
+                    'file_name' => $request['credentialfile'],
+                    'expire_date' => $request['expire_date'],
+                    'sign_date' => date('Y-m-d h:i:s'),
+                ]);
+            }
 
             Credentialusers::Upload_credentialfile($credential->id);
 
@@ -407,7 +416,7 @@ class UsersController extends Controller
 
         $data = $this->getCredentials($request['userid']);
 
-        return response()->json(['status' => "success", 'data' => $data, 'msg' => 'Successfully uploaded.']);
+        return response()->json(['status' => "success", 'data' => $data, 'msg' => 'Successfully uploaded.', 'path' => $path]);
     }
 
     /**
@@ -418,13 +427,14 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function getCredentials($userid)
+    private function getCredentials($userid)
     {
         if (@$userid) {
+            $id = $userid;
             $result = DB::table('credentials')
-                            ->leftJoin('credential_users', function ($join) {
+                            ->leftJoin('credential_users', function ($join) use ($id) {
                                 $join->on('credentials.id', '=', 'credential_users.credentialid')
-                                     ->where('credential_users.userid', '=', $userid);
+                                     ->where('credential_users.userid', '=', $id);
                             })
                             ->select('credentials.title', 'credential_users.file_name', 'credential_users.expire_date')
                             ->get();
