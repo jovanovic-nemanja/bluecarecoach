@@ -240,8 +240,7 @@ class UsersController extends Controller
                 User::upload_photo($user->id);
             }
 
-            $result = [];
-            $result = User::where('id', $user->id)->first();
+            $data = $this->getCredentials($user->id);
 
             DB::commit();
         } catch (\Exception $e) {
@@ -250,7 +249,7 @@ class UsersController extends Controller
             throw $e;
         }  
 
-        return response()->json(['status' => "success", 'data' => $result, 'msg' => 'Successfully registered.', 'path' => $path]);
+        return response()->json(['status' => "success", 'data' => $data, 'msg' => 'Successfully registered.', 'path' => $path]);
     }
 
     /**
@@ -293,15 +292,18 @@ class UsersController extends Controller
             ]);
             
             $result = User::where('id', $user->id)->first();
+            $data = $this->getCredentials($user->id);
+
             $msg = 'Successfully Logged In.';
             // $newUser = 1;
         }else{
             $result = $user;
+            $data = $this->getCredentials($user->id);
             $msg = 'Successfully Logged In.';
             // $newUser = 0;
         }
 
-        return response()->json(['status' => 'success', 'data' => $result, 'msg' => $msg]);
+        return response()->json(['status' => 'success', 'data' => $data, 'msg' => $msg]);
     }
 
     /**
@@ -335,8 +337,10 @@ class UsersController extends Controller
             ]);
 
         $user = $request->user();
+        $userid = $user->id;
+        $data = $this->getCredentials($userid);
         
-        return response()->json(['status' => 'success', 'data' => $user, 'msg' => 'Successfully Logged In.']);
+        return response()->json(['status' => 'success', 'data' => $data, 'msg' => 'Successfully Logged In.']);
     }
 
     /**
@@ -401,7 +405,9 @@ class UsersController extends Controller
             throw $e;
         }  
 
-        return response()->json(['status' => "success", 'data' => 'true', 'msg' => 'Successfully uploaded.']);
+        $data = $this->getCredentials($request['userid']);
+
+        return response()->json(['status' => "success", 'data' => $data, 'msg' => 'Successfully uploaded.']);
     }
 
     /**
@@ -412,25 +418,18 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function getCredentials()
+    public function getCredentials($userid)
     {
-        if (@$request->userid) {
+        if (@$userid) {
             $result = DB::table('credentials')
                             ->join('credential_users', 'credentials.id', '=', 'credential_users.credentialid')
-                            ->where('credential_users.userid', $request->userid)
+                            ->where('credential_users.userid', $userid)
                             ->select('credentials.title', 'credential_users.file_name', 'credential_users.expire_date'))
                             ->get();
-
-            $status = "success";
-            $msg = "Success.";                            
         }else{
             $result = [];
-            $status = "failed";
-            $msg = "Failed.";
         }
-
-        $path = env('APP_URL')."uploads/"; 
         
-        return response()->json(['status' => $status, 'data' => $result, 'msg' => $msg, 'path' => $path]);
+        return $result;
     }
 }
