@@ -15,18 +15,5 @@
 
 <script src="{{ asset('finaldesign/jquery-toast-plugin/jquery.toast.min.js') }}"></script>
 <script src="{{ asset('finaldesign/jquery-toast-plugin/toastr.min.js') }}"></script>
-	
-
-@guest
-	<!--begin::Page Scripts(used by this page)-->
-	
-	<!--end::Page Scripts-->
-@else
-	@if(auth()->user()->hasRole('admin'))
-		<script src="{{ asset('js/notification.js') }}"></script>
-	@endif
-@endguest
-
 <script src="{{ asset('js/font-icon.js') }}"></script>
-
 <script src="{{ asset('js/custom.js') }}"></script>

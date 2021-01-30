@@ -37,3 +37,10 @@ Route::post('/validatecode', 'Auth\RegisterController@validatecode')->name('vali
 
 Route::get('/signupasowner', 'Auth\RegisterController@signupasowner')->name('signupasowner');
 Route::get('/signupasgiver', 'Auth\RegisterController@signupasgiver')->name('signupasgiver');
+
+
+Route::resource('credentials', 'Admin\CredentialsController');
+Route::get('/credentials', 'Admin\CredentialsController@index')->name('credentials.index');
+
+Route::resource('licenses', 'Admin\CaregivinglicensesController');
+Route::get('/licenses', 'Admin\CaregivinglicensesController@index')->name('licenses.index');

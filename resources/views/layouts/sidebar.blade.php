@@ -10,9 +10,9 @@
                     <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
                 </li>
 
-                <li class="menu-item menu-item-submenu <?= ($menu == 'residents' || $menu == 'addresident' || $menu == 'manageresident') ? "menu-item-open" : "" ?> menu-item-here" aria-haspopup="true" data-menu-toggle="hover">
+                <li class="menu-item menu-item-submenu <?= ($menu == 'users') ? "menu-item-open" : "" ?> menu-item-here" aria-haspopup="true" data-menu-toggle="hover">
                     <a href="javascript:;" class="menu-link menu-toggle">
-                        <span class="svg-icon svg-icon-2x custom_span_tag_flex">
+                        <span class="svg-icon svg-icon-primary svg-icon-2x">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                     <polygon points="0 0 24 0 24 24 0 24"></polygon>
@@ -39,6 +39,54 @@
                                         <span></span>
                                     </i>
                                     <span class="menu-text">All Users</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="menu-item menu-item-submenu <?= ($menu == 'credentials' || $menu == 'care_giving_licenses') ? "menu-item-open" : "" ?> menu-item-here" aria-haspopup="true" data-menu-toggle="hover">
+                    <a href="javascript:;" class="menu-link menu-toggle">
+                        <span class="svg-icon svg-icon-primary svg-icon-2x">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <rect x="0" y="0" width="24" height="24"></rect>
+                                    <path d="M5,8.6862915 L5,5 L8.6862915,5 L11.5857864,2.10050506 L14.4852814,5 L19,5 L19,9.51471863 L21.4852814,12 L19,14.4852814 L19,19 L14.4852814,19 L11.5857864,21.8994949 L8.6862915,19 L5,19 L5,15.3137085 L1.6862915,12 L5,8.6862915 Z M12,15 C13.6568542,15 15,13.6568542 15,12 C15,10.3431458 13.6568542,9 12,9 C10.3431458,9 9,10.3431458 9,12 C9,13.6568542 10.3431458,15 12,15 Z" fill="#000000"></path>
+                                </g>
+                            </svg>
+                            <!--end::Svg Icon-->
+                        </span>
+                        <span class="menu-text">Setup</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="menu-submenu">
+                        <i class="menu-arrow"></i>
+                        <ul class="menu-subnav">
+                            <li class="menu-item menu-item-parent" aria-haspopup="true">
+                                <span class="menu-link">
+                                    <span class="menu-text">Credentials</span>
+                                </span>
+                            </li>
+                            <li class="menu-item <?= ($menu == "credentials") ? "menu-item-active" : "" ?>" aria-haspopup="true">
+                                <a href="{{ route('credentials.index') }}" class="menu-link <?= ($menu == "credentials") ? "menu-item-active" : "" ?>">
+                                    <i class="menu-bullet menu-bullet-dot">
+                                        <span></span>
+                                    </i>
+                                    <span class="menu-text">Credentials</span>
+                                </a>
+                            </li>
+
+                            <li class="menu-item menu-item-parent" aria-haspopup="true">
+                                <span class="menu-link">
+                                    <span class="menu-text">Care Giving Licenses</span>
+                                </span>
+                            </li>
+                            <li class="menu-item <?= ($menu == "care_giving_licenses") ? "menu-item-active" : "" ?>" aria-haspopup="true">
+                                <a href="{{ route('licenses.index') }}" class="menu-link <?= ($menu == "care_giving_licenses") ? "menu-item-active" : "" ?>">
+                                    <i class="menu-bullet menu-bullet-dot">
+                                        <span></span>
+                                    </i>
+                                    <span class="menu-text">Care Giving Licenses</span>
                                 </a>
                             </li>
                         </ul>

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\User;
 use App\Credentials;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class CredentialsController extends Controller
@@ -15,7 +17,9 @@ class CredentialsController extends Controller
      */
     public function index()
     {
-        //
+        $credentials = Credentials::all();
+
+        return view('admin.credentials.index', compact('credentials'));
     }
 
     /**
@@ -25,7 +29,7 @@ class CredentialsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.credentials.create');
     }
 
     /**
@@ -36,7 +40,19 @@ class CredentialsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate(request(), [
+            'title' => 'required|max:64'
+        ]);
+
+        $dates = User::getformattime();
+        $date = $dates['date'];
+
+        $credential = Credentials::create([
+            'title' => $request->title,
+            'sign_date' => $date,
+        ]);
+
+        return redirect()->route('credentials.index')->with('flash', 'Credential has been successfully created.');
     }
 
     /**
@@ -47,7 +63,9 @@ class CredentialsController extends Controller
      */
     public function show($id)
     {
-        //
+        $result = Credentials::where('id', $id)->first();
+
+        return view('admin.credentials.edit', compact('result'));
     }
 
     /**
@@ -70,7 +88,18 @@ class CredentialsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate(request(), [
+            'title' => 'required|max:64'
+        ]);
+
+        $record = Credentials::where('id', $id)->first();
+        if (@$record) {
+            $record->title = $request->title;
+
+            $record->update();
+        }
+
+        return redirect()->route('credentials.index');
     }
 
     /**
@@ -81,6 +110,8 @@ class CredentialsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $record = Credentials::where('id', $id)->delete();
+        
+        return redirect()->route('credentials.index');
     }
 }
