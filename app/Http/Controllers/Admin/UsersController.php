@@ -7,6 +7,7 @@ use App\User;
 use App\Role;
 use App\RoleUser;
 use App\Verifyemails;
+use App\Credentialusers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
@@ -18,7 +19,7 @@ use Illuminate\Support\Facades\Validator;
 class UsersController extends Controller
 {
     public function __construct(){
-        $this->middleware(['auth', 'admin'])->except(['store', 'emailverify', 'validateCode', 'loginUserwithApple', 'loginUser', 'logout']);
+        $this->middleware(['auth', 'admin'])->except(['store', 'emailverify', 'validateCode', 'loginUserwithApple', 'loginUser', 'logout', 'uploadCredentialFile', 'getCredentials']);
     }
 
     /**
@@ -354,5 +355,82 @@ class UsersController extends Controller
             'success' => true,
             'message' => 'Successfully logged out'
         ]);
+    }
+
+    /**
+     * Swift API : uploadCredential file.
+     *
+     * @since 2021-01-30
+     * @author Nemanja
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function uploadCredentialFile(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'credentialfile' => 'required',
+            'credentialid' => 'required',
+            'userid' => 'required',
+            'expire_date' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            $messages = $validator->messages();
+
+            //pass validator errors as errors object for ajax response
+            return response()->json(['status' => "failed", 'msg' => $messages->first(), 'path' => $path]);
+        }
+
+        DB::beginTransaction();
+
+        try {
+            $credential = Credentialusers::create([
+                'userid' => $request['userid'],
+                'credentialid' => $request['credentialid'],
+                'file_name' => $request['credentialfile'],
+                'expire_date' => $request['expire_date'],
+                'sign_date' => date('Y-m-d h:i:s'),
+            ]);
+
+            Credentialusers::Upload_credentialfile($credential->id);
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            throw $e;
+        }  
+
+        return response()->json(['status' => "success", 'data' => 'true', 'msg' => 'Successfully uploaded.']);
+    }
+
+    /**
+     * Swift API : get credential information.
+     *
+     * @since 2021-01-30
+     * @author Nemanja
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getCredentials()
+    {
+        if (@$request->userid) {
+            $result = DB::table('credentials')
+                            ->join('credential_users', 'credentials.id', '=', 'credential_users.credentialid')
+                            ->where('credential_users.userid', $request->userid)
+                            ->select('credentials.title', 'credential_users.file_name', 'credential_users.expire_date'))
+                            ->get();
+
+            $status = "success";
+            $msg = "Success.";                            
+        }else{
+            $result = [];
+            $status = "failed";
+            $msg = "Failed.";
+        }
+
+        $path = env('APP_URL')."uploads/"; 
+        
+        return response()->json(['status' => $status, 'data' => $result, 'msg' => $msg, 'path' => $path]);
     }
 }

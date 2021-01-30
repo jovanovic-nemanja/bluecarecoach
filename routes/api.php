@@ -25,3 +25,4 @@ Route::POST('/v1/register', 'Admin\UsersController@store');
 Route::POST('/v1/loginwithApple', 'Admin\UsersController@loginUserwithApple');
 Route::POST('/v1/login', 'Admin\UsersController@loginUser');
 Route::POST('/v1/logout', 'Admin\UsersController@logout');
+Route::POST('/v1/uploadCredentialFile', 'Admin\UsersController@uploadCredentialFile');
