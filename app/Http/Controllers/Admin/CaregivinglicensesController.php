@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Credentials;
+use App\Caregivinglicenses;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CredentialsController extends Controller
+class CaregivinglicensesController extends Controller
 {
     /**
      * Display a listing of the resource.
