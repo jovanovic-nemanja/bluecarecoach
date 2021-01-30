@@ -188,7 +188,7 @@ class UsersController extends Controller
         $validator = Validator::make($request->all(), [
             'first_name' => 'required|string|max:190',
             'last_name' => 'required|string|max:190',
-            'email' => 'required|string|email|max:255', //|unique:users
+            'email' => 'required|string|unique:users|email|max:255', //|unique:users
             'care_giving_license' => 'required|integer',
             'zip_code' => 'required',
             'care_giving_experience' => 'required',
