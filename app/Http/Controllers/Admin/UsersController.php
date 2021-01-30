@@ -422,8 +422,10 @@ class UsersController extends Controller
     {
         if (@$userid) {
             $result = DB::table('credentials')
-                            ->leftjoin('credential_users', 'credentials.id', '=', 'credential_users.credentialid')
-                            ->where('credential_users.userid', $userid)
+                            ->leftJoin('credential_users', function ($join) {
+                                $join->on('credentials.id', '=', 'credential_users.credentialid')
+                                     ->where('credential_users.userid', '=', $userid);
+                            })
                             ->select('credentials.title', 'credential_users.file_name', 'credential_users.expire_date')
                             ->get();
         }else{
