@@ -196,7 +196,7 @@ class UsersController extends Controller
             'password' => 'required|string|min:6|confirmed'
         ]);
 
-        $path = env('APP_URL')."/uploads/";
+        $path = env('APP_URL')."uploads/";
 
         if ($validator->fails()) {
             $messages = $validator->messages();
@@ -378,7 +378,7 @@ class UsersController extends Controller
             'expire_date' => 'required'
         ]);
 
-        $path = env('APP_URL')."/uploads/";
+        $path = env('APP_URL')."uploads/";
 
         if ($validator->fails()) {
             $messages = $validator->messages();
