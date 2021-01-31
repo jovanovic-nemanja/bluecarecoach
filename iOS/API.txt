@@ -53,76 +53,100 @@
 		zip_code: 11023
 		care_giving_experience: 3
 		birthday: 2020-01-29
+		phone_number: 123-023423
 		password: 111111
 		password_confirmation: 111111
+		skil1: add
+		skil2: asdf
+		skil3: wer
+		skil4: fghd
+		skil5: asdf
+		hobby1: wer
+		hobby2: asdfdsf
+		hobby3: abdfg
+		hobby4: ytr
+		hobby5: ert
 	}
 
 	{
 	    "status": "success",
 	    "data": [
 	        {
+	            "id": "1",
 	            "title": "First Aid & CPR",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "2",
 	            "title": "Food Handing  and Safety",
-	            "file_name": null,
-	            "expire_date": null
+	            "file_name": "123.txt",
+	            "expire_date": "2022-01-09 00:00:00"
 	        },
 	        {
+	            "id": "3",
 	            "title": "Orientation & Safety",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "4",
 	            "title": "HIV/AIDS",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "5",
 	            "title": "75 Hours Long Term Care Worker Basic Training",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "6",
 	            "title": "Mental Health",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "7",
 	            "title": "Dementia",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "8",
 	            "title": "Nurse Deligation Core",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "9",
 	            "title": "Nurse Delegation Diabetes",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "10",
 	            "title": "AFH Administrator Training",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "11",
 	            "title": "AFH Orientation Class Prospective Provider",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "12",
 	            "title": "Continuing Education (CE)",
 	            "file_name": null,
 	            "expire_date": null
 	        }
 	    ],
-	    "msg": "Successfully registered.",
-	    "path": "http://localhost:9000/uploads/"
+	    "msg": "Successfully uploaded.",
+	    "path": "uploads/",
+	    "isNewUser": 0
 	}
 
 	{
@@ -144,67 +168,80 @@
 	    "status": "success",
 	    "data": [
 	        {
+	            "id": "1",
 	            "title": "First Aid & CPR",
-	            "file_name": "34.pdf",
-	            "expire_date": "2021-05-20 00:00:00"
-	        },
-	        {
-	            "title": "Food Handing  and Safety",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "2",
+	            "title": "Food Handing  and Safety",
+	            "file_name": "123.txt",
+	            "expire_date": "2022-01-09 00:00:00"
+	        },
+	        {
+	            "id": "3",
 	            "title": "Orientation & Safety",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "4",
 	            "title": "HIV/AIDS",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "5",
 	            "title": "75 Hours Long Term Care Worker Basic Training",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "6",
 	            "title": "Mental Health",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "7",
 	            "title": "Dementia",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "8",
 	            "title": "Nurse Deligation Core",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "9",
 	            "title": "Nurse Delegation Diabetes",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "10",
 	            "title": "AFH Administrator Training",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "11",
 	            "title": "AFH Orientation Class Prospective Provider",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "12",
 	            "title": "Continuing Education (CE)",
 	            "file_name": null,
 	            "expire_date": null
 	        }
 	    ],
-	    "msg": "Successfully Logged In."
+	    "msg": "Successfully Logged In.",
+	    "isNewUser": 1
 	}
 
 	{
@@ -225,67 +262,80 @@
 	    "status": "success",
 	    "data": [
 	        {
+	            "id": "1",
 	            "title": "First Aid & CPR",
-	            "file_name": "34.pdf",
-	            "expire_date": "2021-05-20 00:00:00"
-	        },
-	        {
-	            "title": "Food Handing  and Safety",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "2",
+	            "title": "Food Handing  and Safety",
+	            "file_name": "123.txt",
+	            "expire_date": "2022-01-09 00:00:00"
+	        },
+	        {
+	            "id": "3",
 	            "title": "Orientation & Safety",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "4",
 	            "title": "HIV/AIDS",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "5",
 	            "title": "75 Hours Long Term Care Worker Basic Training",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "6",
 	            "title": "Mental Health",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "7",
 	            "title": "Dementia",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "8",
 	            "title": "Nurse Deligation Core",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "9",
 	            "title": "Nurse Delegation Diabetes",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "10",
 	            "title": "AFH Administrator Training",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "11",
 	            "title": "AFH Orientation Class Prospective Provider",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "12",
 	            "title": "Continuing Education (CE)",
 	            "file_name": null,
 	            "expire_date": null
 	        }
 	    ],
-	    "msg": "Successfully Logged In."
+	    "msg": "Successfully Logged In.",
+	    "isNewUser": 1
 	}
 
 	{
@@ -306,67 +356,80 @@
 	    "status": "success",
 	    "data": [
 	        {
+	            "id": "1",
 	            "title": "First Aid & CPR",
-	            "file_name": "34.pdf",
-	            "expire_date": "2021-05-20 00:00:00"
-	        },
-	        {
-	            "title": "Food Handing  and Safety",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "2",
+	            "title": "Food Handing  and Safety",
+	            "file_name": "123.txt",
+	            "expire_date": "2022-01-09 00:00:00"
+	        },
+	        {
+	            "id": "3",
 	            "title": "Orientation & Safety",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "4",
 	            "title": "HIV/AIDS",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "5",
 	            "title": "75 Hours Long Term Care Worker Basic Training",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "6",
 	            "title": "Mental Health",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "7",
 	            "title": "Dementia",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "8",
 	            "title": "Nurse Deligation Core",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "9",
 	            "title": "Nurse Delegation Diabetes",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "10",
 	            "title": "AFH Administrator Training",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "11",
 	            "title": "AFH Orientation Class Prospective Provider",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "12",
 	            "title": "Continuing Education (CE)",
 	            "file_name": null,
 	            "expire_date": null
 	        }
 	    ],
-	    "msg": "Successfully Logged In."
+	    "msg": "Successfully Logged In.",
+	    "isNewUser": 1
 	}
 
 	{
@@ -471,68 +534,80 @@
 	    "status": "success",
 	    "data": [
 	        {
+	            "id": "1",
 	            "title": "First Aid & CPR",
-	            "file_name": "123.txt",
-	            "expire_date": "2022-10-12 00:00:00"
-	        },
-	        {
-	            "title": "Food Handing  and Safety",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "2",
+	            "title": "Food Handing  and Safety",
+	            "file_name": "123.txt",
+	            "expire_date": "2022-01-09 00:00:00"
+	        },
+	        {
+	            "id": "3",
 	            "title": "Orientation & Safety",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "4",
 	            "title": "HIV/AIDS",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "5",
 	            "title": "75 Hours Long Term Care Worker Basic Training",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "6",
 	            "title": "Mental Health",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "7",
 	            "title": "Dementia",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "8",
 	            "title": "Nurse Deligation Core",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "9",
 	            "title": "Nurse Delegation Diabetes",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "10",
 	            "title": "AFH Administrator Training",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "11",
 	            "title": "AFH Orientation Class Prospective Provider",
 	            "file_name": null,
 	            "expire_date": null
 	        },
 	        {
+	            "id": "12",
 	            "title": "Continuing Education (CE)",
 	            "file_name": null,
 	            "expire_date": null
 	        }
 	    ],
-	    "path": "https://bluecarecoach.com/uploads/",
-	    "msg": "Successfully uploaded."
+	    "msg": "Successfully uploaded.",
+	    "path": "uploads/"
 	}
 
 	{

@@ -193,6 +193,7 @@ class UsersController extends Controller
             'zip_code' => 'required',
             'care_giving_experience' => 'required',
             'birthday' => 'required',
+            'phone_number' => 'required',
             'password' => 'required|string|min:6|confirmed'
         ]);
 
@@ -249,7 +250,7 @@ class UsersController extends Controller
             throw $e;
         }  
 
-        return response()->json(['status' => "success", 'data' => $data, 'msg' => 'Successfully registered.', 'path' => $path]);
+        return response()->json(['status' => "success", 'data' => $data, 'msg' => 'Successfully registered.', 'path' => $path, 'isNewUser' => 0]);
     }
 
     /**
@@ -295,15 +296,15 @@ class UsersController extends Controller
             $data = $this->getCredentials($user->id);
 
             $msg = 'Successfully Logged In.';
-            // $newUser = 1;
+            $isNewUser = 0;
         }else{
             $result = $user;
             $data = $this->getCredentials($user->id);
             $msg = 'Successfully Logged In.';
-            // $newUser = 0;
+            $isNewUser = 1;
         }
 
-        return response()->json(['status' => 'success', 'data' => $data, 'msg' => $msg]);
+        return response()->json(['status' => 'success', 'data' => $data, 'msg' => $msg, 'isNewUser' => $isNewUser]);
     }
 
     /**
@@ -349,15 +350,15 @@ class UsersController extends Controller
             $data = $this->getCredentials($user->id);
 
             $msg = 'Successfully Logged In.';
-            // $newUser = 1;
+            $isNewUser = 0;
         }else{
             $result = $user;
             $data = $this->getCredentials($user->id);
             $msg = 'Successfully Logged In.';
-            // $newUser = 0;
+            $isNewUser = 1;
         }
 
-        return response()->json(['status' => 'success', 'data' => $data, 'msg' => $msg]);
+        return response()->json(['status' => 'success', 'data' => $data, 'msg' => $msg, 'isNewUser' => $isNewUser]);
     }
 
     /**
@@ -403,15 +404,15 @@ class UsersController extends Controller
             $data = $this->getCredentials($user->id);
 
             $msg = 'Successfully Logged In.';
-            // $newUser = 1;
+            $isNewUser = 0;
         }else{
             $result = $user;
             $data = $this->getCredentials($user->id);
             $msg = 'Successfully Logged In.';
-            // $newUser = 0;
+            $isNewUser = 1;
         }
 
-        return response()->json(['status' => 'success', 'data' => $data, 'msg' => $msg]);
+        return response()->json(['status' => 'success', 'data' => $data, 'msg' => $msg, 'isNewUser' => $isNewUser]);
     }
 
     /**
@@ -544,7 +545,7 @@ class UsersController extends Controller
                                 $join->on('credentials.id', '=', 'credential_users.credentialid')
                                      ->where('credential_users.userid', '=', $id);
                             })
-                            ->select('credentials.title', 'credential_users.file_name', 'credential_users.expire_date')
+                            ->select('credentials.id', 'credentials.title', 'credential_users.file_name', 'credential_users.expire_date')
                             ->get();
         }else{
             $result = [];
