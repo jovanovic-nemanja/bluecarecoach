@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Validator;
 class UsersController extends Controller
 {
     public function __construct(){
-        $this->middleware(['auth', 'admin'])->except(['store', 'emailverify', 'validateCode', 'loginUserwithApple', 'loginUser', 'logout', 'uploadCredentialFile']);
+        $this->middleware(['auth', 'admin'])->except(['store', 'emailverify', 'validateCode', 'loginUserwithApple', 'loginUserwithGoogle', 'loginUserwithFacebook', 'loginUser', 'logout', 'uploadCredentialFile']);
     }
 
     /**
@@ -280,6 +280,114 @@ class UsersController extends Controller
         if (!$user) {   //register
             $user = User::create([
                 'apple_id' => $request['apple_id'],
+                'email' => @$request['user_mail'],
+                'firstname' => @$request['firstname'],
+                'lastname' => @$request['lastname'],
+                'sign_date' => date('Y-m-d h:i:s'),
+            ]);
+
+            RoleUser::create([
+                'user_id' => $user->id,
+                'role_id' => 3,
+            ]);
+            
+            $result = User::where('id', $user->id)->first();
+            $data = $this->getCredentials($user->id);
+
+            $msg = 'Successfully Logged In.';
+            // $newUser = 1;
+        }else{
+            $result = $user;
+            $data = $this->getCredentials($user->id);
+            $msg = 'Successfully Logged In.';
+            // $newUser = 0;
+        }
+
+        return response()->json(['status' => 'success', 'data' => $data, 'msg' => $msg]);
+    }
+
+    /**
+     * Swift API : login with google.
+     *
+     * @since 2021-01-31
+     * @author Nemanja
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function loginUserwithGoogle(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'google_id' => 'required|string'
+        ]);
+
+        if ($validator->fails()) {
+            $messages = $validator->messages();
+
+            //pass validator errors as errors object for ajax response
+            return response()->json(['status' => "failed", 'msg' => $messages->first()]);
+        }
+
+        $google_id = $request->google_id;
+        $user = User::where('google_id', $google_id)->first();
+        $result = [];
+
+        if (!$user) {   //register
+            $user = User::create([
+                'google_id' => $request['google_id'],
+                'email' => @$request['user_mail'],
+                'firstname' => @$request['firstname'],
+                'lastname' => @$request['lastname'],
+                'sign_date' => date('Y-m-d h:i:s'),
+            ]);
+
+            RoleUser::create([
+                'user_id' => $user->id,
+                'role_id' => 3,
+            ]);
+            
+            $result = User::where('id', $user->id)->first();
+            $data = $this->getCredentials($user->id);
+
+            $msg = 'Successfully Logged In.';
+            // $newUser = 1;
+        }else{
+            $result = $user;
+            $data = $this->getCredentials($user->id);
+            $msg = 'Successfully Logged In.';
+            // $newUser = 0;
+        }
+
+        return response()->json(['status' => 'success', 'data' => $data, 'msg' => $msg]);
+    }
+
+    /**
+     * Swift API : login with facebook.
+     *
+     * @since 2021-01-31
+     * @author Nemanja
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function loginUserwithFacebook(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'fb_id' => 'required|string'
+        ]);
+
+        if ($validator->fails()) {
+            $messages = $validator->messages();
+
+            //pass validator errors as errors object for ajax response
+            return response()->json(['status' => "failed", 'msg' => $messages->first()]);
+        }
+
+        $fb_id = $request->fb_id;
+        $user = User::where('fb_id', $fb_id)->first();
+        $result = [];
+
+        if (!$user) {   //register
+            $user = User::create([
+                'fb_id' => $request['fb_id'],
                 'email' => @$request['user_mail'],
                 'firstname' => @$request['firstname'],
                 'lastname' => @$request['lastname'],

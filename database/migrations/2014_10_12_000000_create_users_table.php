@@ -46,7 +46,11 @@ class CreateUsersTable extends Migration
             $table->string('profile_logo', '256')->nullable();
             $table->integer('email_verified_at')->nullable();
             $table->string('password')->nullable();
+            
+            $table->string('fb_id')->nullable();
+            $table->string('google_id')->nullable();
             $table->string('apple_id')->nullable();
+
             $table->string('phone_number')->nullable();
             $table->datetime('sign_date');
             $table->rememberToken();

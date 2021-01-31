@@ -23,6 +23,8 @@ Route::POST('/v1/emailverify', 'Admin\UsersController@emailverify');
 Route::POST('/v1/validateCode', 'Admin\UsersController@validateCode');
 Route::POST('/v1/register', 'Admin\UsersController@store');
 Route::POST('/v1/loginwithApple', 'Admin\UsersController@loginUserwithApple');
+Route::POST('/v1/loginwithGoogle', 'Admin\UsersController@loginUserwithGoogle');
+Route::POST('/v1/loginUserwithFacebook', 'Admin\UsersController@loginUserwithFacebook');
 Route::POST('/v1/login', 'Admin\UsersController@loginUser');
 Route::POST('/v1/logout', 'Admin\UsersController@logout');
 Route::POST('/v1/uploadCredentialFile', 'Admin\UsersController@uploadCredentialFile');

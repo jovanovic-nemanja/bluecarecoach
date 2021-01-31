@@ -2,6 +2,10 @@
 
 	https://bluecarecoach.com/api/v1/emailverify
 
+	params : {
+		email : jovanovic.nemanja.1029@gmail.com
+	}
+
 	{
 	    "status": "success",
 	    "data": "jovanovic.nemanja.1029@gmail.com",
@@ -17,6 +21,11 @@
 - Validation Code
 
 	https://bluecarecoach.com/api/v1/validateCode
+
+	params : {
+		email: 1@gm.com
+		code: 111111
+	}
 
 	{
 	    "status": "success",
@@ -35,6 +44,18 @@
 - Register user
 
 	https://bluecarecoach.com/api/v1/register
+
+	params : {
+		first_name : nemanja
+		last_name: jovanovic
+		email: 1@gm.com
+		care_giving_license: 2
+		zip_code: 11023
+		care_giving_experience: 3
+		birthday: 2020-01-29
+		password: 111111
+		password_confirmation: 111111
+	}
 
 	{
 	    "status": "success",
@@ -115,6 +136,172 @@
 
 	https://bluecarecoach.com/api/v1/loginwithApple?apple_id=123123
 
+	params : {
+		apple_id : 111111
+	}
+
+	{
+	    "status": "success",
+	    "data": [
+	        {
+	            "title": "First Aid & CPR",
+	            "file_name": "34.pdf",
+	            "expire_date": "2021-05-20 00:00:00"
+	        },
+	        {
+	            "title": "Food Handing  and Safety",
+	            "file_name": null,
+	            "expire_date": null
+	        },
+	        {
+	            "title": "Orientation & Safety",
+	            "file_name": null,
+	            "expire_date": null
+	        },
+	        {
+	            "title": "HIV/AIDS",
+	            "file_name": null,
+	            "expire_date": null
+	        },
+	        {
+	            "title": "75 Hours Long Term Care Worker Basic Training",
+	            "file_name": null,
+	            "expire_date": null
+	        },
+	        {
+	            "title": "Mental Health",
+	            "file_name": null,
+	            "expire_date": null
+	        },
+	        {
+	            "title": "Dementia",
+	            "file_name": null,
+	            "expire_date": null
+	        },
+	        {
+	            "title": "Nurse Deligation Core",
+	            "file_name": null,
+	            "expire_date": null
+	        },
+	        {
+	            "title": "Nurse Delegation Diabetes",
+	            "file_name": null,
+	            "expire_date": null
+	        },
+	        {
+	            "title": "AFH Administrator Training",
+	            "file_name": null,
+	            "expire_date": null
+	        },
+	        {
+	            "title": "AFH Orientation Class Prospective Provider",
+	            "file_name": null,
+	            "expire_date": null
+	        },
+	        {
+	            "title": "Continuing Education (CE)",
+	            "file_name": null,
+	            "expire_date": null
+	        }
+	    ],
+	    "msg": "Successfully Logged In."
+	}
+
+	{
+	    "status": "failed",
+	    "msg": "The apple id field is required."
+	}
+
+
+- login with google
+
+	https://bluecarecoach.com/api/v1/loginwithGoogle
+
+	params : {
+		google_id : 111111
+	}
+
+	{
+	    "status": "success",
+	    "data": [
+	        {
+	            "title": "First Aid & CPR",
+	            "file_name": "34.pdf",
+	            "expire_date": "2021-05-20 00:00:00"
+	        },
+	        {
+	            "title": "Food Handing  and Safety",
+	            "file_name": null,
+	            "expire_date": null
+	        },
+	        {
+	            "title": "Orientation & Safety",
+	            "file_name": null,
+	            "expire_date": null
+	        },
+	        {
+	            "title": "HIV/AIDS",
+	            "file_name": null,
+	            "expire_date": null
+	        },
+	        {
+	            "title": "75 Hours Long Term Care Worker Basic Training",
+	            "file_name": null,
+	            "expire_date": null
+	        },
+	        {
+	            "title": "Mental Health",
+	            "file_name": null,
+	            "expire_date": null
+	        },
+	        {
+	            "title": "Dementia",
+	            "file_name": null,
+	            "expire_date": null
+	        },
+	        {
+	            "title": "Nurse Deligation Core",
+	            "file_name": null,
+	            "expire_date": null
+	        },
+	        {
+	            "title": "Nurse Delegation Diabetes",
+	            "file_name": null,
+	            "expire_date": null
+	        },
+	        {
+	            "title": "AFH Administrator Training",
+	            "file_name": null,
+	            "expire_date": null
+	        },
+	        {
+	            "title": "AFH Orientation Class Prospective Provider",
+	            "file_name": null,
+	            "expire_date": null
+	        },
+	        {
+	            "title": "Continuing Education (CE)",
+	            "file_name": null,
+	            "expire_date": null
+	        }
+	    ],
+	    "msg": "Successfully Logged In."
+	}
+
+	{
+	    "status": "failed",
+	    "msg": "The apple id field is required."
+	}
+
+
+- login with facebook
+
+	https://bluecarecoach.com/api/v1/loginUserwithFacebook
+
+	params : {
+		fb_id : 111111
+	}
+
 	{
 	    "status": "success",
 	    "data": [
@@ -192,6 +379,11 @@
 	
 	https://bluecarecoach.com/api/v1/login
 
+	params : {
+		email : 1@gm.com
+		password: 1111111
+	}
+
 	{
 	    "status": "success",
 	    "data": [
@@ -267,6 +459,13 @@
 - upload credential files
 
 	https://bluecarecoach.com/api/v1/uploadCredentialFile
+
+	params : {
+		credentialfile : 123.txt
+		credentialid: 2
+		userid: 1
+		expire_date: 2022-01-02
+	}
 
 	{
 	    "status": "success",
