@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Validator;
 class UsersController extends Controller
 {
     public function __construct(){
-        $this->middleware(['auth', 'admin'])->except(['store', 'emailverify', 'validateCode', 'loginUserwithApple', 'loginUserwithGoogle', 'loginUserwithFacebook', 'loginUser', 'logout', 'uploadCredentialFile', 'forgotpassword', 'resetpwd', 'resetUserpassword']);
+        $this->middleware(['auth', 'admin'])->except(['store', 'emailverify', 'validateCode', 'loginUserwithApple', 'loginUserwithGoogle', 'loginUserwithFacebook', 'loginUser', 'logout', 'uploadCredentialFile', 'forgotpassword', 'resetpwd', 'resetUserpassword', 'getUserinformation', 'getCredentials']);
     }
 
     /**
@@ -219,16 +219,6 @@ class UsersController extends Controller
                 'zip_code' => $request['zip_code'],
                 'password' => Hash::make($request['password']),
                 'phone_number' => $request['phone_number'],
-                'skill1' => @$request['skill1'],
-                'skill2' => @$request['skill2'],
-                'skill3' => @$request['skill3'],
-                'skill4' => @$request['skill4'],
-                'skill5' => @$request['skill5'],
-                'hobby1' => @$request['hobby1'],
-                'hobby2' => @$request['hobby2'],
-                'hobby3' => @$request['hobby3'],
-                'hobby4' => @$request['hobby4'],
-                'hobby5' => @$request['hobby5'],
                 'sign_date' => date('Y-m-d h:i:s'),
             ]);
 
@@ -241,7 +231,7 @@ class UsersController extends Controller
                 User::upload_photo($user->id);
             }
 
-            $data = $this->getCredentials($user->id);
+            $data = $this->getUserinformation($user->id);
 
             DB::commit();
         } catch (\Exception $e) {
@@ -251,6 +241,51 @@ class UsersController extends Controller
         }  
 
         return response()->json(['status' => "success", 'data' => $data, 'msg' => 'Successfully registered.', 'path' => $path, 'isNewUser' => 0]);
+    }
+
+    /**
+     * Swift API : save skills and hobbies.
+     *
+     * @since 2021-02-01
+     * @author Nemanja
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function saveSkillandhobby(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'userid' => 'required'
+        ]);
+
+        $path = env('APP_URL')."uploads/";
+
+        if ($validator->fails()) {
+            $messages = $validator->messages();
+
+            //pass validator errors as errors object for ajax response
+            return response()->json(['status' => "failed", 'msg' => $messages->first(), 'path' => $path]);
+        }
+
+        $user = User::where('id', $userid)->first();
+
+        if (@$user) {
+            $user->skill1 = @$request['skill1'];
+            $user->skill2 = @$request['skill2'];
+            $user->skill3 = @$request['skill3'];
+            $user->skill4 = @$request['skill4'];
+            $user->skill5 = @$request['skill5'];
+            $user->hobby1 = @$request['hobby1'];
+            $user->hobby2 = @$request['hobby2'];
+            $user->hobby3 = @$request['hobby3'];
+            $user->hobby4 = @$request['hobby4'];
+            $user->hobby5 = @$request['hobby5'];
+
+            $user->update();
+        }
+
+        $data = $this->getUserinformation($user->id);
+
+        return response()->json(['status' => "success", 'data' => $data, 'msg' => 'Successfully updated.', 'path' => $path]);
     }
 
     /**
@@ -293,13 +328,13 @@ class UsersController extends Controller
             ]);
             
             $result = User::where('id', $user->id)->first();
-            $data = $this->getCredentials($user->id);
+            $data = $this->getUserinformation($user->id);
 
             $msg = 'Successfully Logged In.';
             $isNewUser = 0;
         }else{
             $result = $user;
-            $data = $this->getCredentials($user->id);
+            $data = $this->getUserinformation($user->id);
             $msg = 'Successfully Logged In.';
             $isNewUser = 1;
         }
@@ -347,13 +382,13 @@ class UsersController extends Controller
             ]);
             
             $result = User::where('id', $user->id)->first();
-            $data = $this->getCredentials($user->id);
+            $data = $this->getUserinformation($user->id);
 
             $msg = 'Successfully Logged In.';
             $isNewUser = 0;
         }else{
             $result = $user;
-            $data = $this->getCredentials($user->id);
+            $data = $this->getUserinformation($user->id);
             $msg = 'Successfully Logged In.';
             $isNewUser = 1;
         }
@@ -401,13 +436,13 @@ class UsersController extends Controller
             ]);
             
             $result = User::where('id', $user->id)->first();
-            $data = $this->getCredentials($user->id);
+            $data = $this->getUserinformation($user->id);
 
             $msg = 'Successfully Logged In.';
             $isNewUser = 0;
         }else{
             $result = $user;
-            $data = $this->getCredentials($user->id);
+            $data = $this->getUserinformation($user->id);
             $msg = 'Successfully Logged In.';
             $isNewUser = 1;
         }
@@ -447,7 +482,7 @@ class UsersController extends Controller
 
         $user = $request->user();
         $userid = $user->id;
-        $data = $this->getCredentials($userid);
+        $data = $this->getUserinformation($userid);
         
         return response()->json(['status' => 'success', 'data' => $data, 'msg' => 'Successfully Logged In.']);
     }
@@ -523,7 +558,14 @@ class UsersController extends Controller
             throw $e;
         }  
 
-        $data = $this->getCredentials($request['userid']);
+        $id = $credential->id;
+        $data = DB::table('credentials')
+                        ->leftJoin('credential_users', function ($join) use ($id) {
+                            $join->on('credentials.id', '=', 'credential_users.credentialid')
+                                 ->where('credential_users.userid', '=', $id);
+                        })
+                        ->select('credentials.id', 'credentials.title', 'credential_users.file_name', 'credential_users.expire_date')
+                        ->get();
 
         return response()->json(['status' => "success", 'data' => $data, 'msg' => 'Successfully uploaded.', 'path' => $path]);
     }
@@ -536,20 +578,44 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    private function getCredentials($userid)
+    public function getCredentials(Request $request)
     {
-        if (@$userid) {
-            $id = $userid;
-            $result = DB::table('credentials')
-                            ->leftJoin('credential_users', function ($join) use ($id) {
-                                $join->on('credentials.id', '=', 'credential_users.credentialid')
-                                     ->where('credential_users.userid', '=', $id);
-                            })
-                            ->select('credentials.id', 'credentials.title', 'credential_users.file_name', 'credential_users.expire_date')
-                            ->get();
-        }else{
-            $result = [];
+        $validator = Validator::make($request->all(), [
+            'userid' => 'required'
+        ]);
+
+        $path = env('APP_URL')."uploads/";
+
+        if ($validator->fails()) {
+            $messages = $validator->messages();
+
+            //pass validator errors as errors object for ajax response
+            return response()->json(['status' => "failed", 'msg' => $messages->first(), 'path' => $path]);
         }
+
+        $id = $request->userid;
+        $result = DB::table('credentials')
+                        ->leftJoin('credential_users', function ($join) use ($id) {
+                            $join->on('credentials.id', '=', 'credential_users.credentialid')
+                                 ->where('credential_users.userid', '=', $id);
+                        })
+                        ->select('credentials.id', 'credentials.title', 'credential_users.file_name', 'credential_users.expire_date')
+                        ->get();
+        
+        return response()->json(['status' => "success", 'data' => $result, 'msg' => 'Successfully got credentials data.', 'path' => $path]);
+    }
+
+    /**
+     * Swift API : get user information.
+     *
+     * @since 2021-02-01
+     * @author Nemanja
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    private function getUserinformation($userid)
+    {
+        $result = User::where('id', $userid)->first();
         
         return $result;
     }

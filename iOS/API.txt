@@ -56,6 +56,62 @@
 		phone_number: 123-023423
 		password: 111111
 		password_confirmation: 111111
+	}
+
+	{
+	    "status": "success",
+	    "data": {
+	        "id": 1,
+	        "firstname": "Admin",
+	        "middlename": "Admin",
+	        "lastname": "Admin",
+	        "email": "admin@gmail.com",
+	        "gender": "1",
+	        "birthday": "1999-10-29",
+	        "care_giving_license": null,
+	        "care_giving_experience": null,
+	        "street1": "Serbia",
+	        "street2": "Beograd",
+	        "city": "Beograd",
+	        "zip_code": "11042",
+	        "state": "Beograd",
+	        "skill1": null,
+	        "skill2": null,
+	        "skill3": null,
+	        "skill4": null,
+	        "skill5": null,
+	        "hobby1": null,
+	        "hobby2": null,
+	        "hobby3": null,
+	        "hobby4": null,
+	        "hobby5": null,
+	        "profile_logo": "1.png",
+	        "email_verified_at": "1",
+	        "fb_id": null,
+	        "google_id": null,
+	        "apple_id": "123123",
+	        "phone_number": "029292162",
+	        "sign_date": "2021-01-31 05:01:24",
+	        "created_at": "2021-01-31 17:26:24",
+	        "updated_at": "2021-01-31 17:26:24"
+	    },
+	    "msg": "Successfully Logged In.",
+	    "isNewUser": 1
+	}
+
+	{
+	    "status": "failed",
+	    "msg": "The first name field is required.",
+	    "path": "https://bluecarecoach.com/uploads/"
+	}
+
+
+- Skills and Hobbies
+
+	https://bluecarecoach.com/api/v1/skills
+
+	params : {
+		userid: 1
 		skil1: add
 		skil2: asdf
 		skil3: wer
@@ -70,83 +126,43 @@
 
 	{
 	    "status": "success",
-	    "data": [
-	        {
-	            "id": "1",
-	            "title": "First Aid & CPR",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "id": "2",
-	            "title": "Food Handing  and Safety",
-	            "file_name": "123.txt",
-	            "expire_date": "2022-01-09 00:00:00"
-	        },
-	        {
-	            "id": "3",
-	            "title": "Orientation & Safety",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "id": "4",
-	            "title": "HIV/AIDS",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "id": "5",
-	            "title": "75 Hours Long Term Care Worker Basic Training",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "id": "6",
-	            "title": "Mental Health",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "id": "7",
-	            "title": "Dementia",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "id": "8",
-	            "title": "Nurse Deligation Core",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "id": "9",
-	            "title": "Nurse Delegation Diabetes",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "id": "10",
-	            "title": "AFH Administrator Training",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "id": "11",
-	            "title": "AFH Orientation Class Prospective Provider",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "id": "12",
-	            "title": "Continuing Education (CE)",
-	            "file_name": null,
-	            "expire_date": null
-	        }
-	    ],
-	    "msg": "Successfully uploaded.",
-	    "path": "uploads/",
-	    "isNewUser": 0
+	    "data": {
+	        "id": 1,
+	        "firstname": "Admin",
+	        "middlename": "Admin",
+	        "lastname": "Admin",
+	        "email": "admin@gmail.com",
+	        "gender": "1",
+	        "birthday": "1999-10-29",
+	        "care_giving_license": null,
+	        "care_giving_experience": null,
+	        "street1": "Serbia",
+	        "street2": "Beograd",
+	        "city": "Beograd",
+	        "zip_code": "11042",
+	        "state": "Beograd",
+	        "skill1": null,
+	        "skill2": null,
+	        "skill3": null,
+	        "skill4": null,
+	        "skill5": null,
+	        "hobby1": null,
+	        "hobby2": null,
+	        "hobby3": null,
+	        "hobby4": null,
+	        "hobby5": null,
+	        "profile_logo": "1.png",
+	        "email_verified_at": "1",
+	        "fb_id": null,
+	        "google_id": null,
+	        "apple_id": "123123",
+	        "phone_number": "029292162",
+	        "sign_date": "2021-01-31 05:01:24",
+	        "created_at": "2021-01-31 17:26:24",
+	        "updated_at": "2021-01-31 17:26:24"
+	    },
+	    "msg": "Successfully Logged In.",
+	    "isNewUser": 1
 	}
 
 	{
@@ -166,80 +182,41 @@
 
 	{
 	    "status": "success",
-	    "data": [
-	        {
-	            "id": "1",
-	            "title": "First Aid & CPR",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "id": "2",
-	            "title": "Food Handing  and Safety",
-	            "file_name": "123.txt",
-	            "expire_date": "2022-01-09 00:00:00"
-	        },
-	        {
-	            "id": "3",
-	            "title": "Orientation & Safety",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "id": "4",
-	            "title": "HIV/AIDS",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "id": "5",
-	            "title": "75 Hours Long Term Care Worker Basic Training",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "id": "6",
-	            "title": "Mental Health",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "id": "7",
-	            "title": "Dementia",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "id": "8",
-	            "title": "Nurse Deligation Core",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "id": "9",
-	            "title": "Nurse Delegation Diabetes",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "id": "10",
-	            "title": "AFH Administrator Training",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "id": "11",
-	            "title": "AFH Orientation Class Prospective Provider",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "id": "12",
-	            "title": "Continuing Education (CE)",
-	            "file_name": null,
-	            "expire_date": null
-	        }
-	    ],
+	    "data": {
+	        "id": 1,
+	        "firstname": "Admin",
+	        "middlename": "Admin",
+	        "lastname": "Admin",
+	        "email": "admin@gmail.com",
+	        "gender": "1",
+	        "birthday": "1999-10-29",
+	        "care_giving_license": null,
+	        "care_giving_experience": null,
+	        "street1": "Serbia",
+	        "street2": "Beograd",
+	        "city": "Beograd",
+	        "zip_code": "11042",
+	        "state": "Beograd",
+	        "skill1": null,
+	        "skill2": null,
+	        "skill3": null,
+	        "skill4": null,
+	        "skill5": null,
+	        "hobby1": null,
+	        "hobby2": null,
+	        "hobby3": null,
+	        "hobby4": null,
+	        "hobby5": null,
+	        "profile_logo": "1.png",
+	        "email_verified_at": "1",
+	        "fb_id": null,
+	        "google_id": null,
+	        "apple_id": "123123",
+	        "phone_number": "029292162",
+	        "sign_date": "2021-01-31 05:01:24",
+	        "created_at": "2021-01-31 17:26:24",
+	        "updated_at": "2021-01-31 17:26:24"
+	    },
 	    "msg": "Successfully Logged In.",
 	    "isNewUser": 1
 	}
@@ -260,80 +237,41 @@
 
 	{
 	    "status": "success",
-	    "data": [
-	        {
-	            "id": "1",
-	            "title": "First Aid & CPR",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "id": "2",
-	            "title": "Food Handing  and Safety",
-	            "file_name": "123.txt",
-	            "expire_date": "2022-01-09 00:00:00"
-	        },
-	        {
-	            "id": "3",
-	            "title": "Orientation & Safety",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "id": "4",
-	            "title": "HIV/AIDS",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "id": "5",
-	            "title": "75 Hours Long Term Care Worker Basic Training",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "id": "6",
-	            "title": "Mental Health",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "id": "7",
-	            "title": "Dementia",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "id": "8",
-	            "title": "Nurse Deligation Core",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "id": "9",
-	            "title": "Nurse Delegation Diabetes",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "id": "10",
-	            "title": "AFH Administrator Training",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "id": "11",
-	            "title": "AFH Orientation Class Prospective Provider",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "id": "12",
-	            "title": "Continuing Education (CE)",
-	            "file_name": null,
-	            "expire_date": null
-	        }
-	    ],
+	    "data": {
+	        "id": 1,
+	        "firstname": "Admin",
+	        "middlename": "Admin",
+	        "lastname": "Admin",
+	        "email": "admin@gmail.com",
+	        "gender": "1",
+	        "birthday": "1999-10-29",
+	        "care_giving_license": null,
+	        "care_giving_experience": null,
+	        "street1": "Serbia",
+	        "street2": "Beograd",
+	        "city": "Beograd",
+	        "zip_code": "11042",
+	        "state": "Beograd",
+	        "skill1": null,
+	        "skill2": null,
+	        "skill3": null,
+	        "skill4": null,
+	        "skill5": null,
+	        "hobby1": null,
+	        "hobby2": null,
+	        "hobby3": null,
+	        "hobby4": null,
+	        "hobby5": null,
+	        "profile_logo": "1.png",
+	        "email_verified_at": "1",
+	        "fb_id": null,
+	        "google_id": null,
+	        "apple_id": "123123",
+	        "phone_number": "029292162",
+	        "sign_date": "2021-01-31 05:01:24",
+	        "created_at": "2021-01-31 17:26:24",
+	        "updated_at": "2021-01-31 17:26:24"
+	    },
 	    "msg": "Successfully Logged In.",
 	    "isNewUser": 1
 	}
@@ -354,80 +292,41 @@
 
 	{
 	    "status": "success",
-	    "data": [
-	        {
-	            "id": "1",
-	            "title": "First Aid & CPR",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "id": "2",
-	            "title": "Food Handing  and Safety",
-	            "file_name": "123.txt",
-	            "expire_date": "2022-01-09 00:00:00"
-	        },
-	        {
-	            "id": "3",
-	            "title": "Orientation & Safety",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "id": "4",
-	            "title": "HIV/AIDS",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "id": "5",
-	            "title": "75 Hours Long Term Care Worker Basic Training",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "id": "6",
-	            "title": "Mental Health",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "id": "7",
-	            "title": "Dementia",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "id": "8",
-	            "title": "Nurse Deligation Core",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "id": "9",
-	            "title": "Nurse Delegation Diabetes",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "id": "10",
-	            "title": "AFH Administrator Training",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "id": "11",
-	            "title": "AFH Orientation Class Prospective Provider",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "id": "12",
-	            "title": "Continuing Education (CE)",
-	            "file_name": null,
-	            "expire_date": null
-	        }
-	    ],
+	    "data": {
+	        "id": 1,
+	        "firstname": "Admin",
+	        "middlename": "Admin",
+	        "lastname": "Admin",
+	        "email": "admin@gmail.com",
+	        "gender": "1",
+	        "birthday": "1999-10-29",
+	        "care_giving_license": null,
+	        "care_giving_experience": null,
+	        "street1": "Serbia",
+	        "street2": "Beograd",
+	        "city": "Beograd",
+	        "zip_code": "11042",
+	        "state": "Beograd",
+	        "skill1": null,
+	        "skill2": null,
+	        "skill3": null,
+	        "skill4": null,
+	        "skill5": null,
+	        "hobby1": null,
+	        "hobby2": null,
+	        "hobby3": null,
+	        "hobby4": null,
+	        "hobby5": null,
+	        "profile_logo": "1.png",
+	        "email_verified_at": "1",
+	        "fb_id": null,
+	        "google_id": null,
+	        "apple_id": "123123",
+	        "phone_number": "029292162",
+	        "sign_date": "2021-01-31 05:01:24",
+	        "created_at": "2021-01-31 17:26:24",
+	        "updated_at": "2021-01-31 17:26:24"
+	    },
 	    "msg": "Successfully Logged In.",
 	    "isNewUser": 1
 	}
@@ -449,69 +348,43 @@
 
 	{
 	    "status": "success",
-	    "data": [
-	        {
-	            "title": "First Aid & CPR",
-	            "file_name": "34.pdf",
-	            "expire_date": "2021-05-20 00:00:00"
-	        },
-	        {
-	            "title": "Food Handing  and Safety",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "title": "Orientation & Safety",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "title": "HIV/AIDS",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "title": "75 Hours Long Term Care Worker Basic Training",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "title": "Mental Health",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "title": "Dementia",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "title": "Nurse Deligation Core",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "title": "Nurse Delegation Diabetes",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "title": "AFH Administrator Training",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "title": "AFH Orientation Class Prospective Provider",
-	            "file_name": null,
-	            "expire_date": null
-	        },
-	        {
-	            "title": "Continuing Education (CE)",
-	            "file_name": null,
-	            "expire_date": null
-	        }
-	    ],
-	    "msg": "Successfully Logged In."
+	    "data": {
+	        "id": 1,
+	        "firstname": "Admin",
+	        "middlename": "Admin",
+	        "lastname": "Admin",
+	        "email": "admin@gmail.com",
+	        "gender": "1",
+	        "birthday": "1999-10-29",
+	        "care_giving_license": null,
+	        "care_giving_experience": null,
+	        "street1": "Serbia",
+	        "street2": "Beograd",
+	        "city": "Beograd",
+	        "zip_code": "11042",
+	        "state": "Beograd",
+	        "skill1": null,
+	        "skill2": null,
+	        "skill3": null,
+	        "skill4": null,
+	        "skill5": null,
+	        "hobby1": null,
+	        "hobby2": null,
+	        "hobby3": null,
+	        "hobby4": null,
+	        "hobby5": null,
+	        "profile_logo": "1.png",
+	        "email_verified_at": "1",
+	        "fb_id": null,
+	        "google_id": null,
+	        "apple_id": "123123",
+	        "phone_number": "029292162",
+	        "sign_date": "2021-01-31 05:01:24",
+	        "created_at": "2021-01-31 17:26:24",
+	        "updated_at": "2021-01-31 17:26:24"
+	    },
+	    "msg": "Successfully Logged In.",
+	    "isNewUser": 1
 	}
 
 	{
@@ -634,4 +507,99 @@
 	{
 	    "status": "failed",
 	    "msg": "The email field is required."
+	}
+
+
+- get Credential data
+
+	https://bluecarecoach.com/api/v1/getcredentials
+
+	param: {
+		userid: 1
+	}
+
+	{
+	    "status": "success",
+	    "data": [
+	        {
+	            "id": "1",
+	            "title": "First Aid & CPR",
+	            "file_name": null,
+	            "expire_date": null
+	        },
+	        {
+	            "id": "2",
+	            "title": "Food Handing  and Safety",
+	            "file_name": "123.txt",
+	            "expire_date": "2022-01-09 00:00:00"
+	        },
+	        {
+	            "id": "3",
+	            "title": "Orientation & Safety",
+	            "file_name": null,
+	            "expire_date": null
+	        },
+	        {
+	            "id": "4",
+	            "title": "HIV/AIDS",
+	            "file_name": null,
+	            "expire_date": null
+	        },
+	        {
+	            "id": "5",
+	            "title": "75 Hours Long Term Care Worker Basic Training",
+	            "file_name": null,
+	            "expire_date": null
+	        },
+	        {
+	            "id": "6",
+	            "title": "Mental Health",
+	            "file_name": null,
+	            "expire_date": null
+	        },
+	        {
+	            "id": "7",
+	            "title": "Dementia",
+	            "file_name": null,
+	            "expire_date": null
+	        },
+	        {
+	            "id": "8",
+	            "title": "Nurse Deligation Core",
+	            "file_name": null,
+	            "expire_date": null
+	        },
+	        {
+	            "id": "9",
+	            "title": "Nurse Delegation Diabetes",
+	            "file_name": null,
+	            "expire_date": null
+	        },
+	        {
+	            "id": "10",
+	            "title": "AFH Administrator Training",
+	            "file_name": null,
+	            "expire_date": null
+	        },
+	        {
+	            "id": "11",
+	            "title": "AFH Orientation Class Prospective Provider",
+	            "file_name": null,
+	            "expire_date": null
+	        },
+	        {
+	            "id": "12",
+	            "title": "Continuing Education (CE)",
+	            "file_name": null,
+	            "expire_date": null
+	        }
+	    ],
+	    "msg": "Successfully got credentials data.",
+	    "path": "uploads/"
+	}
+
+	{
+	    "status": "failed",
+	    "msg": "The userid field is required.",
+	    "path": "uploads/"
 	}
