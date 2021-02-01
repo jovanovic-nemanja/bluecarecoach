@@ -615,3 +615,13 @@
 	    "msg": "The credentialfile field is required.",
 	    "path": "https://bluecarecoach.com/uploads/"
 	}
+
+
+
+- Forgot password
+
+	https://bluecarecoach.com/api/v1/forgotpassword
+
+	param: {
+		email: jovanovic.nemanja.1029@gmail.com
+	}

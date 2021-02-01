@@ -44,3 +44,7 @@ Route::get('/credentials', 'Admin\CredentialsController@index')->name('credentia
 
 Route::resource('licenses', 'Admin\CaregivinglicensesController');
 Route::get('/licenses', 'Admin\CaregivinglicensesController@index')->name('licenses.index');
+
+
+Route::get('/users/resetpwd/{token}', 'Admin\UsersController@resetpwd')->name('users.resetpwd');
+Route::POST('/users/resetUserpassword', 'Admin\UsersController@resetUserpassword')->name('users.resetUserpassword');
