@@ -625,3 +625,13 @@
 	param: {
 		email: jovanovic.nemanja.1029@gmail.com
 	}
+
+	{
+	    "status": "success",
+	    "msg": "Successfully sent now. Please check your inbox."
+	}
+
+	{
+	    "status": "failed",
+	    "msg": "The email field is required."
+	}
