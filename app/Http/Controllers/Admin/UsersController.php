@@ -240,7 +240,7 @@ class UsersController extends Controller
             throw $e;
         }  
 
-        return response()->json(['status' => "success", 'data' => $data, 'msg' => 'Successfully registered.', 'path' => $path, 'isNewUser' => 0]);
+        return response()->json(['status' => "success", 'data' => $data, 'msg' => 'Successfully registered.', 'path' => $path, 'isNewUser' => 1]);
     }
 
     /**
@@ -331,12 +331,12 @@ class UsersController extends Controller
             $data = $this->getUserinformation($user->id);
 
             $msg = 'Successfully Logged In.';
-            $isNewUser = 0;
+            $isNewUser = 1;
         }else{
             $result = $user;
             $data = $this->getUserinformation($user->id);
             $msg = 'Successfully Logged In.';
-            $isNewUser = 1;
+            $isNewUser = 0;
         }
 
         return response()->json(['status' => 'success', 'data' => $data, 'msg' => $msg, 'isNewUser' => $isNewUser]);
@@ -385,12 +385,12 @@ class UsersController extends Controller
             $data = $this->getUserinformation($user->id);
 
             $msg = 'Successfully Logged In.';
-            $isNewUser = 0;
+            $isNewUser = 1;
         }else{
             $result = $user;
             $data = $this->getUserinformation($user->id);
             $msg = 'Successfully Logged In.';
-            $isNewUser = 1;
+            $isNewUser = 0;
         }
 
         return response()->json(['status' => 'success', 'data' => $data, 'msg' => $msg, 'isNewUser' => $isNewUser]);
@@ -439,12 +439,12 @@ class UsersController extends Controller
             $data = $this->getUserinformation($user->id);
 
             $msg = 'Successfully Logged In.';
-            $isNewUser = 0;
+            $isNewUser = 1;
         }else{
             $result = $user;
             $data = $this->getUserinformation($user->id);
             $msg = 'Successfully Logged In.';
-            $isNewUser = 1;
+            $isNewUser = 0;
         }
 
         return response()->json(['status' => 'success', 'data' => $data, 'msg' => $msg, 'isNewUser' => $isNewUser]);
@@ -581,7 +581,8 @@ class UsersController extends Controller
     public function getCredentials(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'userid' => 'required'
+            '
+            ' => 'required'
         ]);
 
         $path = env('APP_URL')."uploads/";
