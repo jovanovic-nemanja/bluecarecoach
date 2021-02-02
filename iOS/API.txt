@@ -603,3 +603,12 @@
 	    "msg": "The userid field is required.",
 	    "path": "uploads/"
 	}
+
+
+- get licenses data
+
+	https://bluecarecoach.com/api/v1/getLicenses
+
+	param: {}
+
+		

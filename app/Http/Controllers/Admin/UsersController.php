@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Validator;
 class UsersController extends Controller
 {
     public function __construct(){
-        $this->middleware(['auth', 'admin'])->except(['store', 'emailverify', 'validateCode', 'loginUserwithApple', 'loginUserwithGoogle', 'loginUserwithFacebook', 'loginUser', 'logout', 'uploadCredentialFile', 'forgotpassword', 'resetpwd', 'resetUserpassword', 'getUserinformation', 'getCredentials']);
+        $this->middleware(['auth', 'admin'])->except(['store', 'emailverify', 'validateCode', 'loginUserwithApple', 'loginUserwithGoogle', 'loginUserwithFacebook', 'loginUser', 'logout', 'uploadCredentialFile', 'forgotpassword', 'resetpwd', 'resetUserpassword', 'getUserinformation', 'getCredentials', 'getLicenses']);
     }
 
     /**
@@ -603,6 +603,21 @@ class UsersController extends Controller
                         ->get();
         
         return response()->json(['status' => "success", 'data' => $result, 'msg' => 'Successfully got credentials data.', 'path' => $path]);
+    }
+
+    /**
+     * Swift API : get care licenses information.
+     *
+     * @since 2021-02-02
+     * @author Nemanja
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getLicenses(Request $request)
+    {
+        $result = Caregivinglicenses::all();
+        
+        return response()->json(['status' => "success", 'data' => $result, 'msg' => 'Successfully got licenses data.']);
     }
 
     /**
