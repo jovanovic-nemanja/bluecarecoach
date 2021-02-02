@@ -194,7 +194,7 @@ class UsersController extends Controller
             'care_giving_experience' => 'required',
             'birthday' => 'required',
             'phone_number' => 'required',
-            'password' => 'required|string|min:6|confirmed'
+            'password' => 'required|string|min:6'
         ]);
 
         $path = env('APP_URL')."uploads/";
@@ -581,8 +581,7 @@ class UsersController extends Controller
     public function getCredentials(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            '
-            ' => 'required'
+            'userid' => 'required'
         ]);
 
         $path = env('APP_URL')."uploads/";
