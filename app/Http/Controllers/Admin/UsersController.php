@@ -7,6 +7,7 @@ use App\User;
 use App\Role;
 use App\RoleUser;
 use App\Verifyemails;
+use App\Caregivinglicenses;
 use App\Credentialusers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
