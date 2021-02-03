@@ -112,11 +112,11 @@
 
 	params : {
 		userid: 1
-		skil1: add
-		skil2: asdf
-		skil3: wer
-		skil4: fghd
-		skil5: asdf
+		skill1: add
+		skill2: asdf
+		skill3: wer
+		skill4: fghd
+		skill5: asdf
 		hobby1: wer
 		hobby2: asdfdsf
 		hobby3: abdfg
