@@ -17,6 +17,7 @@ class CreateCredentialsTable extends Migration
             $table->increments('id');
 
             $table->string('title', 64);
+            $table->integer('created_by');
             $table->datetime('sign_date');
             
             $table->timestamps();

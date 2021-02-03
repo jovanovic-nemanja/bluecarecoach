@@ -32,3 +32,5 @@ Route::POST('/v1/forgotpassword', 'Admin\UsersController@forgotpassword');
 Route::POST('/v1/skills', 'Admin\UsersController@saveSkillandhobby');
 Route::GET('/v1/getcredentials', 'Admin\UsersController@getCredentials');
 Route::GET('/v1/getLicenses', 'Admin\UsersController@getLicenses');
+Route::POST('/v1/updateAccount', 'Admin\UsersController@updateAccount');
+Route::POST('/v1/addCredential', 'Admin\UsersController@addCredential');

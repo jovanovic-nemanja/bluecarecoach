@@ -8,6 +8,7 @@ use App\Role;
 use App\RoleUser;
 use App\Verifyemails;
 use App\Caregivinglicenses;
+use App\Credentials;
 use App\Credentialusers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -20,7 +21,7 @@ use Illuminate\Support\Facades\Validator;
 class UsersController extends Controller
 {
     public function __construct(){
-        $this->middleware(['auth', 'admin'])->except(['store', 'emailverify', 'validateCode', 'loginUserwithApple', 'loginUserwithGoogle', 'loginUserwithFacebook', 'loginUser', 'logout', 'uploadCredentialFile', 'forgotpassword', 'resetpwd', 'resetUserpassword', 'getUserinformation', 'getCredentials', 'getLicenses']);
+        $this->middleware(['auth', 'admin'])->except(['store', 'emailverify', 'validateCode', 'loginUserwithApple', 'loginUserwithGoogle', 'loginUserwithFacebook', 'loginUser', 'logout', 'uploadCredentialFile', 'forgotpassword', 'resetpwd', 'resetUserpassword', 'getUserinformation', 'getCredentials', 'getLicenses', 'updateAccount', 'addCredential']);
     }
 
     /**
@@ -195,7 +196,7 @@ class UsersController extends Controller
             'care_giving_experience' => 'required',
             'birthday' => 'required',
             'phone_number' => 'required',
-            'password' => 'required|string|min:6'
+            // 'password' => 'required|string|min:6'
         ]);
 
         $path = env('APP_URL')."uploads/";
@@ -552,23 +553,78 @@ class UsersController extends Controller
 
             Credentialusers::Upload_credentialfile($credential->id);
 
+            $data = $this->getCredentialdata($request->userid);
+
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
 
             throw $e;
-        }  
+        }
 
-        $id = $credential->id;
-        $data = DB::table('credentials')
+        return response()->json(['status' => "success", 'data' => $data, 'msg' => 'Successfully uploaded.', 'path' => $path]);
+    }
+
+    private function getCredentialdata($id)
+    {
+        $admin = User::where('firstname', 'Admin')->first();
+        $adminId = $admin->id;
+
+        $result = DB::table('credentials')
                         ->leftJoin('credential_users', function ($join) use ($id) {
                             $join->on('credentials.id', '=', 'credential_users.credentialid')
                                  ->where('credential_users.userid', '=', $id);
                         })
-                        ->select('credentials.id', 'credentials.title', 'credential_users.file_name', 'credential_users.expire_date')
+                        ->whereIn('credentials.created_by', [$id, $adminId])
+                        ->select('credentials.id', 'credentials.title', 'credential_users.file_name', 'credential_users.expire_date', 'credentials.created_by')
                         ->get();
 
-        return response()->json(['status' => "success", 'data' => $data, 'msg' => 'Successfully uploaded.', 'path' => $path]);
+        return $result;
+    }
+
+    /**
+     * Swift API : add user credential information.
+     *
+     * @since 2021-01-30
+     * @author Nemanja
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function addCredential(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'userid' => 'required',
+            'title' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            $messages = $validator->messages();
+
+            //pass validator errors as errors object for ajax response
+            return response()->json(['status' => "failed", 'msg' => $messages->first()]);
+        }
+
+        $result = Credentials::where('title', $request->title)->where('created_by', $request->userid)->first();
+        if (@$result) {
+            return response()->json(['status' => "failed", 'msg' => 'You already created it.']);   
+        }
+
+        $admin = User::where('firstname', 'Admin')->first();
+        $adminId = $admin->id;
+        $result1 = Credentials::where('title', $request->title)->where('created_by', $adminId)->first();
+        if (@$result) {
+            return response()->json(['status' => "failed", 'msg' => 'Admin already created it.']);   
+        }
+
+        $record = Credentials::create([
+            'title' => $request->title,
+            'sign_date' => date('Y-m-d H:i:s'),
+            'created_by' => $request->userid
+        ]);
+
+        $data = $this->getCredentialdata($request->userid);
+
+        return response()->json(['status' => "success", 'data' => $data, 'msg' => 'Successfully added.']);
     }
 
     /**
@@ -595,14 +651,18 @@ class UsersController extends Controller
         }
 
         $id = $request->userid;
+        $admin = User::where('firstname', 'Admin')->first();
+        $adminId = $admin->id;
+
         $result = DB::table('credentials')
                         ->leftJoin('credential_users', function ($join) use ($id) {
                             $join->on('credentials.id', '=', 'credential_users.credentialid')
                                  ->where('credential_users.userid', '=', $id);
                         })
-                        ->select('credentials.id', 'credentials.title', 'credential_users.file_name', 'credential_users.expire_date')
+                        ->whereIn('credentials.created_by', [$id, $adminId])
+                        ->select('credentials.id', 'credentials.title', 'credential_users.file_name', 'credential_users.expire_date', 'credentials.created_by')
                         ->get();
-        
+
         return response()->json(['status' => "success", 'data' => $result, 'msg' => 'Successfully got credentials data.', 'path' => $path]);
     }
 
@@ -725,5 +785,59 @@ class UsersController extends Controller
         }
             
         return redirect()->route('users.resetpwd', $request->_token)->with('flash', 'Password has been successfully resetted.');
+    }
+
+    /**
+     * Swift API : Update user account information.
+     *
+     * @since 2021-02-03
+     * @author Nemanja
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function updateAccount(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'userid' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            $messages = $validator->messages();
+
+            //pass validator errors as errors object for ajax response
+            return response()->json(['status' => "failed", 'msg' => $messages->first()]);
+        }
+
+        $user = User::where('id', $request->userid)->first();
+        if (@$user) {
+            if (@$request->firstname) {
+                $user->firstname = $request->firstname;
+            }
+            if (@$request->lastname) {
+                $user->lastname = $request->lastname;
+            }
+            if (@$request->birthday) {
+                $user->birthday = $request->birthday;
+            }
+            if (@$request->care_giving_experience) {
+                $user->care_giving_experience = $request->care_giving_experience;
+            }
+            if (@$request->care_giving_experience) {
+                $user->care_giving_experience = $request->care_giving_experience;
+            }
+            if (@$request->zip_code) {
+                $user->zip_code = $request->zip_code;
+            }
+            if (@$request->phone_number) {
+                $user->phone_number = $request->phone_number;
+            }
+
+            $user->update();
+        }
+
+        $result = [];
+        $result = User::where('id', $user->id)->first();
+            
+        return response()->json(['status' => "success", 'data' => $result, 'msg' => 'Successfully updated your account information.']);
     }
 }

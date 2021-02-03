@@ -46,9 +46,11 @@ class CredentialsController extends Controller
 
         $dates = User::getformattime();
         $date = $dates['date'];
+        $userid = auth()->id();
 
         $credential = Credentials::create([
             'title' => $request->title,
+            'created_by' => $userid,
             'sign_date' => $date,
         ]);
 
@@ -93,8 +95,11 @@ class CredentialsController extends Controller
         ]);
 
         $record = Credentials::where('id', $id)->first();
+        $userid = auth()->id();
+
         if (@$record) {
             $record->title = $request->title;
+            // $record->created_by = $userid;
 
             $record->update();
         }

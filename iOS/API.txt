@@ -638,3 +638,170 @@
 	    ],
 	    "msg": "Successfully got licenses data."
 	}
+
+
+- update Account information
+
+	https://bluecarecoach.com/api/v1/updateAccount
+
+	param: {
+		userid: 2
+	}
+
+	{
+	    "status": "success",
+	    "data": {
+	        "id": 2,
+	        "firstname": "nemanja",
+	        "middlename": null,
+	        "lastname": "jovanovic",
+	        "email": "jovanovic.nemanja.1029@gmail.com",
+	        "gender": null,
+	        "birthday": "2020-01-04",
+	        "care_giving_license": "2",
+	        "care_giving_experience": "3",
+	        "street1": null,
+	        "street2": null,
+	        "city": null,
+	        "zip_code": "123123",
+	        "state": null,
+	        "skill1": null,
+	        "skill2": null,
+	        "skill3": null,
+	        "skill4": null,
+	        "skill5": null,
+	        "hobby1": null,
+	        "hobby2": null,
+	        "hobby3": null,
+	        "hobby4": null,
+	        "hobby5": null,
+	        "profile_logo": null,
+	        "email_verified_at": null,
+	        "fb_id": null,
+	        "google_id": null,
+	        "apple_id": null,
+	        "phone_number": "12312312123",
+	        "sign_date": "2021-01-31 05:46:18",
+	        "created_at": "2021-01-31 17:46:18",
+	        "updated_at": "2021-01-31 17:46:18"
+	    },
+	    "msg": "Successfully updated your account information."
+	}
+
+	{
+	    "status": "failed",
+	    "msg": "The userid field is required."
+	}
+
+
+- add credential by user
+
+	https://bluecarecoach.com/api/v1/addCredential
+
+	param: {
+		userid: 2
+		title: 'asdfasdf'
+	}
+
+	{
+	    "status": "success",
+	    "data": [
+	        {
+	            "id": "1",
+	            "title": "First Aid & CPR",
+	            "file_name": null,
+	            "expire_date": null,
+	            "created_by": "1"
+	        },
+	        {
+	            "id": "2",
+	            "title": "Food Handing  and Safety",
+	            "file_name": null,
+	            "expire_date": null,
+	            "created_by": "1"
+	        },
+	        {
+	            "id": "3",
+	            "title": "Orientation & Safety",
+	            "file_name": null,
+	            "expire_date": null,
+	            "created_by": "1"
+	        },
+	        {
+	            "id": "4",
+	            "title": "HIV/AIDS",
+	            "file_name": null,
+	            "expire_date": null,
+	            "created_by": "1"
+	        },
+	        {
+	            "id": "5",
+	            "title": "75 Hours Long Term Care Worker Basic Training",
+	            "file_name": null,
+	            "expire_date": null,
+	            "created_by": "1"
+	        },
+	        {
+	            "id": "6",
+	            "title": "Mental Health",
+	            "file_name": null,
+	            "expire_date": null,
+	            "created_by": "1"
+	        },
+	        {
+	            "id": "7",
+	            "title": "Dementia",
+	            "file_name": null,
+	            "expire_date": null,
+	            "created_by": "1"
+	        },
+	        {
+	            "id": "8",
+	            "title": "Nurse Deligation Core",
+	            "file_name": null,
+	            "expire_date": null,
+	            "created_by": "1"
+	        },
+	        {
+	            "id": "9",
+	            "title": "Nurse Delegation Diabetes",
+	            "file_name": null,
+	            "expire_date": null,
+	            "created_by": "1"
+	        },
+	        {
+	            "id": "10",
+	            "title": "AFH Administrator Training",
+	            "file_name": null,
+	            "expire_date": null,
+	            "created_by": "1"
+	        },
+	        {
+	            "id": "11",
+	            "title": "AFH Orientation Class Prospective Provider",
+	            "file_name": null,
+	            "expire_date": null,
+	            "created_by": "1"
+	        },
+	        {
+	            "id": "12",
+	            "title": "Continuing Education (CE)",
+	            "file_name": null,
+	            "expire_date": null,
+	            "created_by": "1"
+	        },
+	        {
+	            "id": "13",
+	            "title": "12312",
+	            "file_name": null,
+	            "expire_date": null,
+	            "created_by": "2"
+	        }
+	    ],
+	    "msg": "Successfully added."
+	}
+
+	{
+	    "status": "failed",
+	    "msg": "The userid field is required."
+	}
