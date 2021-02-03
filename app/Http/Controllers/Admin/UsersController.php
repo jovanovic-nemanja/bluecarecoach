@@ -268,7 +268,7 @@ class UsersController extends Controller
             return response()->json(['status' => "failed", 'msg' => $messages->first(), 'path' => $path]);
         }
 
-        $user = User::where('id', $userid)->first();
+        $user = User::where('id', $request->userid)->first();
 
         if (@$user) {
             $user->skill1 = @$request['skill1'];
