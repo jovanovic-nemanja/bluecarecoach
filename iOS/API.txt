@@ -46,8 +46,8 @@
 	https://bluecarecoach.com/api/v1/register
 
 	params : {
-		first_name : nemanja
-		last_name: jovanovic
+		firstname : nemanja
+		lastname: jovanovic
 		email: 1@gm.com
 		care_giving_license: 2
 		zip_code: 11023

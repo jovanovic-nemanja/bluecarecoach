@@ -188,8 +188,8 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'first_name' => 'required|string|max:190',
-            'last_name' => 'required|string|max:190',
+            'firstname' => 'required|string|max:190',
+            'lastname' => 'required|string|max:190',
             'email' => 'required|string|unique:users|email|max:255', //|unique:users
             'care_giving_license' => 'required|integer',
             'zip_code' => 'required',
@@ -212,8 +212,8 @@ class UsersController extends Controller
 
         try {
             $user = User::create([
-                'firstname' => $request['first_name'],
-                'lastname' => $request['last_name'],
+                'firstname' => $request['firstname'],
+                'lastname' => $request['lastname'],
                 'email' => $request['email'],
                 'birthday' => $request['birthday'],
                 'care_giving_license' => $request['care_giving_license'],
@@ -822,8 +822,8 @@ class UsersController extends Controller
             if (@$request->care_giving_experience) {
                 $user->care_giving_experience = $request->care_giving_experience;
             }
-            if (@$request->care_giving_experience) {
-                $user->care_giving_experience = $request->care_giving_experience;
+            if (@$request->care_giving_license) {
+                $user->care_giving_license = $request->care_giving_license;
             }
             if (@$request->zip_code) {
                 $user->zip_code = $request->zip_code;
