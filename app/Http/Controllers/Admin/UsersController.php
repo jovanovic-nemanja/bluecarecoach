@@ -576,7 +576,7 @@ class UsersController extends Controller
                                  ->where('credential_users.userid', '=', $id);
                         })
                         ->whereIn('credentials.created_by', [$id, $adminId])
-                        ->select('credentials.id', 'credentials.title', 'credential_users.file_name', 'credential_users.expire_date', 'credentials.created_by')
+                        ->select('credentials.id', 'credentials.title', 'credential_users.file_name', DB::raw('DATE_FORMAT(credential_users.expire_date, "%Y-%m-%d") as expire_date'), 'credentials.created_by', DB::raw('DATEDIFF(credential_users.expire_date, NOW()) as expired'))
                         ->get();
 
         return $result;
@@ -660,7 +660,8 @@ class UsersController extends Controller
                                  ->where('credential_users.userid', '=', $id);
                         })
                         ->whereIn('credentials.created_by', [$id, $adminId])
-                        ->select('credentials.id', 'credentials.title', 'credential_users.file_name', 'credential_users.expire_date', 'credentials.created_by')
+                        // ->select('credentials.id', 'credentials.title', 'credential_users.file_name', 'credential_users.expire_date', 'credentials.created_by')
+                        ->select('credentials.id', 'credentials.title', 'credential_users.file_name', DB::raw('DATE_FORMAT(credential_users.expire_date, "%Y-%m-%d") as expire_date'), 'credentials.created_by', DB::raw('DATEDIFF(credential_users.expire_date, NOW()) as expired'))
                         ->get();
 
         return response()->json(['status' => "success", 'data' => $result, 'msg' => 'Successfully got credentials data.', 'path' => $path]);

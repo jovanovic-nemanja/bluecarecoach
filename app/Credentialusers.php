@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 class Credentialusers extends Model
 {
     public $fillable = ['userid', 'credentialid', 'file_name', 'expire_date', 'sign_date'];
-
+    public $appends = ['expired'];
     public $table = 'credential_users';
 
     /**
@@ -47,5 +47,10 @@ class Credentialusers extends Model
             $record->file_name = $file->hashName();
             $record->update();
         }
+    }
+
+    public function getExpiredAttribute($value)
+    {
+        return date_diff(date_create($this->expire_date), date_create($this->sign_date))->invert;
     }
 }
