@@ -553,7 +553,7 @@ class UsersController extends Controller
 
             Credentialusers::Upload_credentialfile($credential->id);
 
-            $data = $this->getCredentialdata($request->userid);
+            $data = $this->getCredentialdata($request->userid, $credential->id);
 
             DB::commit();
         } catch (\Exception $e) {
@@ -565,15 +565,22 @@ class UsersController extends Controller
         return response()->json(['status' => "success", 'data' => $data, 'msg' => 'Successfully uploaded.', 'path' => $path]);
     }
 
-    private function getCredentialdata($id)
+    private function getCredentialdata($userid, $credentialid)
     {
         $admin = User::where('firstname', 'Admin')->first();
         $adminId = $admin->id;
 
+        if ($credentialid == -1) {
+            $adminId = $userid;
+        }else{
+            $credential = Credentials::where('id', $credentialid)->first();
+            $adminId = $credential->created_by;
+        }
+
         $result = DB::table('credentials')
-                        ->leftJoin('credential_users', function ($join) use ($id) {
+                        ->leftJoin('credential_users', function ($join) use ($userid) {
                             $join->on('credentials.id', '=', 'credential_users.credentialid')
-                                 ->where('credential_users.userid', '=', $id);
+                                 ->where('credential_users.userid', '=', $userid);
                         })
                         // ->whereIn('credentials.created_by', [$id, $adminId])
                         ->where('credentials.created_by', $adminId)
@@ -623,7 +630,7 @@ class UsersController extends Controller
             'created_by' => $request->userid
         ]);
 
-        $data = $this->getCredentialdata($request->userid);
+        $data = $this->getCredentialdata($request->userid, -1);
 
         return response()->json(['status' => "success", 'data' => $data, 'msg' => 'Successfully added.']);
     }
