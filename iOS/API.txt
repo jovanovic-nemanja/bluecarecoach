@@ -539,7 +539,8 @@
 	https://bluecarecoach.com/api/v1/getcredentials
 
 	param: {
-		userid: 1
+		userid: 1,
+		created_by: 1
 	}
 
 	{
