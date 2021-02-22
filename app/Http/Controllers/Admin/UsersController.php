@@ -594,7 +594,7 @@ class UsersController extends Controller
         try {
             $credential = Credentialusers::where('id', $request->cre_uid)->first();
             $cre = Credentials::where('id', $credential->credentialid)->first();
-            $created_by = $cre->created_by;
+            $created_by = $cre['created_by'];
             
             $del = Credentialusers::where('id', $request->cre_uid)->delete();
 
