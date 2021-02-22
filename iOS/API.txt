@@ -473,7 +473,7 @@
 
 
 
-- delete credential files
+- delete credential file
 
 	https://bluecarecoach.com/api/v1/deleteCredentialuser
 
@@ -481,8 +481,93 @@
 		cre_uid: 3
 		userid: 13
 	}
+	POST: method
 
-	
+	{
+	    "status": "success",
+	    "data": [
+	        {
+	            "id": "1",
+	            "title": "First Aid & CPR",
+	            "cre_uid": "23",
+	            "file_name": "qKrYKHkCbyiu49gYDmjww026PWWgUxYaMq6EvP1M.jpeg",
+	            "expire_date": "2021-02-26",
+	            "created_by": "1",
+	            "expired": "4"
+	        },
+	        {
+	            "id": "2",
+	            "title": "Food Handing  and Safety",
+	            "cre_uid": "19",
+	            "file_name": "Il6hTwyZWjZfo1d5up66yTkvmwPLuPJGLgwaksTx.jpeg",
+	            "expire_date": "2021-02-10",
+	            "created_by": "1",
+	            "expired": "-12"
+	        },
+	        {
+	            "id": "6",
+	            "title": "Mental Health",
+	            "cre_uid": null,
+	            "file_name": null,
+	            "expire_date": null,
+	            "created_by": "1",
+	            "expired": null
+	        },
+	        {
+	            "id": "7",
+	            "title": "Dementia",
+	            "cre_uid": "25",
+	            "file_name": "6cxVvDE4dKkeKiH8jltnzJphpCgQa5vbNCcQjHR6.jpeg",
+	            "expire_date": "2021-02-25",
+	            "created_by": "1",
+	            "expired": "3"
+	        },
+	        {
+	            "id": "8",
+	            "title": "Nurse Deligation Core",
+	            "cre_uid": null,
+	            "file_name": null,
+	            "expire_date": null,
+	            "created_by": "1",
+	            "expired": null
+	        },
+	        {
+	            "id": "9",
+	            "title": "Nurse Delegation Diabetes",
+	            "cre_uid": "10",
+	            "file_name": "WEWYg9XDmsS5uXaIwHBdS0rb0On9XmOILLOBGQO7.jpeg",
+	            "expire_date": "2022-02-10",
+	            "created_by": "1",
+	            "expired": "353"
+	        },
+	        {
+	            "id": "10",
+	            "title": "AFH Administrator Training",
+	            "cre_uid": null,
+	            "file_name": null,
+	            "expire_date": null,
+	            "created_by": "1",
+	            "expired": null
+	        },
+	        {
+	            "id": "11",
+	            "title": "AFH Orientation Class Prospective Provider",
+	            "cre_uid": null,
+	            "file_name": null,
+	            "expire_date": null,
+	            "created_by": "1",
+	            "expired": null
+	        }
+	    ],
+	    "msg": "Successfully deleted.",
+	    "path": "https://bluecarecoach.com/uploads/"
+	}
+
+	{
+	    "status": "failed",
+	    "msg": "The userid field is required.",
+	    "path": "https://bluecarecoach.com/uploads/"
+	}
 
 
 
