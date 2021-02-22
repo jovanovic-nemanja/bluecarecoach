@@ -565,6 +565,64 @@ class UsersController extends Controller
         return response()->json(['status' => "success", 'data' => $data, 'msg' => 'Successfully uploaded.', 'path' => $path]);
     }
 
+    /**
+     * Swift API : update Credential file.
+     *
+     * @since 2021-02-22
+     * @author Nemanja
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function updateCredentialFile(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'credentialfile' => 'required',
+            'credentialid' => 'required',
+            'userid' => 'required',
+            'expire_date' => 'required'
+        ]);
+
+        $path = env('APP_URL')."uploads/";
+
+        if ($validator->fails()) {
+            $messages = $validator->messages();
+
+            //pass validator errors as errors object for ajax response
+            return response()->json(['status' => "failed", 'msg' => $messages->first(), 'path' => $path]);
+        }
+
+        DB::beginTransaction();
+
+        try {
+            $credential = Credentialusers::where('userid', $request->userid)->where('credentialid', $request->credentialid)->first();
+            if (@$credential) {
+                $credential->file_name = $request['credentialfile'];
+                $credential->expire_date = $request['expire_date'];
+                $credential->update();
+            }else{
+                $credential = Credentialusers::create([
+                    'userid' => $request['userid'],
+                    'credentialid' => $request['credentialid'],
+                    'file_name' => $request['credentialfile'],
+                    'expire_date' => $request['expire_date'],
+                    'sign_date' => date('Y-m-d h:i:s'),
+                ]);
+            }
+
+            Credentialusers::Upload_credentialfile($credential->id);
+
+            $data = $this->getCredentialdata($request->userid, $credential->id);
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            throw $e;
+        }
+
+        return response()->json(['status' => "success", 'data' => $data, 'msg' => 'Successfully uploaded.', 'path' => $path]);
+    }
+
     private function getCredentialdata($userid, $credentialid)
     {
         $admin = User::where('firstname', 'Admin')->first();
@@ -583,7 +641,7 @@ class UsersController extends Controller
                         })
                         // ->whereIn('credentials.care_licenses', [$caregiving_license])
                         ->where('credentials.created_by', $userid)
-                        ->select('credentials.id', 'credentials.title', 'credential_users.file_name', DB::raw('DATE_FORMAT(credential_users.expire_date, "%Y-%m-%d") as expire_date'), 'credentials.created_by', DB::raw('DATEDIFF(credential_users.expire_date, NOW()) as expired'))
+                        ->select('credentials.id', 'credentials.title', 'credential_users.id as cre_uid', 'credential_users.file_name', DB::raw('DATE_FORMAT(credential_users.expire_date, "%Y-%m-%d") as expire_date'), 'credentials.created_by', DB::raw('DATEDIFF(credential_users.expire_date, NOW()) as expired'))
                         ->get();
             }else{
                 $result = DB::table('credentials')
@@ -594,7 +652,7 @@ class UsersController extends Controller
                         // ->whereIn('credentials.care_licenses', [$caregiving_license])
                         ->where('credentials.created_by', $userid)
                         ->whereRaw($query)
-                        ->select('credentials.id', 'credentials.title', 'credential_users.file_name', DB::raw('DATE_FORMAT(credential_users.expire_date, "%Y-%m-%d") as expire_date'), 'credentials.created_by', DB::raw('DATEDIFF(credential_users.expire_date, NOW()) as expired'))
+                        ->select('credentials.id', 'credentials.title', 'credential_users.id as cre_uid', 'credential_users.file_name', DB::raw('DATE_FORMAT(credential_users.expire_date, "%Y-%m-%d") as expire_date'), 'credentials.created_by', DB::raw('DATEDIFF(credential_users.expire_date, NOW()) as expired'))
                         ->get();
             }
         }else{  //created by admin
@@ -605,7 +663,7 @@ class UsersController extends Controller
                                  ->where('credential_users.userid', '=', $userid);
                         })
                         ->where('credentials.created_by', $adminId)
-                        ->select('credentials.id', 'credentials.title', 'credential_users.file_name', DB::raw('DATE_FORMAT(credential_users.expire_date, "%Y-%m-%d") as expire_date'), 'credentials.created_by', DB::raw('DATEDIFF(credential_users.expire_date, NOW()) as expired'))
+                        ->select('credentials.id', 'credentials.title', 'credential_users.id as cre_uid', 'credential_users.file_name', DB::raw('DATE_FORMAT(credential_users.expire_date, "%Y-%m-%d") as expire_date'), 'credentials.created_by', DB::raw('DATEDIFF(credential_users.expire_date, NOW()) as expired'))
                         ->get();
             }else{
                 $result = DB::table('credentials')
@@ -616,7 +674,7 @@ class UsersController extends Controller
                         // ->whereIn('credentials.created_by', [$id, $adminId])
                         ->where('credentials.created_by', $adminId)
                         ->whereRaw($query)
-                        ->select('credentials.id', 'credentials.title', 'credential_users.file_name', DB::raw('DATE_FORMAT(credential_users.expire_date, "%Y-%m-%d") as expire_date'), 'credentials.created_by', DB::raw('DATEDIFF(credential_users.expire_date, NOW()) as expired'))
+                        ->select('credentials.id', 'credentials.title', 'credential_users.id as cre_uid', 'credential_users.file_name', DB::raw('DATE_FORMAT(credential_users.expire_date, "%Y-%m-%d") as expire_date'), 'credentials.created_by', DB::raw('DATEDIFF(credential_users.expire_date, NOW()) as expired'))
                         ->get();
             }
         }
@@ -710,7 +768,7 @@ class UsersController extends Controller
                                      ->where('credential_users.userid', '=', $id);
                             })
                             ->where('credentials.created_by', $created_by)
-                            ->select('credentials.id', 'credentials.title', 'credential_users.file_name', DB::raw('DATE_FORMAT(credential_users.expire_date, "%Y-%m-%d") as expire_date'), 'credentials.created_by', DB::raw('DATEDIFF(credential_users.expire_date, NOW()) as expired'))
+                            ->select('credentials.id', 'credentials.title', 'credential_users.id as cre_uid', 'credential_users.file_name', DB::raw('DATE_FORMAT(credential_users.expire_date, "%Y-%m-%d") as expire_date'), 'credentials.created_by', DB::raw('DATEDIFF(credential_users.expire_date, NOW()) as expired'))
                             ->get();
         }else{
             $query = "JSON_CONTAINS(credentials.care_licenses, ".$caregiving_license.", '$')=1"; 
@@ -723,7 +781,7 @@ class UsersController extends Controller
                             ->where('credentials.created_by', $created_by)
                             ->whereRaw($query)
                             // ->select('credentials.id', 'credentials.title', 'credential_users.file_name', 'credential_users.expire_date', 'credentials.created_by')
-                            ->select('credentials.id', 'credentials.title', 'credential_users.file_name', DB::raw('DATE_FORMAT(credential_users.expire_date, "%Y-%m-%d") as expire_date'), 'credentials.created_by', DB::raw('DATEDIFF(credential_users.expire_date, NOW()) as expired'))
+                            ->select('credentials.id', 'credentials.title', 'credential_users.id as cre_uid', 'credential_users.file_name', DB::raw('DATE_FORMAT(credential_users.expire_date, "%Y-%m-%d") as expire_date'), 'credentials.created_by', DB::raw('DATEDIFF(credential_users.expire_date, NOW()) as expired'))
                             ->get();   
         }
 
