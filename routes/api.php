@@ -27,7 +27,10 @@ Route::POST('/v1/loginwithGoogle', 'Admin\UsersController@loginUserwithGoogle');
 Route::POST('/v1/loginUserwithFacebook', 'Admin\UsersController@loginUserwithFacebook');
 Route::POST('/v1/login', 'Admin\UsersController@loginUser');
 Route::POST('/v1/logout', 'Admin\UsersController@logout');
+
 Route::POST('/v1/uploadCredentialFile', 'Admin\UsersController@uploadCredentialFile');
+Route::POST('/v1/deleteCredentialuser', 'Admin\UsersController@deleteCredentialuser');
+
 Route::POST('/v1/forgotpassword', 'Admin\UsersController@forgotpassword');
 Route::POST('/v1/skills', 'Admin\UsersController@saveSkillandhobby');
 Route::GET('/v1/getcredentials', 'Admin\UsersController@getCredentials');

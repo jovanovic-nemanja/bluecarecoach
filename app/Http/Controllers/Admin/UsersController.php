@@ -566,20 +566,18 @@ class UsersController extends Controller
     }
 
     /**
-     * Swift API : update Credential file.
+     * Swift API : delete credential file.
      *
      * @since 2021-02-22
      * @author Nemanja
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function updateCredentialFile(Request $request)
+    public function deleteCredentialuser(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'credentialfile' => 'required',
-            'credentialid' => 'required',
-            'userid' => 'required',
-            'expire_date' => 'required'
+            'cre_uid' => 'required',
+            'userid' => 'required'
         ]);
 
         $path = env('APP_URL')."uploads/";
@@ -594,24 +592,13 @@ class UsersController extends Controller
         DB::beginTransaction();
 
         try {
-            $credential = Credentialusers::where('userid', $request->userid)->where('credentialid', $request->credentialid)->first();
-            if (@$credential) {
-                $credential->file_name = $request['credentialfile'];
-                $credential->expire_date = $request['expire_date'];
-                $credential->update();
-            }else{
-                $credential = Credentialusers::create([
-                    'userid' => $request['userid'],
-                    'credentialid' => $request['credentialid'],
-                    'file_name' => $request['credentialfile'],
-                    'expire_date' => $request['expire_date'],
-                    'sign_date' => date('Y-m-d h:i:s'),
-                ]);
-            }
+            $credential = Credentialusers::where('id', $request->cre_uid)->first();
+            $cre = Credentials::where('id', $credential->credentialid)->first();
+            $created_by = $cre->created_by;
+            
+            $del = Credentialusers::where('id', $request->cre_uid)->delete();
 
-            Credentialusers::Upload_credentialfile($credential->id);
-
-            $data = $this->getCredentialdata($request->userid, $credential->id);
+            $data = $this->getCredentialdata($request->userid, $created_by);
 
             DB::commit();
         } catch (\Exception $e) {
@@ -620,13 +607,17 @@ class UsersController extends Controller
             throw $e;
         }
 
-        return response()->json(['status' => "success", 'data' => $data, 'msg' => 'Successfully uploaded.', 'path' => $path]);
+        return response()->json(['status' => "success", 'data' => $data, 'msg' => 'Successfully deleted.', 'path' => $path]);
     }
 
     private function getCredentialdata($userid, $credentialid)
     {
         $admin = User::where('firstname', 'Admin')->first();
-        $adminId = $admin->id;
+        if ($credentialid == $admin->id) {
+            $adminId = $admin->id;
+        }else if($credentialid != -1) {
+            $adminId = $credentialid;
+        }
 
         $user = User::where('id', $userid)->first();
         $caregiving_license = $user->care_giving_license;
@@ -655,7 +646,7 @@ class UsersController extends Controller
                         ->select('credentials.id', 'credentials.title', 'credential_users.id as cre_uid', 'credential_users.file_name', DB::raw('DATE_FORMAT(credential_users.expire_date, "%Y-%m-%d") as expire_date'), 'credentials.created_by', DB::raw('DATEDIFF(credential_users.expire_date, NOW()) as expired'))
                         ->get();
             }
-        }else{  //created by admin
+        }else{
             if(@$caregiving_license == NULL) {
                 $result = DB::table('credentials')
                         ->leftJoin('credential_users', function ($join) use ($userid) {

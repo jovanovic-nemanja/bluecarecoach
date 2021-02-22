@@ -392,12 +392,12 @@
 	    "msg": "The email field is required."
 	}
 
-- upload credential files
+- upload and update credential files
 
 	https://bluecarecoach.com/api/v1/uploadCredentialFile
 
 	params : {
-		credentialfile : 123.txt
+		credentialfile : 123.txt (formdata)
 		credentialid: 2
 		userid: 1
 		expire_date: 2022-01-02
@@ -409,62 +409,43 @@
 	        {
 	            "id": "1",
 	            "title": "First Aid & CPR",
-	            "file_name": null,
-	            "expire_date": null,
+	            "cre_uid": "23",
+	            "file_name": "qKrYKHkCbyiu49gYDmjww026PWWgUxYaMq6EvP1M.jpeg",
+	            "expire_date": "2021-02-26",
 	            "created_by": "1",
-	            "expired": null
+	            "expired": "4"
 	        },
 	        {
 	            "id": "2",
 	            "title": "Food Handing  and Safety",
-	            "file_name": "123.txt",
-	            "expire_date": "2013-01-09",
+	            "cre_uid": "19",
+	            "file_name": "Il6hTwyZWjZfo1d5up66yTkvmwPLuPJGLgwaksTx.jpeg",
+	            "expire_date": "2021-02-10",
 	            "created_by": "1",
-	            "expired": "-2947"
-	        },
-	        {
-	            "id": "3",
-	            "title": "Orientation & Safety",
-	            "file_name": null,
-	            "expire_date": null,
-	            "created_by": "1",
-	            "expired": null
-	        },
-	        {
-	            "id": "4",
-	            "title": "HIV/AIDS",
-	            "file_name": null,
-	            "expire_date": null,
-	            "created_by": "1",
-	            "expired": null
-	        },
-	        {
-	            "id": "5",
-	            "title": "75 Hours Long Term Care Worker Basic Training",
-	            "file_name": null,
-	            "expire_date": null,
-	            "created_by": "1",
-	            "expired": null
+	            "expired": "-12"
 	        },
 	        {
 	            "id": "6",
 	            "title": "Mental Health",
-	            "file_name": null,
-	            "expire_date": null,
+	            "cre_uid": "9",
+	            "file_name": "a6PmyCIUnQG9FCE6jhsoHrYPnSu0ID7RJ9uEcLw5.jpeg",
+	            "expire_date": "2023-02-04",
 	            "created_by": "1",
-	            "expired": null
+	            "expired": "712"
 	        },
 	        {
 	            "id": "7",
 	            "title": "Dementia",
-	            "file_name": null,
-	            "expire_date": null,
+	            "cre_uid": "25",
+	            "file_name": "6cxVvDE4dKkeKiH8jltnzJphpCgQa5vbNCcQjHR6.jpeg",
+	            "expire_date": "2021-02-25",
 	            "created_by": "1",
-	            "expired": null
+	            "expired": "3"
 	        },
 	        {
 	            "id": "8",
 	            "title": "Nurse Deligation Core",
+	            "cre_uid": null,
 	            "file_name": null,
 	            "expire_date": null,
 	            "created_by": "1",
@@ -473,38 +454,15 @@
 	        {
 	            "id": "9",
 	            "title": "Nurse Delegation Diabetes",
-	            "file_name": null,
-	            "expire_date": null,
+	            "cre_uid": "10",
+	            "file_name": "WEWYg9XDmsS5uXaIwHBdS0rb0On9XmOILLOBGQO7.jpeg",
+	            "expire_date": "2022-02-10",
 	            "created_by": "1",
-	            "expired": null
-	        },
-	        {
-	            "id": "10",
-	            "title": "AFH Administrator Training",
-	            "file_name": null,
-	            "expire_date": null,
-	            "created_by": "1",
-	            "expired": null
-	        },
-	        {
-	            "id": "11",
-	            "title": "AFH Orientation Class Prospective Provider",
-	            "file_name": null,
-	            "expire_date": null,
-	            "created_by": "1",
-	            "expired": null
-	        },
-	        {
-	            "id": "12",
-	            "title": "Continuing Education (CE)",
-	            "file_name": null,
-	            "expire_date": null,
-	            "created_by": "1",
-	            "expired": null
+	            "expired": "353"
 	        }
 	    ],
-	    "msg": "Successfully uploaded.",
-	    "path": "uploads/"
+	    "msg": "Successfully got credentials data.",
+	    "path": "https://bluecarecoach.com/uploads/"
 	}
 
 	{
@@ -512,6 +470,19 @@
 	    "msg": "The credentialfile field is required.",
 	    "path": "https://bluecarecoach.com/uploads/"
 	}
+
+
+
+- delete credential files
+
+	https://bluecarecoach.com/api/v1/deleteCredentialuser
+
+	params : {
+		cre_uid: 3
+		userid: 13
+	}
+
+	
 
 
 
@@ -549,62 +520,43 @@
 	        {
 	            "id": "1",
 	            "title": "First Aid & CPR",
-	            "file_name": null,
-	            "expire_date": null,
+	            "cre_uid": "23",
+	            "file_name": "qKrYKHkCbyiu49gYDmjww026PWWgUxYaMq6EvP1M.jpeg",
+	            "expire_date": "2021-02-26",
 	            "created_by": "1",
-	            "expired": null
+	            "expired": "4"
 	        },
 	        {
 	            "id": "2",
 	            "title": "Food Handing  and Safety",
-	            "file_name": "123.txt",
-	            "expire_date": "2013-01-09",
+	            "cre_uid": "19",
+	            "file_name": "Il6hTwyZWjZfo1d5up66yTkvmwPLuPJGLgwaksTx.jpeg",
+	            "expire_date": "2021-02-10",
 	            "created_by": "1",
-	            "expired": "-2947"
-	        },
-	        {
-	            "id": "3",
-	            "title": "Orientation & Safety",
-	            "file_name": null,
-	            "expire_date": null,
-	            "created_by": "1",
-	            "expired": null
-	        },
-	        {
-	            "id": "4",
-	            "title": "HIV/AIDS",
-	            "file_name": null,
-	            "expire_date": null,
-	            "created_by": "1",
-	            "expired": null
-	        },
-	        {
-	            "id": "5",
-	            "title": "75 Hours Long Term Care Worker Basic Training",
-	            "file_name": null,
-	            "expire_date": null,
-	            "created_by": "1",
-	            "expired": null
+	            "expired": "-12"
 	        },
 	        {
 	            "id": "6",
 	            "title": "Mental Health",
-	            "file_name": null,
-	            "expire_date": null,
+	            "cre_uid": "9",
+	            "file_name": "a6PmyCIUnQG9FCE6jhsoHrYPnSu0ID7RJ9uEcLw5.jpeg",
+	            "expire_date": "2023-02-04",
 	            "created_by": "1",
-	            "expired": null
+	            "expired": "712"
 	        },
 	        {
 	            "id": "7",
 	            "title": "Dementia",
-	            "file_name": null,
-	            "expire_date": null,
+	            "cre_uid": "25",
+	            "file_name": "6cxVvDE4dKkeKiH8jltnzJphpCgQa5vbNCcQjHR6.jpeg",
+	            "expire_date": "2021-02-25",
 	            "created_by": "1",
-	            "expired": null
+	            "expired": "3"
 	        },
 	        {
 	            "id": "8",
 	            "title": "Nurse Deligation Core",
+	            "cre_uid": null,
 	            "file_name": null,
 	            "expire_date": null,
 	            "created_by": "1",
@@ -613,14 +565,16 @@
 	        {
 	            "id": "9",
 	            "title": "Nurse Delegation Diabetes",
-	            "file_name": null,
-	            "expire_date": null,
+	            "cre_uid": "10",
+	            "file_name": "WEWYg9XDmsS5uXaIwHBdS0rb0On9XmOILLOBGQO7.jpeg",
+	            "expire_date": "2022-02-10",
 	            "created_by": "1",
-	            "expired": null
+	            "expired": "353"
 	        },
 	        {
 	            "id": "10",
 	            "title": "AFH Administrator Training",
+	            "cre_uid": null,
 	            "file_name": null,
 	            "expire_date": null,
 	            "created_by": "1",
@@ -629,14 +583,7 @@
 	        {
 	            "id": "11",
 	            "title": "AFH Orientation Class Prospective Provider",
-	            "file_name": null,
-	            "expire_date": null,
-	            "created_by": "1",
-	            "expired": null
-	        },
-	        {
-	            "id": "12",
-	            "title": "Continuing Education (CE)",
+	            "cre_uid": null,
 	            "file_name": null,
 	            "expire_date": null,
 	            "created_by": "1",
@@ -644,7 +591,7 @@
 	        }
 	    ],
 	    "msg": "Successfully got credentials data.",
-	    "path": "uploads/"
+	    "path": "https://bluecarecoach.com/uploads/"
 	}
 
 	{
