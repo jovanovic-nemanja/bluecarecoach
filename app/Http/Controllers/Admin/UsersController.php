@@ -713,7 +713,7 @@ class UsersController extends Controller
         $record = Credentials::create([
             'title' => $request->title,
             'sign_date' => date('Y-m-d H:i:s'),
-            'care_licenses' => $caregiving_license,
+            'care_licenses' => '['.$caregiving_license.']',
             'created_by' => $request->userid
         ]);
 
