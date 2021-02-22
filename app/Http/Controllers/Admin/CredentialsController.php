@@ -64,7 +64,7 @@ class CredentialsController extends Controller
         $credential = Credentials::create([
             'title' => $request->title,
             'created_by' => $userid,
-            'care_licenses' => $care_licenses,
+            'care_licenses' => '['.$care_licenses.']',
             'sign_date' => $date,
         ]);
 
@@ -125,7 +125,7 @@ class CredentialsController extends Controller
 
         if (@$record) {
             $record->title = $request->title;
-            $record->care_licenses = $care_licenses;
+            $record->care_licenses = '['.$care_licenses.']';
 
             $record->update();
         }
