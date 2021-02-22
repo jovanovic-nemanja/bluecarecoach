@@ -64,7 +64,10 @@
                                     <select name="care_licenses[]" required class="form-control select2" multiple="multiple" id="kt_select2_3">
                                         @foreach($care_licenses as $licen)
                                             <?php 
-                                                $diff = explode(",", $result->care_licenses);
+                                                $arr1 = $result->care_licenses;
+                                                $arr2 = str_replace('[', '', $arr1);
+                                                $arr3 = str_replace(']', '', $arr2);
+                                                $diff = explode(",", $arr3);
                                                 if (@$diff) {
                                                     $arr = [];
                                                     for ($i=0; $i < count($diff); $i++) { 
