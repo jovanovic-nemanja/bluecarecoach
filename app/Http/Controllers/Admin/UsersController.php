@@ -569,26 +569,56 @@ class UsersController extends Controller
     {
         $admin = User::where('firstname', 'Admin')->first();
         $adminId = $admin->id;
-        if ($credentialid == -1) {
-            $result = DB::table('credentials')
+
+        $user = User::where('id', $userid)->first();
+        $caregiving_license = $user->care_giving_license;
+        $query = "JSON_CONTAINS(credentials.care_licenses, ".$caregiving_license.", '$')=1";
+
+        if ($credentialid == -1) {  //for special user
+            if(@$caregiving_license == NULL) {
+                $result = DB::table('credentials')
                         ->leftJoin('credential_users', function ($join) use ($userid) {
                             $join->on('credentials.id', '=', 'credential_users.credentialid')
                                  ->where('credential_users.userid', '=', $userid);
                         })
-                        // ->whereIn('credentials.created_by', [$id, $adminId])
+                        // ->whereIn('credentials.care_licenses', [$caregiving_license])
                         ->where('credentials.created_by', $userid)
                         ->select('credentials.id', 'credentials.title', 'credential_users.file_name', DB::raw('DATE_FORMAT(credential_users.expire_date, "%Y-%m-%d") as expire_date'), 'credentials.created_by', DB::raw('DATEDIFF(credential_users.expire_date, NOW()) as expired'))
                         ->get();
-        }else{
-            $result = DB::table('credentials')
+            }else{
+                $result = DB::table('credentials')
+                        ->leftJoin('credential_users', function ($join) use ($userid) {
+                            $join->on('credentials.id', '=', 'credential_users.credentialid')
+                                 ->where('credential_users.userid', '=', $userid);
+                        })
+                        // ->whereIn('credentials.care_licenses', [$caregiving_license])
+                        ->where('credentials.created_by', $userid)
+                        ->whereRaw($query)
+                        ->select('credentials.id', 'credentials.title', 'credential_users.file_name', DB::raw('DATE_FORMAT(credential_users.expire_date, "%Y-%m-%d") as expire_date'), 'credentials.created_by', DB::raw('DATEDIFF(credential_users.expire_date, NOW()) as expired'))
+                        ->get();
+            }
+        }else{  //created by admin
+            if(@$caregiving_license == NULL) {
+                $result = DB::table('credentials')
+                        ->leftJoin('credential_users', function ($join) use ($userid) {
+                            $join->on('credentials.id', '=', 'credential_users.credentialid')
+                                 ->where('credential_users.userid', '=', $userid);
+                        })
+                        ->where('credentials.created_by', $adminId)
+                        ->select('credentials.id', 'credentials.title', 'credential_users.file_name', DB::raw('DATE_FORMAT(credential_users.expire_date, "%Y-%m-%d") as expire_date'), 'credentials.created_by', DB::raw('DATEDIFF(credential_users.expire_date, NOW()) as expired'))
+                        ->get();
+            }else{
+                $result = DB::table('credentials')
                         ->leftJoin('credential_users', function ($join) use ($userid) {
                             $join->on('credentials.id', '=', 'credential_users.credentialid')
                                  ->where('credential_users.userid', '=', $userid);
                         })
                         // ->whereIn('credentials.created_by', [$id, $adminId])
                         ->where('credentials.created_by', $adminId)
+                        ->whereRaw($query)
                         ->select('credentials.id', 'credentials.title', 'credential_users.file_name', DB::raw('DATE_FORMAT(credential_users.expire_date, "%Y-%m-%d") as expire_date'), 'credentials.created_by', DB::raw('DATEDIFF(credential_users.expire_date, NOW()) as expired'))
                         ->get();
+            }
         }
 
         return $result;
@@ -628,9 +658,13 @@ class UsersController extends Controller
             return response()->json(['status' => "failed", 'msg' => 'Admin already created it.']);   
         }
 
+        $user = User::where('id', $request->userid)->first();
+        $caregiving_license = $user->care_giving_license;
+        
         $record = Credentials::create([
             'title' => $request->title,
             'sign_date' => date('Y-m-d H:i:s'),
+            'care_licenses' => $caregiving_license,
             'created_by' => $request->userid
         ]);
 
@@ -667,16 +701,31 @@ class UsersController extends Controller
         $adminId = $admin->id;
         $created_by = $request->created_by;
 
-        $result = DB::table('credentials')
-                        ->leftJoin('credential_users', function ($join) use ($id) {
-                            $join->on('credentials.id', '=', 'credential_users.credentialid')
-                                 ->where('credential_users.userid', '=', $id);
-                        })
-                        // ->whereIn('credentials.created_by', [$id, $adminId])
-                        ->where('credentials.created_by', $created_by)
-                        // ->select('credentials.id', 'credentials.title', 'credential_users.file_name', 'credential_users.expire_date', 'credentials.created_by')
-                        ->select('credentials.id', 'credentials.title', 'credential_users.file_name', DB::raw('DATE_FORMAT(credential_users.expire_date, "%Y-%m-%d") as expire_date'), 'credentials.created_by', DB::raw('DATEDIFF(credential_users.expire_date, NOW()) as expired'))
-                        ->get();
+        $user = User::where('id', $id)->first();
+        $caregiving_license = $user->care_giving_license;
+        if(@$caregiving_license == NULL) {
+            $result = DB::table('credentials')
+                            ->leftJoin('credential_users', function ($join) use ($id) {
+                                $join->on('credentials.id', '=', 'credential_users.credentialid')
+                                     ->where('credential_users.userid', '=', $id);
+                            })
+                            ->where('credentials.created_by', $created_by)
+                            ->select('credentials.id', 'credentials.title', 'credential_users.file_name', DB::raw('DATE_FORMAT(credential_users.expire_date, "%Y-%m-%d") as expire_date'), 'credentials.created_by', DB::raw('DATEDIFF(credential_users.expire_date, NOW()) as expired'))
+                            ->get();
+        }else{
+            $query = "JSON_CONTAINS(credentials.care_licenses, ".$caregiving_license.", '$')=1"; 
+            $result = DB::table('credentials')
+                            ->leftJoin('credential_users', function ($join) use ($id) {
+                                $join->on('credentials.id', '=', 'credential_users.credentialid')
+                                     ->where('credential_users.userid', '=', $id);
+                            })
+                            // ->whereIn('credentials.created_by', [$id, $adminId])
+                            ->where('credentials.created_by', $created_by)
+                            ->whereRaw($query)
+                            // ->select('credentials.id', 'credentials.title', 'credential_users.file_name', 'credential_users.expire_date', 'credentials.created_by')
+                            ->select('credentials.id', 'credentials.title', 'credential_users.file_name', DB::raw('DATE_FORMAT(credential_users.expire_date, "%Y-%m-%d") as expire_date'), 'credentials.created_by', DB::raw('DATEDIFF(credential_users.expire_date, NOW()) as expired'))
+                            ->get();   
+        }
 
         return response()->json(['status' => "success", 'data' => $result, 'msg' => 'Successfully got credentials data.', 'path' => $path]);
     }

@@ -56,6 +56,17 @@
                                 @endif
                             </div>
 
+                            <div class="form-group {{ $errors->has('care_licenses') ? 'has-error' : '' }}">
+                                <label class="col-form-label">Required(NAR, NAC, HCA)</label>
+                                <div class="controls">
+                                    <select name="care_licenses[]" required class="form-control select2" multiple="multiple" id="kt_select2_3">
+                                        @foreach($care_licenses as $licen)
+                                            <option value="{{ $licen['id'] }}">{{ $licen['name'] }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
                             <div class="padding-bottom-30" style="text-align: center;">
                                 <div class="">
                                     <button type="submit" class="btn btn-primary gradient-blue submit_btn">Submit</button>
@@ -71,3 +82,7 @@
         <!--end::Entry-->
     </div>
 @stop
+
+@section('script')
+    <script src="{{ asset('finaldesign/assets/js/pages/crud/forms/widgets/select2.js') }}"></script>
+@endsection

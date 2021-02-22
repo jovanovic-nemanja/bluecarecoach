@@ -18,6 +18,7 @@ class CreateCredentialsTable extends Migration
 
             $table->string('title', 64);
             $table->integer('created_by');
+            $table->string('care_licenses', 256);
             $table->datetime('sign_date');
             
             $table->timestamps();

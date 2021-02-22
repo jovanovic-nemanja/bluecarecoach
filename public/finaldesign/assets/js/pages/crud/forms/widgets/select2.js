@@ -14,7 +14,7 @@ var KTSelect2 = function() {
 
         // multi select
         $('#kt_select2_3, #kt_select2_3_validate').select2({
-            placeholder: 'Select a state',
+            placeholder: 'Select the care license',
         });
 
         // basic
