@@ -1,3 +1,19 @@
+- Get video link
+
+	https://bluecarecoach.com/api/v1/getvideolink
+	method: GET
+
+    Response
+	-- success
+		{
+		    "status": "success",
+		    "data": "https://tdguae.com/uploads/Hzt5mIzoPGTviGPGjznX4Dk3Dddqcwr8ebYswk2b.mp4",
+		    "msg": "success"
+		}
+
+
+
+
 - Email verification
 
 	https://bluecarecoach.com/api/v1/emailverify

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Mail;
 use App\User;
 use App\Role;
+use App\Video;
 use App\RoleUser;
 use App\Verifyemails;
 use App\Caregivinglicenses;
@@ -21,7 +22,7 @@ use Illuminate\Support\Facades\Validator;
 class UsersController extends Controller
 {
     public function __construct(){
-        $this->middleware(['auth', 'admin'])->except(['store', 'emailverify', 'validateCode', 'loginUserwithApple', 'loginUserwithGoogle', 'loginUserwithFacebook', 'loginUser', 'logout', 'uploadCredentialFile', 'deleteCredentialuser', 'forgotpassword', 'resetpwd', 'resetUserpassword', 'getUserinformation', 'getCredentials', 'getLicenses', 'updateAccount', 'addCredential', 'saveSkillandhobby']);
+        $this->middleware(['auth', 'admin'])->except(['store', 'emailverify', 'validateCode', 'loginUserwithApple', 'loginUserwithGoogle', 'loginUserwithFacebook', 'loginUser', 'logout', 'uploadCredentialFile', 'deleteCredentialuser', 'forgotpassword', 'resetpwd', 'resetUserpassword', 'getUserinformation', 'getCredentials', 'getLicenses', 'updateAccount', 'addCredential', 'saveSkillandhobby', 'getvideolink']);
     }
 
     /**
@@ -952,5 +953,26 @@ class UsersController extends Controller
         $result = User::where('id', $user->id)->first();
             
         return response()->json(['status' => "success", 'data' => $result, 'msg' => 'Successfully updated your account information.']);
+    }
+
+    /**
+     * Swift API: get link of Video for introducing.
+     *
+     * @since 2021-03-01
+     * @author Nemanja
+     * @return \Illuminate\Http\Response
+     */
+    public function getvideolink(Request $request)
+    {
+        $result = Video::where('active', 1)->first();
+        if (@$result) {
+            $status = "success";
+            $link = env('APP_URL') . "uploads/" . $result->link;
+        }else {
+            $status = "success";
+            $link = "https://youtu.be/VSo41Y9i2Ug";
+        }
+
+        return response()->json(['status' => $status, 'data' => $link, 'msg' => 'success']);
     }
 }

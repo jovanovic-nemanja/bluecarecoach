@@ -42,6 +42,9 @@ Route::get('/signupasgiver', 'Auth\RegisterController@signupasgiver')->name('sig
 Route::resource('credentials', 'Admin\CredentialsController');
 Route::get('/credentials', 'Admin\CredentialsController@index')->name('credentials.index');
 
+Route::resource('admin/video', 'Admin\VideoController');
+Route::get('/admin/video', 'Admin\VideoController@index')->name('video.index');
+
 Route::resource('licenses', 'Admin\CaregivinglicensesController');
 Route::get('/licenses', 'Admin\CaregivinglicensesController@index')->name('licenses.index');
 
