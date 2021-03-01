@@ -1,6 +1,11 @@
 - Get video link
 
 	https://bluecarecoach.com/api/v1/getvideolink
+
+	params : {
+		userid : 13
+	}
+
 	method: GET
 
     Response

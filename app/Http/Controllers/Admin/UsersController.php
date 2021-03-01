@@ -957,6 +957,19 @@ class UsersController extends Controller
      */
     public function getvideolink(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'userid' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            $messages = $validator->messages();
+
+            //pass validator errors as errors object for ajax response
+            return response()->json(['status' => "failed", 'msg' => $messages->first()]);
+        }
+
+        $data = [];
+
         $result = Video::where('active', 1)->first();
         if (@$result) {
             $status = "success";
@@ -965,8 +978,12 @@ class UsersController extends Controller
             $status = "success";
             $link = "https://youtu.be/VSo41Y9i2Ug";
         }
-        $data = [];
+
+        $all_uploaded_credentials = Credentialusers::where('userid', $request->userid)->get();
+        $all_uploaded_credentials_count = count($all_uploaded_credentials));
+        
         $data['link'] = $link;
+        $data['all_uploaded_credentials_count'] = $all_uploaded_credentials_count;
 
         return response()->json(['status' => $status, 'data' => $data, 'msg' => 'success']);
     }
