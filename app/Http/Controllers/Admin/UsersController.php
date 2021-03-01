@@ -965,7 +965,9 @@ class UsersController extends Controller
             $status = "success";
             $link = "https://youtu.be/VSo41Y9i2Ug";
         }
+        $data = [];
+        $data['link'] = $link;
 
-        return response()->json(['status' => $status, 'data' => $link, 'msg' => 'success']);
+        return response()->json(['status' => $status, 'data' => $data, 'msg' => 'success']);
     }
 }
