@@ -6,6 +6,7 @@ use Mail;
 use App\User;
 use App\Role;
 use App\Video;
+use Carbon\Carbon;
 use App\RoleUser;
 use App\Verifyemails;
 use App\Caregivinglicenses;
@@ -985,9 +986,18 @@ class UsersController extends Controller
         }else{
             $all_uploaded_credentials_count = 0;
         }
+
+        $now = getdate();
+        $expired_credentials = Credentialusers::where('userid', $request->userid)->where('expire_date', '<', $now)->get();
+        if (count($expired_credentials) > 0) {
+            $expired_credentials_count = count($expired_credentials);
+        }else{
+            $expired_credentials_count = 0;
+        }
         
         $data['link'] = $link;
         $data['all_uploaded_credentials_count'] = $all_uploaded_credentials_count;
+        $data['expired_credentials_count'] = $expired_credentials_count;
 
         return response()->json(['status' => $status, 'data' => $data, 'msg' => 'success']);
     }
