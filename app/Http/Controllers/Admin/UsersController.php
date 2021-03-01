@@ -980,7 +980,7 @@ class UsersController extends Controller
         }
 
         $all_uploaded_credentials = Credentialusers::where('userid', $request->userid)->get();
-        if (@$all_uploaded_credentials) {
+        if (count($all_uploaded_credentials) > 0) {
             $all_uploaded_credentials_count = count($all_uploaded_credentials));
         }else{
             $all_uploaded_credentials_count = 0;
