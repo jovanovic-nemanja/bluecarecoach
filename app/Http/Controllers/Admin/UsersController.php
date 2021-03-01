@@ -994,10 +994,22 @@ class UsersController extends Controller
         }else{
             $expired_credentials_count = 0;
         }
+
+        $user = User::where('id', $request->userid)->first();
+        $care_giving_license = $user->care_giving_license;
+        if (@$care_giving_license) {
+            $query = "JSON_CONTAINS(care_licenses, ".$care_giving_license.", '$')=1";
+            
+            $extra_credentials_count = Credentials::where('created_by', $request->userid)->whereRaw($query)->count();
+        }else{
+            $extra_credentials_count = Credentials::where('created_by', $request->userid)->extra_credentials();
+        }
+        
         
         $data['link'] = $link;
         $data['all_uploaded_credentials_count'] = $all_uploaded_credentials_count;
         $data['expired_credentials_count'] = $expired_credentials_count;
+        $data['extra_credentials_count'] = $extra_credentials_count;
 
         return response()->json(['status' => $status, 'data' => $data, 'msg' => 'success']);
     }
