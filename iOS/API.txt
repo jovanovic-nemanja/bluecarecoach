@@ -7,7 +7,7 @@
 	-- success
 		{
 		    "status": "success",
-		    "data": "https://tdguae.com/uploads/Hzt5mIzoPGTviGPGjznX4Dk3Dddqcwr8ebYswk2b.mp4",
+		    "data": "https://bluecarecoach.com/uploads/ypqeGdpZ6fXgxKTYk7tVKcL9ob0L6F8o4eFE6Ozo.mp4",
 		    "msg": "success"
 		}
 
