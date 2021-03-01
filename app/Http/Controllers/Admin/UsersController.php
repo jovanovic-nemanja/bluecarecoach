@@ -988,7 +988,7 @@ class UsersController extends Controller
         }
 
         $now = getdate();
-        $expired_credentials = Credentialusers::where('userid', $request->userid)->where('expire_date', '<', $now)->get();
+        $expired_credentials = Credentialusers::where('userid', $request->userid)->whereDate('expire_date', '<', $now)->get();
         if (count($expired_credentials) > 0) {
             $expired_credentials_count = count($expired_credentials);
         }else{
