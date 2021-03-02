@@ -1002,7 +1002,7 @@ class UsersController extends Controller
             
             $extra_credentials_count = Credentials::where('created_by', $request->userid)->whereRaw($query)->count();
         }else{
-            $extra_credentials_count = Credentials::where('created_by', $request->userid)->extra_credentials();
+            $extra_credentials_count = Credentials::where('created_by', $request->userid)->count();
         }
         
         
