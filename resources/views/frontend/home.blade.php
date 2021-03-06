@@ -17,7 +17,6 @@
                     <!--begin::Search Form-->
                     <div class="d-flex align-items-center" id="kt_subheader_search">
                         <span class="text-dark-50 font-weight-bold" id="kt_subheader_total"><?= count($users); ?> Total</span>
-                        
                     </div>
                     <!--end::Search Form-->
                 </div>
@@ -25,86 +24,61 @@
             </div>
         </div>
         <!--end::Subheader-->
+
         <!--begin::Entry-->
         <div class="d-flex flex-column-fluid">
             <!--begin::Container-->
             <div class="container">
-                <!--begin::Row-->
-                
-                <?php if(count($users) > 0) { ?>
-                    <div class="row">
-                        @foreach($users as $user)
-                            <!--begin::Col-->
-                            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-                                <!--begin::Card-->
-                                <div class="card card-custom gutter-b card-stretch">
-                                    <!--begin::Body-->
-                                    <div class="card-body pt-4">
-                                        <!--begin::Toolbar-->
-                                        <div class="d-flex justify-content-end">
-                                            <div class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions" data-placement="left">
-                                            </div>
-                                        </div>
-                                        <!--end::Toolbar-->
-                                        <!--begin::User-->
-                                        <div class="d-flex align-items-end mb-7">
-                                            <!--begin::Pic-->
-                                            <div class="d-flex align-items-center">
-                                                <!--begin::Pic-->
-                                                <div class="flex-shrink-0 mr-4 mt-lg-0 mt-3">
-                                                    <div class="symbol symbol-circle symbol-lg-75">
-                                                        <img src="{{ asset('uploads/').'/'.$user->profile_logo }}" class="rad-50 center-block custom_img_tag" alt="image">
-                                                    </div>
-                                                    <div class="symbol symbol-lg-75 symbol-circle symbol-primary d-none">
-                                                        <span class="font-size-h3 font-weight-boldest">JM</span>
-                                                    </div>
-                                                </div>
-                                                <!--end::Pic-->
-                                                <!--begin::Title-->
-                                                <div class="d-flex flex-column">
-                                                    <a href="#" class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0 custom_a_tag">{{ $user->firstname }}</a>
-                                                    <span class="text-muted font-weight-bold">User</span>
-                                                </div>
-                                                <!--end::Title-->
-                                            </div>
-                                            <!--end::Title-->
-                                        </div>
-                                        <!--end::User-->
-                                        <!--begin::Desc-->
-                                        <p class="mb-7"><a href="#" class="text-primary pr-1">{{ App\User::getGender($user->gender) }} / {{ $user->birthday }}</a></p>
-                                        <!--end::Desc-->
-                                        <!--begin::Info-->
-                                        <div class="mb-7">
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <span class="text-dark-75 font-weight-bolder mr-2">Email:</span>
-                                                <a href="#" class="text-muted text-hover-primary custom_a_tag">{{ $user->email }}</a>
-                                            </div>
-                                            <div class="d-flex justify-content-between align-items-cente my-1">
-                                                <span class="text-dark-75 font-weight-bolder mr-2">Phone:</span>
-                                                <a href="#" class="text-muted text-hover-primary custom_a_tag">{{ $user->phone_number }}</a>
-                                            </div>
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <span class="text-dark-75 font-weight-bolder mr-2">Location:</span>
-                                                <span class="text-muted font-weight-bold">{{ $user->street1 }}</span>
-                                            </div>
-                                        </div>
-                                        <!--end::Info-->
-                                    </div>
-                                    <!--end::Body-->
-                                </div>
-                                <!--end::Card-->
-                            </div>
-                            <!--end::Col-->
-                        @endforeach
+                <!--begin::Card-->
+                <div class="card card-custom">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h3 class="card-label">Users</h3>
+                        </div>
+                        <div class="card-toolbar">
+                            <!-- <a href="{{ route('credentials.create') }}" class="btn btn-primary font-weight-bolder">Add</a> -->
+                        </div>
                     </div>
-                <?php } else { ?>
-                    <div style="text-align: center;">
-                        <br><br>
-                        <h6>There is no resident at this moment</h6>
-                    </div>
-                <?php } ?>        
+                        
+                    <div class="card-body">
+                        <!--begin: Datatable-->
+                        <table class="table table-bordered table-hover table-checkable" id="kt_datatable" style="margin-top: 13px !important">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>License</th>
+                                    <th>Experience</th>
+                                    <th>ZipCode</th>
+                                    <th>Phone</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php 
+                                    if($users) {
+                                        $i = 1;
+                                        foreach($users as $user) { ?>
+                                            <tr>
+                                                <td>{{ $i }}</td>
+                                                <td>
+                                                    {{ $user->firstname }}
+                                                </td>
+                                                <td>{{ $user->email }}</td>
+                                                <td>{{ $user->license }}</td>
+                                                <td>{{ $user->care_giving_experience." Years" }}</td>
+                                                <td>{{ $user->zip_code }}</td>
+                                                <td>{{ $user->phone_number }}</td>
+                                            </tr>
+                                <?php $i++; } }else{ ?>
 
-                <!--end::Row-->
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                        <!--end: Datatable-->
+                    </div>
+                </div>
+                <!--end::Card-->
             </div>
             <!--end::Container-->
         </div>
