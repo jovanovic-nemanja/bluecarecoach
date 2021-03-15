@@ -924,9 +924,9 @@ class UsersController extends Controller
             if (@$request->lastname) {
                 $user->lastname = $request->lastname;
             }
-            if ($request->over_18) {
-                $user->over_18 = $request->over_18;
-            }
+            
+            $user->over_18 = $request->over_18;
+
             if (@$request->care_giving_experience) {
                 $user->care_giving_experience = $request->care_giving_experience;
             }
