@@ -195,8 +195,8 @@ class UsersController extends Controller
             'email' => 'required|string|unique:users|email|max:255', //|unique:users
             'care_giving_license' => 'required|integer',
             'zip_code' => 'required',
-            'care_giving_experience' => 'required',
-            'birthday' => 'required',
+            // 'care_giving_experience' => 'required',
+            'over_18' => 'required',
             'phone_number' => 'required',
             // 'password' => 'required|string|min:6'
         ]);
@@ -217,9 +217,9 @@ class UsersController extends Controller
                 'firstname' => $request['firstname'],
                 'lastname' => $request['lastname'],
                 'email' => $request['email'],
-                'birthday' => $request['birthday'],
+                'over_18' => $request['over_18'],
                 'care_giving_license' => $request['care_giving_license'],
-                'care_giving_experience' => $request['care_giving_experience'],
+                // 'care_giving_experience' => $request['care_giving_experience'],
                 'zip_code' => $request['zip_code'],
                 'password' => Hash::make($request['password']),
                 'phone_number' => $request['phone_number'],
@@ -523,7 +523,7 @@ class UsersController extends Controller
             'credentialfile' => 'required',
             'credentialid' => 'required',
             'userid' => 'required',
-            'expire_date' => 'required'
+            // 'expire_date' => 'required'
         ]);
 
         $path = env('APP_URL')."uploads/";
@@ -541,7 +541,7 @@ class UsersController extends Controller
             $credential = Credentialusers::where('userid', $request->userid)->where('credentialid', $request->credentialid)->first();
             if (@$credential) {
                 $credential->file_name = $request['credentialfile'];
-                $credential->expire_date = $request['expire_date'];
+                $credential->expire_date = @$request['expire_date'];
                 $credential->update();
             }else{
                 $credential = Credentialusers::create([
@@ -924,8 +924,8 @@ class UsersController extends Controller
             if (@$request->lastname) {
                 $user->lastname = $request->lastname;
             }
-            if (@$request->birthday) {
-                $user->birthday = $request->birthday;
+            if (@$request->over_18) {
+                $user->over_18 = $request->over_18;
             }
             if (@$request->care_giving_experience) {
                 $user->care_giving_experience = $request->care_giving_experience;

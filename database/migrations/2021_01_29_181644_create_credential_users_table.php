@@ -22,7 +22,7 @@ class CreateCredentialUsersTable extends Migration
             $table->integer('credentialid');
             $table->text('file_name');
 
-            $table->datetime('expire_date');
+            $table->datetime('expire_date')->nullable();
             $table->datetime('sign_date');
 
             $table->timestamps();

@@ -77,11 +77,9 @@
 		email: 1@gm.com
 		care_giving_license: 2
 		zip_code: 11023
-		care_giving_experience: 3
-		birthday: 2020-01-29
+		over_18: 1
 		phone_number: 123-023423
 		password: 111111
-		password_confirmation: 111111
 	}
 
 	{
@@ -93,7 +91,7 @@
 	        "lastname": "Admin",
 	        "email": "admin@gmail.com",
 	        "gender": "1",
-	        "birthday": "1999-10-29",
+	        "over_18": "1",
 	        "care_giving_license": null,
 	        "care_giving_experience": null,
 	        "street1": "Serbia",
@@ -159,7 +157,7 @@
 	        "lastname": "Admin",
 	        "email": "admin@gmail.com",
 	        "gender": "1",
-	        "birthday": "1999-10-29",
+	        "over_18": "1999-10-29",
 	        "care_giving_license": null,
 	        "care_giving_experience": null,
 	        "street1": "Serbia",
@@ -215,7 +213,7 @@
 	        "lastname": "Admin",
 	        "email": "admin@gmail.com",
 	        "gender": "1",
-	        "birthday": "1999-10-29",
+	        "over_18": "1",
 	        "care_giving_license": null,
 	        "care_giving_experience": null,
 	        "street1": "Serbia",
@@ -270,7 +268,7 @@
 	        "lastname": "Admin",
 	        "email": "admin@gmail.com",
 	        "gender": "1",
-	        "birthday": "1999-10-29",
+	        "over_18": "1",
 	        "care_giving_license": null,
 	        "care_giving_experience": null,
 	        "street1": "Serbia",
@@ -325,7 +323,7 @@
 	        "lastname": "Admin",
 	        "email": "admin@gmail.com",
 	        "gender": "1",
-	        "birthday": "1999-10-29",
+	        "over_18": "1",
 	        "care_giving_license": null,
 	        "care_giving_experience": null,
 	        "street1": "Serbia",
@@ -381,7 +379,7 @@
 	        "lastname": "Admin",
 	        "email": "admin@gmail.com",
 	        "gender": "1",
-	        "birthday": "1999-10-29",
+	        "over_18": "1",
 	        "care_giving_license": null,
 	        "care_giving_experience": null,
 	        "street1": "Serbia",
@@ -764,7 +762,7 @@
 	        "lastname": "jovanovic",
 	        "email": "jovanovic.nemanja.1029@gmail.com",
 	        "gender": null,
-	        "birthday": "2020-01-04",
+	        "over_18": "1",
 	        "care_giving_license": "2",
 	        "care_giving_experience": "3",
 	        "street1": null,
