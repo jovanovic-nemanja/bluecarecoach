@@ -25,6 +25,12 @@ class CreateUsersTable extends Migration
             $table->integer('care_giving_license')->nullable();
             $table->string('care_giving_experience')->nullable();
 
+            $table->integer('looking_job')->nullable();
+            $table->integer('looking_job_zipcode')->nullable();
+            $table->integer('preferred_shift')->nullable();
+            $table->integer('desired_pay_from')->nullable();
+            $table->integer('desired_pay_to')->nullable();
+
             $table->text('street1')->nullable();
             $table->text('street2')->nullable();
             $table->text('city')->nullable();

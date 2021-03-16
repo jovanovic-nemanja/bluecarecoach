@@ -80,6 +80,7 @@
 		over_18: 1
 		phone_number: 123-023423
 		password: 111111
+		profile_logo: 1.png
 	}
 
 	{
@@ -94,6 +95,11 @@
 	        "over_18": "1",
 	        "care_giving_license": null,
 	        "care_giving_experience": null,
+	        'looking_job' : null,
+	        'looking_job_zipcode' : null,
+	        'preferred_shift' : null,
+	        'desired_pay_from' : null,
+	        'desired_pay_to' : null,
 	        "street1": "Serbia",
 	        "street2": "Beograd",
 	        "city": "Beograd",
@@ -216,6 +222,11 @@
 	        "over_18": "1",
 	        "care_giving_license": null,
 	        "care_giving_experience": null,
+	        'looking_job' : null,
+	        'looking_job_zipcode' : null,
+	        'preferred_shift' : null,
+	        'desired_pay_from' : null,
+	        'desired_pay_to' : null,
 	        "street1": "Serbia",
 	        "street2": "Beograd",
 	        "city": "Beograd",
@@ -271,6 +282,11 @@
 	        "over_18": "1",
 	        "care_giving_license": null,
 	        "care_giving_experience": null,
+	        'looking_job' : null,
+	        'looking_job_zipcode' : null,
+	        'preferred_shift' : null,
+	        'desired_pay_from' : null,
+	        'desired_pay_to' : null,
 	        "street1": "Serbia",
 	        "street2": "Beograd",
 	        "city": "Beograd",
@@ -326,6 +342,11 @@
 	        "over_18": "1",
 	        "care_giving_license": null,
 	        "care_giving_experience": null,
+	        'looking_job' : null,
+	        'looking_job_zipcode' : null,
+	        'preferred_shift' : null,
+	        'desired_pay_from' : null,
+	        'desired_pay_to' : null,
 	        "street1": "Serbia",
 	        "street2": "Beograd",
 	        "city": "Beograd",
@@ -382,6 +403,11 @@
 	        "over_18": "1",
 	        "care_giving_license": null,
 	        "care_giving_experience": null,
+	        'looking_job' : null,
+	        'looking_job_zipcode' : null,
+	        'preferred_shift' : null,
+	        'desired_pay_from' : null,
+	        'desired_pay_to' : null,
 	        "street1": "Serbia",
 	        "street2": "Beograd",
 	        "city": "Beograd",
@@ -750,7 +776,33 @@
 	https://bluecarecoach.com/api/v1/updateAccount
 
 	param: {
-		userid: 2
+		userid: 2 : Required
+		firstname: test
+		lastname: test
+		over_18: 1
+		profile_logo: 123.png
+
+		looking_job: 1
+		looking_job_zipcode: 99999
+		preferred_shift: 2
+		desired_pay_from: 35
+		desired_pay_to: 40
+
+		care_giving_experience: 5
+		care_giving_license: 3
+		zip_code: 12345
+		phone_number: 123123123123
+
+		skill1: add
+		skill2: asdf
+		skill3: wer
+		skill4: fghd
+		skill5: asdf
+		hobby1: wer
+		hobby2: asdfdsf
+		hobby3: abdfg
+		hobby4: ytr
+		hobby5: ert
 	}
 
 	{
@@ -765,22 +817,27 @@
 	        "over_18": "1",
 	        "care_giving_license": "2",
 	        "care_giving_experience": "3",
+	        'looking_job' : 1,
+	        'looking_job_zipcode' : 12345,
+	        'preferred_shift' : 2,
+	        'desired_pay_from' : 35,
+	        'desired_pay_to' : 40,
 	        "street1": null,
 	        "street2": null,
 	        "city": null,
 	        "zip_code": "123123",
 	        "state": null,
-	        "skill1": null,
-	        "skill2": null,
-	        "skill3": null,
-	        "skill4": null,
-	        "skill5": null,
-	        "hobby1": null,
-	        "hobby2": null,
-	        "hobby3": null,
-	        "hobby4": null,
-	        "hobby5": null,
-	        "profile_logo": null,
+	        "skill1": asdf,
+	        "skill2": wr,
+	        "skill3": asdf,
+	        "skill4": asdf,
+	        "skill5": asdf,
+	        "hobby1": sadf,
+	        "hobby2": asd,
+	        "hobby3": asdf,
+	        "hobby4": asdf,
+	        "hobby5": asdf,
+	        "profile_logo": 123.png,
 	        "email_verified_at": null,
 	        "fb_id": null,
 	        "google_id": null,

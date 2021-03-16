@@ -195,10 +195,10 @@ class UsersController extends Controller
             'email' => 'required|string|unique:users|email|max:255', //|unique:users
             'care_giving_license' => 'required|integer',
             'zip_code' => 'required',
-            // 'care_giving_experience' => 'required',
             'over_18' => 'required',
             'phone_number' => 'required',
-            // 'password' => 'required|string|min:6'
+            'profile_logo' => 'required',
+            'password' => 'required|string|min:6'
         ]);
 
         $path = env('APP_URL')."uploads/";
@@ -219,10 +219,11 @@ class UsersController extends Controller
                 'email' => $request['email'],
                 'over_18' => $request['over_18'],
                 'care_giving_license' => $request['care_giving_license'],
-                // 'care_giving_experience' => $request['care_giving_experience'],
+                'profile_logo' => $request['profile_logo'],
                 'zip_code' => $request['zip_code'],
                 'password' => Hash::make($request['password']),
                 'phone_number' => $request['phone_number'],
+                'looking_job' => 0,
                 'sign_date' => date('Y-m-d h:i:s'),
             ]);
 
@@ -231,8 +232,8 @@ class UsersController extends Controller
                 'role_id' => 3,
             ]);
 
-            if (@$request->photo) {
-                User::upload_photo($user->id);
+            if (@$request->profile_logo) {
+                User::Upload_avatar($user->id);
             }
 
             $data = $this->getUserinformation($user->id);
@@ -323,6 +324,7 @@ class UsersController extends Controller
                 'email' => @$request['user_mail'],
                 'firstname' => @$request['firstname'],
                 'lastname' => @$request['lastname'],
+                'looking_job' => 0,
                 'sign_date' => date('Y-m-d h:i:s'),
             ]);
 
@@ -377,6 +379,7 @@ class UsersController extends Controller
                 'email' => @$request['user_mail'],
                 'firstname' => @$request['firstname'],
                 'lastname' => @$request['lastname'],
+                'looking_job' => 0,
                 'sign_date' => date('Y-m-d h:i:s'),
             ]);
 
@@ -431,6 +434,7 @@ class UsersController extends Controller
                 'email' => @$request['user_mail'],
                 'firstname' => @$request['firstname'],
                 'lastname' => @$request['lastname'],
+                'looking_job' => 0,
                 'sign_date' => date('Y-m-d h:i:s'),
             ]);
 
@@ -926,6 +930,7 @@ class UsersController extends Controller
             }
             
             $user->over_18 = $request->over_18;
+            $user->looking_job = $request->looking_job;
 
             if (@$request->care_giving_experience) {
                 $user->care_giving_experience = $request->care_giving_experience;
@@ -940,7 +945,22 @@ class UsersController extends Controller
                 $user->phone_number = $request->phone_number;
             }
 
+            $user->skill1 = @$request['skill1'];
+            $user->skill2 = @$request['skill2'];
+            $user->skill3 = @$request['skill3'];
+            $user->skill4 = @$request['skill4'];
+            $user->skill5 = @$request['skill5'];
+            $user->hobby1 = @$request['hobby1'];
+            $user->hobby2 = @$request['hobby2'];
+            $user->hobby3 = @$request['hobby3'];
+            $user->hobby4 = @$request['hobby4'];
+            $user->hobby5 = @$request['hobby5'];
+
             $user->update();
+
+            if (@$request->profile_logo) {
+                User::Upload_avatar($user->id);
+            }
         }
 
         $result = [];
