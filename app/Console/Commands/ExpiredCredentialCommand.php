@@ -65,25 +65,19 @@ class ExpiredCredentialCommand extends Command
                     $diff_in_months = $today->diffInDays($expire_date);
 
                     $username = $expiredCredential->firstname;
-                    // $useremail = $expiredCredential->email;
-                    $useremail = "jovanovic.nemanja.1029@gmail.com";
+                    $useremail = $expiredCredential->email;
 
                     $subject = "Please check and update your credential. It can be expire in 1 months.";
                     $data = [];
                     $data['name'] = $username;
                     $data['body'] = "Hello! Welcome to Bluely document organizer. Thank you for uploading credentials. <br> Your credential can be expire in 1 months now. Please check it and update your credential - ".$expiredCredential->title.". <br> Thanks for your checking our E-mail. <br> Kindly regards.";
 
-                    // if ($diff_in_months == 30) {
-                    //     Mail::send('frontend.mail.expiredemail', $data, function($message) use ($username, $useremail, $subject) {
-                    //         $message->to($useremail, $username)->subject($subject);
-                    //         $message->from('solaris.dubai@gmail.com', 'Administrator');
-                    //     });
-                    // }
-
-                    Mail::send('frontend.mail.expiredemail', $data, function($message) use ($username, $useremail, $subject) {
-                        $message->to($useremail, $username)->subject($subject);
-                        $message->from('solaris.dubai@gmail.com', 'Administrator');
-                    });
+                    if ($diff_in_months == 30) {
+                        Mail::send('frontend.mail.expiredemail', $data, function($message) use ($username, $useremail, $subject) {
+                            $message->to($useremail, $username)->subject($subject);
+                            $message->from('solaris.dubai@gmail.com', 'Administrator');
+                        });
+                    }
                 }
             }
         }
