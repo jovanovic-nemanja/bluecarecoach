@@ -931,6 +931,10 @@ class UsersController extends Controller
             
             $user->over_18 = $request->over_18;
             $user->looking_job = $request->looking_job;
+            $user->looking_job_zipcode = @$request->looking_job_zipcode;
+            $user->preferred_shift = @$request->preferred_shift;
+            $user->desired_pay_from = @$request->desired_pay_from;
+            $user->desired_pay_to = @$request->desired_pay_to;
 
             if (@$request->care_giving_experience) {
                 $user->care_giving_experience = $request->care_giving_experience;
