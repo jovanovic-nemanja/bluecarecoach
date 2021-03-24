@@ -13,15 +13,90 @@
 	-- success
 		{
 		    "status": "success",
-		    "data": {
-		        "link": "https://bluecarecoach.com/uploads/ypqeGdpZ6fXgxKTYk7tVKcL9ob0L6F8o4eFE6Ozo.mp4",
-		        "all_uploaded_credentials_count": 2,
-		        "expired_credentials_count": 1,
-		        "extra_credentials_count": 1
-		    },
-		    "msg": "success"
+		    "data": [
+		        {
+		            "id": "1",
+		            "title": "First Aid & CPR",
+		            "cre_uid": null,
+		            "file_name": null,
+		            "expire_date": null,
+		            "created_by": "1",
+		            "expired": null
+		        },
+		        {
+		            "id": "2",
+		            "title": "Food Handing  and Safety",
+		            "cre_uid": null,
+		            "file_name": null,
+		            "expire_date": null,
+		            "created_by": "1",
+		            "expired": null
+		        },
+		        {
+		            "id": "6",
+		            "title": "Mental Health",
+		            "cre_uid": null,
+		            "file_name": null,
+		            "expire_date": null,
+		            "created_by": "1",
+		            "expired": null
+		        },
+		        {
+		            "id": "7",
+		            "title": "Dementia",
+		            "cre_uid": null,
+		            "file_name": null,
+		            "expire_date": null,
+		            "created_by": "1",
+		            "expired": null
+		        },
+		        {
+		            "id": "8",
+		            "title": "Nurse Deligation Core",
+		            "cre_uid": null,
+		            "file_name": null,
+		            "expire_date": null,
+		            "created_by": "1",
+		            "expired": null
+		        },
+		        {
+		            "id": "9",
+		            "title": "Nurse Delegation Diabetes",
+		            "cre_uid": null,
+		            "file_name": null,
+		            "expire_date": null,
+		            "created_by": "1",
+		            "expired": null
+		        },
+		        {
+		            "id": "10",
+		            "title": "AFH Administrator Training",
+		            "cre_uid": null,
+		            "file_name": null,
+		            "expire_date": null,
+		            "created_by": "1",
+		            "expired": null
+		        },
+		        {
+		            "id": "11",
+		            "title": "AFH Orientation Class Prospective Provider",
+		            "cre_uid": null,
+		            "file_name": null,
+		            "expire_date": null,
+		            "created_by": "1",
+		            "expired": null
+		        }
+		    ],
+		    "msg": "Successfully deleted.",
+		    "path": "https://bluecarecoach.com/uploads/"
 		}
 
+	---failed
+	{
+	    "status": "failed",
+	    "msg": "The userid field is required.",
+	    "path": "https://bluecarecoach.com/uploads/"
+	}
 
 
 
@@ -39,14 +114,16 @@
 	-- success
 		{
 		    "status": "success",
-		    "data": {
-		        "link": "https://bluecarecoach.com/uploads/ypqeGdpZ6fXgxKTYk7tVKcL9ob0L6F8o4eFE6Ozo.mp4",
-		        "all_uploaded_credentials_count": 2,
-		        "expired_credentials_count": 1,
-		        "extra_credentials_count": 1
-		    },
-		    "msg": "success"
+		    "data": "",
+		    "msg": "Successfully deleted account."
 		}
+
+	-- failed
+	{
+	    "status": "failed",
+	    "msg": "The userid field is required.",
+	    "path": "https://bluecarecoach.com/uploads/"
+	}
 
 
 
@@ -583,7 +660,7 @@
 		cre_uid: 3
 		userid: 13
 	}
-	POST: method
+	method : POST
 
 	{
 	    "status": "success",

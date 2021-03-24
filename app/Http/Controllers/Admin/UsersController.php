@@ -601,6 +601,7 @@ class UsersController extends Controller
 
         try {
             $credential = Credentialusers::where('id', $request->cre_uid)->first();
+            $deleteUploadedfile = $this->deleteUploadedfile($request->cre_uid, $request->cre_uid, 4);
             $cre = Credentials::where('id', $credential->credentialid)->first();
             $created_by = $cre['created_by'];
             
@@ -1102,6 +1103,14 @@ class UsersController extends Controller
 
                 if ($model->profile_logo) {
                     unlink($path . "/" . $model->profile_logo) or die("Failed to <strong class='highlight'>delete</strong> file");
+                }
+            }
+        }if ($table == 4) {
+            $model = Credentialusers::where('id', $credID)->first();
+            $path = "uploads";
+            if (@$model) {
+                if ($model->file_name) {
+                    unlink($path . "/" . $model->file_name) or die("Failed to <strong class='highlight'>delete</strong> file");
                 }
             }
         }
