@@ -1008,7 +1008,13 @@ class UsersController extends Controller
         }else{
             $extra_credentials_count = Credentials::where('created_by', $request->userid)->count();
         }
-        
+
+        $taglines = Tagline::all();
+        if (count($taglines) > 0) {
+            $data['tagline'] = $taglines[0]['description'];
+        }else{
+            $data['tagline'] = "Standing with Frontline Caregivers";
+        }
         
         $data['link'] = $link;
         $data['all_uploaded_credentials_count'] = $all_uploaded_credentials_count;

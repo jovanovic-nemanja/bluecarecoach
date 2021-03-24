@@ -51,3 +51,7 @@ Route::get('/licenses', 'Admin\CaregivinglicensesController@index')->name('licen
 
 Route::get('/users/resetpwd/{token}', 'Admin\UsersController@resetpwd')->name('users.resetpwd');
 Route::POST('/users/resetUserpassword', 'Admin\UsersController@resetUserpassword')->name('users.resetUserpassword');
+
+
+Route::resource('tagline', 'Admin\TaglineController');
+Route::get('/tagline', 'Admin\TaglineController@index')->name('tagline.index');

@@ -106,6 +106,11 @@ return [
 
     'key' => env('APP_KEY'),
 
+    'twilio' => [
+        'TWILIO_AUTH_TOKEN'  => env('TWILIO_AUTH_TOKEN'),
+        'TWILIO_ACCOUNT_SID' => env('TWILIO_ACCOUNT_SID')
+    ],
+
     'cipher' => 'AES-256-CBC',
 
     /*

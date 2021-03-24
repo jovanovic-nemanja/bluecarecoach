@@ -92,6 +92,20 @@
 
                             <li class="menu-item menu-item-parent" aria-haspopup="true">
                                 <span class="menu-link">
+                                    <span class="menu-text">Tag Line</span>
+                                </span>
+                            </li>
+                            <li class="menu-item <?= ($menu == "tagline") ? "menu-item-active" : "" ?>" aria-haspopup="true">
+                                <a href="{{ route('tagline.index') }}" class="menu-link <?= ($menu == "tagline") ? "menu-item-active" : "" ?>">
+                                    <i class="menu-bullet menu-bullet-dot">
+                                        <span></span>
+                                    </i>
+                                    <span class="menu-text">Tag Line</span>
+                                </a>
+                            </li>
+
+                            <li class="menu-item menu-item-parent" aria-haspopup="true">
+                                <span class="menu-link">
                                     <span class="menu-text">Video</span>
                                 </span>
                             </li>
