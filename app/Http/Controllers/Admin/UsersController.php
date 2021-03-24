@@ -8,6 +8,7 @@ use App\Role;
 use App\Video;
 use App\RoleUser;
 use Carbon\Carbon;
+use App\Tagline;
 use App\Credentials;
 use App\Verifyemails;
 use App\Credentialusers;
@@ -1015,7 +1016,7 @@ class UsersController extends Controller
         }else{
             $data['tagline'] = "Standing with Frontline Caregivers";
         }
-        
+
         $data['link'] = $link;
         $data['all_uploaded_credentials_count'] = $all_uploaded_credentials_count;
         $data['expired_credentials_count'] = $expired_credentials_count;
