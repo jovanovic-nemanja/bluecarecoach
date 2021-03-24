@@ -1,3 +1,29 @@
+- Delete Extra credential
+
+	https://bluecarecoach.com/api/v1/deleteExtracredential
+
+	params : {
+		userid : 13
+	}
+
+	method: GET
+
+    Response
+	-- success
+		{
+		    "status": "success",
+		    "data": {
+		        "link": "https://bluecarecoach.com/uploads/ypqeGdpZ6fXgxKTYk7tVKcL9ob0L6F8o4eFE6Ozo.mp4",
+		        "all_uploaded_credentials_count": 2,
+		        "expired_credentials_count": 1,
+		        "extra_credentials_count": 1
+		    },
+		    "msg": "success"
+		}
+
+
+
+
 - Get video link
 
 	https://bluecarecoach.com/api/v1/getvideolink

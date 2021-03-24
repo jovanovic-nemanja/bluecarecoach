@@ -6,6 +6,7 @@ use Mail;
 use App\User;
 use App\Role;
 use App\Video;
+use App\RoleUser;
 use Carbon\Carbon;
 use App\RoleUser;
 use App\Verifyemails;
@@ -15,15 +16,17 @@ use App\Credentialusers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class UsersController extends Controller
 {
     public function __construct(){
-        $this->middleware(['auth', 'admin'])->except(['store', 'emailverify', 'validateCode', 'loginUserwithApple', 'loginUserwithGoogle', 'loginUserwithFacebook', 'loginUser', 'logout', 'uploadCredentialFile', 'deleteCredentialuser', 'forgotpassword', 'resetpwd', 'resetUserpassword', 'getUserinformation', 'getCredentials', 'getLicenses', 'updateAccount', 'addCredential', 'saveSkillandhobby', 'getvideolink']);
+        $this->middleware(['auth', 'admin'])->except(['store', 'emailverify', 'validateCode', 'loginUserwithApple', 'loginUserwithGoogle', 'loginUserwithFacebook', 'loginUser', 'logout', 'uploadCredentialFile', 'deleteCredentialuser', 'forgotpassword', 'resetpwd', 'resetUserpassword', 'getUserinformation', 'getCredentials', 'getLicenses', 'updateAccount', 'addCredential', 'saveSkillandhobby', 'getvideolink', 'deleteExtracredential', 'deleteAccount']);
     }
 
     /**
@@ -626,48 +629,25 @@ class UsersController extends Controller
         $caregiving_license = $user->care_giving_license;
         $query = "JSON_CONTAINS(credentials.care_licenses, ".$caregiving_license.", '$')=1";
 
-        if ($credentialid == -1) {  //for special user
-            if(@$caregiving_license == NULL) {
-                $result = DB::table('credentials')
-                        ->leftJoin('credential_users', function ($join) use ($userid) {
-                            $join->on('credentials.id', '=', 'credential_users.credentialid')
-                                 ->where('credential_users.userid', '=', $userid);
-                        })
-                        ->whereIn('credentials.created_by', [$id, $adminId])
-                        ->select('credentials.id', 'credentials.title', 'credential_users.id as cre_uid', 'credential_users.file_name', DB::raw('DATE_FORMAT(credential_users.expire_date, "%Y-%m-%d") as expire_date'), 'credentials.created_by', DB::raw('DATEDIFF(credential_users.expire_date, NOW()) as expired'))
-                        ->get();
-            }else{
-                $result = DB::table('credentials')
-                        ->leftJoin('credential_users', function ($join) use ($userid) {
-                            $join->on('credentials.id', '=', 'credential_users.credentialid')
-                                 ->where('credential_users.userid', '=', $userid);
-                        })
-                        ->whereIn('credentials.created_by', [$id, $adminId])
-                        ->whereRaw($query)
-                        ->select('credentials.id', 'credentials.title', 'credential_users.id as cre_uid', 'credential_users.file_name', DB::raw('DATE_FORMAT(credential_users.expire_date, "%Y-%m-%d") as expire_date'), 'credentials.created_by', DB::raw('DATEDIFF(credential_users.expire_date, NOW()) as expired'))
-                        ->get();
-            }
+        if(@$caregiving_license == NULL) {
+            $result = DB::table('credentials')
+                    ->leftJoin('credential_users', function ($join) use ($userid) {
+                        $join->on('credentials.id', '=', 'credential_users.credentialid')
+                             ->where('credential_users.userid', '=', $userid);
+                    })
+                    ->whereIn('credentials.created_by', [$id, $adminId])
+                    ->select('credentials.id', 'credentials.title', 'credential_users.id as cre_uid', 'credential_users.file_name', DB::raw('DATE_FORMAT(credential_users.expire_date, "%Y-%m-%d") as expire_date'), 'credentials.created_by', DB::raw('DATEDIFF(credential_users.expire_date, NOW()) as expired'))
+                    ->get();
         }else{
-            if(@$caregiving_license == NULL) {
-                $result = DB::table('credentials')
-                        ->leftJoin('credential_users', function ($join) use ($userid) {
-                            $join->on('credentials.id', '=', 'credential_users.credentialid')
-                                 ->where('credential_users.userid', '=', $userid);
-                        })
-                        ->whereIn('credentials.created_by', [$id, $adminId])
-                        ->select('credentials.id', 'credentials.title', 'credential_users.id as cre_uid', 'credential_users.file_name', DB::raw('DATE_FORMAT(credential_users.expire_date, "%Y-%m-%d") as expire_date'), 'credentials.created_by', DB::raw('DATEDIFF(credential_users.expire_date, NOW()) as expired'))
-                        ->get();
-            }else{
-                $result = DB::table('credentials')
-                        ->leftJoin('credential_users', function ($join) use ($userid) {
-                            $join->on('credentials.id', '=', 'credential_users.credentialid')
-                                 ->where('credential_users.userid', '=', $userid);
-                        })
-                        ->whereIn('credentials.created_by', [$id, $adminId])
-                        ->whereRaw($query)
-                        ->select('credentials.id', 'credentials.title', 'credential_users.id as cre_uid', 'credential_users.file_name', DB::raw('DATE_FORMAT(credential_users.expire_date, "%Y-%m-%d") as expire_date'), 'credentials.created_by', DB::raw('DATEDIFF(credential_users.expire_date, NOW()) as expired'))
-                        ->get();
-            }
+            $result = DB::table('credentials')
+                    ->leftJoin('credential_users', function ($join) use ($userid) {
+                        $join->on('credentials.id', '=', 'credential_users.credentialid')
+                             ->where('credential_users.userid', '=', $userid);
+                    })
+                    ->whereIn('credentials.created_by', [$id, $adminId])
+                    ->whereRaw($query)
+                    ->select('credentials.id', 'credentials.title', 'credential_users.id as cre_uid', 'credential_users.file_name', DB::raw('DATE_FORMAT(credential_users.expire_date, "%Y-%m-%d") as expire_date'), 'credentials.created_by', DB::raw('DATEDIFF(credential_users.expire_date, NOW()) as expired'))
+                    ->get();
         }
 
         return $result;
@@ -1036,5 +1016,140 @@ class UsersController extends Controller
         $data['extra_credentials_count'] = $extra_credentials_count;
 
         return response()->json(['status' => $status, 'data' => $data, 'msg' => 'success']);
+    }
+
+    /**
+     * Swift API : delete Extra credential.
+     *
+     * @since 2021-03-24
+     * @author Nemanja
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteExtracredential(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'credID' => 'required',
+            'userid' => 'required'
+        ]);
+
+        $path = env('APP_URL')."uploads/";
+
+        if ($validator->fails()) {
+            $messages = $validator->messages();
+
+            //pass validator errors as errors object for ajax response
+            return response()->json(['status' => "failed", 'msg' => $messages->first(), 'path' => $path]);
+        }
+
+        DB::beginTransaction();
+
+        try {
+            $deleteuploadedfile = $this->deleteUploadedfile($request->credID, $request->userid, 1);
+            $credusers = Credentialusers::where('credentialid', $request->credID)->delete();
+            $cre = Credentials::where('id', $request->credID)->first();
+            $created_by = $cre['created_by'];
+            
+            $del = Credentials::where('id', $request->credID)->delete();
+
+            $data = $this->getCredentialdata($request->userid, $created_by);
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            throw $e;
+        }
+
+        return response()->json(['status' => "success", 'data' => $data, 'msg' => 'Successfully deleted.', 'path' => $path]);
+    }
+
+    /**
+     * Swift API : delete uploaded file to server.
+     *
+     * @since 2021-03-24
+     * @author Nemanja
+     * @param  \Illuminate\Http\Request  $credID
+     * @return \Illuminate\Http\Response
+     */
+    private function deleteUploadedfile($credID, $userid, $table)
+    {
+        if ($table == 1) {
+            $model = Credentialusers::where('credentialid', $credID)->where('userid', $userid)->get();
+            $path = "uploads";
+            if (@$model) {
+                foreach ($model as $m) {
+                    if ($m->file_name) {
+                        unlink($path . "/" . $m->file_name) or die("Failed to <strong class='highlight'>delete</strong> file");
+                    }
+                }
+            }
+        }if ($table == 2) {
+            $model = Credentialusers::where('userid', $userid)->get();
+            if (@$model) {
+                $path = "uploads";
+
+                foreach ($model as $m) {
+                    if ($m->file_name) {
+                        unlink($path . "/" . $m->file_name) or die("Failed to <strong class='highlight'>delete</strong> file");
+                    }
+                }
+            }
+        }if ($table == 3) {
+            $roleuser = RoleUser::where('user_id', $userid)->delete();
+            $model = User::where('id', $userid)->first();
+            if (@$model) {
+                $path = "uploads";
+
+                if ($model->profile_logo) {
+                    unlink($path . "/" . $model->profile_logo) or die("Failed to <strong class='highlight'>delete</strong> file");
+                }
+            }
+        }
+            
+        return true;
+    }
+
+    /**
+     * Swift API : delete user account.
+     *
+     * @since 2021-03-24
+     * @author Nemanja
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteAccount(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'userid' => 'required'
+        ]);
+
+        $path = env('APP_URL')."uploads/";
+
+        if ($validator->fails()) {
+            $messages = $validator->messages();
+
+            //pass validator errors as errors object for ajax response
+            return response()->json(['status' => "failed", 'msg' => $messages->first(), 'path' => $path]);
+        }
+
+        DB::beginTransaction();
+
+        try {
+            $deleteuploadedfile = $this->deleteUploadedfile($request->userid, $request->userid, 2);
+            $credusers = Credentialusers::where('userid', $request->userid)->delete();
+            $creds = Credentials::where('created_by', $request->userid)->delete();
+
+            $userphoto = $this->deleteUploadedfile($request->userid, $request->userid, 3);
+            $del = User::where('id', $request->userid)->delete();
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            throw $e;
+        }
+
+        return response()->json(['status' => "success", 'data' => "", 'msg' => 'Successfully deleted account.']);
     }
 }

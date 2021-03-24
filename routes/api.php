@@ -39,3 +39,6 @@ Route::POST('/v1/updateAccount', 'Admin\UsersController@updateAccount');
 Route::POST('/v1/addCredential', 'Admin\UsersController@addCredential');
 
 Route::GET('/v1/getvideolink', 'Admin\UsersController@getvideolink');
+
+Route::POST('/v1/deleteExtracredential', 'Admin\UsersController@deleteExtracredential');
+Route::POST('/v1/deleteAccount', 'Admin\UsersController@deleteAccount');
