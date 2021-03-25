@@ -42,3 +42,5 @@ Route::GET('/v1/getvideolink', 'Admin\UsersController@getvideolink');
 
 Route::POST('/v1/deleteExtracredential', 'Admin\UsersController@deleteExtracredential');
 Route::POST('/v1/deleteAccount', 'Admin\UsersController@deleteAccount');
+
+Route::POST('/v1/sendSMS', 'Frontend\HomeController@sendSMS')->name('home.sendSMS');

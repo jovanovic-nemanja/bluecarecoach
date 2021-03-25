@@ -5,14 +5,19 @@ namespace App\Http\Controllers\Frontend;
 use Carbon\Carbon;
 use App\User;
 use Mail;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+
+use Twilio\Rest\Client; 
+use Twilio\Jwt\AccessToken;
 
 class HomeController extends Controller
 {
     public function __construct(){
 
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['sendSMS']);
 
     }
     
@@ -74,5 +79,25 @@ class HomeController extends Controller
         // }
 
         return view('frontend.home', compact('users'));
+    }
+
+    public function sendSMS(Request $request)
+    {
+        try {
+            $sid    = "AC72b4c566329baa752d3f08b804f5a845"; 
+            $token  = "7170609fa2ba7ac52d47d73130f984d7"; 
+            $twilio = new Client($sid, $token); 
+             
+            $message = $twilio->messages 
+                ->create("+381644090800", // to 
+                    array(        
+                        "messagingServiceSid" => "MGc32c6183ab3b25449a7a827a8e20b4b4",      
+                        "body" => "Hello! Welcome to Bluely document organizer.",
+                        "from" => "+17013803018"
+                    ) 
+                );
+        } catch (TwilioException $e) {
+            $result = 'Twilio replied with: ' . $e;
+        }
     }
 }

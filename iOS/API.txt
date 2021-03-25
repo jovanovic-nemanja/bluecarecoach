@@ -159,12 +159,12 @@
 	https://bluecarecoach.com/api/v1/emailverify
 
 	params : {
-		email : jovanovic.nemanja.1029@gmail.com
+		email : test@gmail.com
 	}
 
 	{
 	    "status": "success",
-	    "data": "jovanovic.nemanja.1029@gmail.com",
+	    "data": "test@gmail.com",
 	    "msg": "We sent a verification code now. Please check your inbox."
 	}
 
@@ -185,13 +185,13 @@
 
 	{
 	    "status": "success",
-	    "data": "jovanovic.nemanja.1029@gmail.com",
+	    "data": "test@gmail.com",
 	    "msg": "Successfully validated now."
 	}
 
 	{
 	    "status": "failed",
-	    "data": "jovanovic.nemanja.1029@gmail.com",
+	    "data": "test@gmail.com",
 	    "msg": "Your verification code is invalid. "
 	}
 
@@ -245,7 +245,7 @@
 	        "hobby3": null,
 	        "hobby4": null,
 	        "hobby5": null,
-	        "profile_logo": "1.png",
+	        "profile_logo": "1asdfwqre.png",
 	        "email_verified_at": "1",
 	        "fb_id": null,
 	        "google_id": null,
