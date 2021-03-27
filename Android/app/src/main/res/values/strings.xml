@@ -1,0 +1,73 @@
+<resources>
+    <string name="app_name">Bluely Document Organizer</string>
+    <string name="title_activity_login">LoginActivity</string>
+
+
+    <string name="facebook_app_id">174392501112144</string>
+    <string name="fb_login_protocol_scheme">fb174392501112144</string>
+
+
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
+    <string name="welcome_bdo">Welcome to \nBluely Document Organizer</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="Sign_in">Sign In</string>
+    <string name="forgot_pswd_btn_text">Forgot Password?</string>
+    <string name="loading">Loading</string>
+    <string name="email_valid_erro">Please enter valid email</string>
+    <string name="password_valid_erro">Please enter password</string>
+    <string name="login_error">Login failed</string>
+    <string name="send_code">Send Code</string>
+    <string name="app_name_center">Bluely Document \nOrganizer</string>
+    <string name="singup_text">New User? Sign Up</string>
+    <string name="send_request">Send Request</string>
+    <string name="fb_login_btn_text">Sign In with Facebook</string>
+    <string name="gplus_login_btn_text">Sign In with Google</string>
+
+    <string name="cance_fb">Facebook login cancelled</string>
+    <string name="google_login_erro">Please try again later</string>
+    <string name="enter_code">Verification Code</string>
+    <string name="confirm_code">Confirm</string>
+    <string name="resendCode">Re-send Code</string>
+    <string name="verificaion_code_error">Please enter valid code</string>
+    <string name="are_you_over_18">Are you over 18?</string>
+    <string name="firstname">First Name</string>
+    <string name="lastname">Last Name</string>
+    <string name="phinenumber">Phone Number</string>
+    <string name="zipcode">Zip code</string>
+    <string name="license">Care Giving License</string>
+    <string name="confirmPassword">Confirm Password</string>
+    <string name="personal_data">Personal Data</string>
+    <string name="save">Save</string>
+    <string name="firstname_required">First name is required</string>
+    <string name="lastname_required">Last name is required</string>
+    <string name="phone_number_required">Phone number is required</string>
+    <string name="password_required">Password is required</string>
+    <string name="conf_password_required">Confirm password is required</string>
+    <string name="password_not_match">Password and confirm password  is not same</string>
+    <string name="error">Please try again later</string>
+    <string name="error_gif">Error</string>
+    <string name="logout">Log out</string>
+    <string name="logout_perm">Do you want to logout?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="profile_image_error">Please select your profile image</string>
+    <string name="license_required">"Please select valid license "</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_base">BaseActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="ask_to_close_App">Do you want to close the application?</string>
+    <string name="upload_credentials">Uploaded Credentials</string>
+</resources>

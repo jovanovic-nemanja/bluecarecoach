@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    android:background="@color/white"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+        <ImageView
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/app_icon_128"
+            android:layout_height="120dp"
+            android:layout_width="120dp"/>
+
+        <TextView
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:textColor="@color/blue_text_clr"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:text="@string/app_name_center"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+
+        <TextView
+            android:textSize="14sp"
+            android:layout_marginTop="24dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:textColor="@color/light_grey_hint"
+            android:text="@string/email"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+
+        <EditText
+            android:padding="6dp"
+            android:background="@drawable/editext_border"
+            android:id="@+id/email_edit"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_height="40dp"
+            android:layout_width="match_parent"/>
+
+        <com.google.android.material.button.MaterialButton
+            app:backgroundTint="@color/send_code_btn_clr"
+            app:cornerRadius="12dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:text="@string/send_code"
+            android:textColor="@color/white"
+            android:textStyle="normal"
+            android:textSize="18sp"
+            android:textAllCaps="false"
+            android:id="@+id/sendcode"
+            android:layout_height="60dp"
+            android:layout_width="match_parent"/>
+
+    </LinearLayout>
+</layout>

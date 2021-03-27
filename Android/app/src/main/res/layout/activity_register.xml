@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    android:background="@color/white"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+    <LinearLayout
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="25dp"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+        <ImageView
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/app_icon_128"
+            android:layout_height="120dp"
+            android:layout_width="120dp"/>
+
+        <TextView
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:textColor="@color/blue_text_clr"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:text="@string/app_name_center"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/addUserPhoto"
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/add_photo_paceholder"
+            android:layout_height="120dp"
+            android:layout_width="120dp"/>
+        <TextView
+            android:textSize="14sp"
+            android:layout_marginTop="24dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:textColor="@color/light_grey_hint"
+            android:text="@string/firstname"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+
+        <EditText
+            android:padding="6dp"
+            android:background="@drawable/editext_border"
+            android:id="@+id/firstnameEdit"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_height="40dp"
+            android:layout_width="match_parent"/>
+
+        <TextView
+            android:textSize="14sp"
+            android:layout_marginTop="24dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:textColor="@color/light_grey_hint"
+            android:text="@string/lastname"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+
+        <EditText
+            android:padding="6dp"
+            android:background="@drawable/editext_border"
+            android:id="@+id/lastNameEdit"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_height="40dp"
+            android:layout_width="match_parent"/>
+
+        <RelativeLayout
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+
+            <TextView
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:textSize="18sp"
+                android:layout_marginTop="24dp"
+                android:textColor="@color/black"
+                android:text="@string/are_you_over_18"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"/>
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:id="@+id/ageSwitch"
+                app:thumbTint="@color/sign_btn_clr"
+                android:textIsSelectable="true"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"/>
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:textSize="14sp"
+            android:layout_marginTop="24dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:textColor="@color/light_grey_hint"
+            android:text="@string/phinenumber"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+
+        <EditText
+            android:padding="6dp"
+            android:background="@drawable/editext_border"
+            android:id="@+id/phnenumberEdit"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_height="40dp"
+            android:layout_width="match_parent"/>
+
+
+        <TextView
+            android:textSize="14sp"
+            android:layout_marginTop="24dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:textColor="@color/light_grey_hint"
+            android:text="@string/zipcode"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+
+        <EditText
+            android:padding="6dp"
+            android:background="@drawable/editext_border"
+            android:id="@+id/zipcodeEdit"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_height="40dp"
+            android:layout_width="match_parent"/>
+
+        <TextView
+            android:textSize="14sp"
+            android:layout_marginTop="24dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:textColor="@color/light_grey_hint"
+            android:text="@string/license"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+
+        <com.jaredrummler.materialspinner.MaterialSpinner
+            android:background="@drawable/editext_border"
+            android:id="@+id/licenseEdit"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="8dp"
+            android:layout_height="40dp"
+            android:layout_width="match_parent"
+  />
+<!--        <EditText-->
+<!--            android:padding="6dp"-->
+<!--            android:background="@drawable/editext_border"-->
+<!--            android:id="@+id/licenseEdit"-->
+<!--            android:textSize="14sp"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:layout_marginLeft="16dp"-->
+<!--            android:layout_marginRight="16dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:layout_width="match_parent"/>-->
+
+        <TextView
+            android:textSize="14sp"
+            android:layout_marginTop="24dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:textColor="@color/light_grey_hint"
+            android:text="@string/password"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+
+        <EditText
+            android:padding="6dp"
+            android:background="@drawable/editext_border"
+            android:id="@+id/passwordEdit"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:inputType="textPassword"
+            android:layout_height="40dp"
+            android:layout_width="match_parent"/>
+
+        <TextView
+            android:textSize="14sp"
+            android:layout_marginTop="24dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:textColor="@color/light_grey_hint"
+            android:text="@string/confirmPassword"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+
+        <EditText
+            android:padding="6dp"
+            android:background="@drawable/editext_border"
+            android:id="@+id/confirmPaswdEdit"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="100dp"
+            android:layout_height="40dp"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"/>
+
+    </LinearLayout>
+    </ScrollView>
+</layout>
