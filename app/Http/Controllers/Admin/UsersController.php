@@ -786,6 +786,13 @@ class UsersController extends Controller
     {
         $result = User::where('id', $userid)->first();
         
+        $profiletagline = Tagline::where('type', 2)->get();
+        if (count($profiletagline) > 0) {
+            $result['profiletagline'] = $profiletagline[0]['description'];
+        }else{
+            $result['profiletagline'] = "Caregiver Credentials, Jobs & Trainings";
+        }
+        
         return $result;
     }
 
@@ -1011,17 +1018,11 @@ class UsersController extends Controller
         }
 
         $hometagline = Tagline::where('type', 1)->get();
-        $profiletagline = Tagline::where('type', 2)->get();
+        
         if (count($hometagline) > 0) {
             $data['tagline'] = $hometagline[0]['description'];
         }else{
             $data['tagline'] = "Standing with Frontline Caregivers";
-        }
-
-        if (count($profiletagline) > 0) {
-            $data['profiletagline'] = $profiletagline[0]['description'];
-        }else{
-            $data['profiletagline'] = "Caregiver Credentials, Jobs & Trainings";
         }
 
         $data['link'] = $link;
