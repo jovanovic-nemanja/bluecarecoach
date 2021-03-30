@@ -146,7 +146,8 @@
 		        "all_uploaded_credentials_count": 2,
 		        "expired_credentials_count": 1,
 		        "extra_credentials_count": 1,
-		        "tagline": "Standing with Frontline Caregivers"
+		        "tagline": "Standing with Frontline Caregivers",
+		        'profiletagline': "Caregiver Credentials, Jobs & Trainings"
 		    },
 		    "msg": "success"
 		}

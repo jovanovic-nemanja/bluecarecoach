@@ -10,4 +10,21 @@ class Tagline extends Model
 {
     public $fillable = ['description', 'sign_date'];
     public $table = 'tagline';
+
+    public static function getType($type) {
+    	switch ($type) {
+    		case '1':
+    			$string = "Home screen area";
+    			break;
+
+    		case '2':
+    			$string = "Profile screen area";
+    			break;
+    		
+    		default:
+    			$string = "Home screen area";
+    			break;
+    	}
+    	return $string;
+    }
 }

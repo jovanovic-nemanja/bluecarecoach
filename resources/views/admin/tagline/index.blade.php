@@ -55,6 +55,7 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Description</th>
+                                    <th>Type</th>
                                     <th>Date</th>
                                     <th>Actions</th>
                                 </tr>
@@ -68,6 +69,9 @@
                                                 <td>{{ $i }}</td>
                                                 <td>
                                                     {{ $tagline->description }}
+                                                </td>
+                                                <td>
+                                                    {{ App\Tagline::getType($tagline->type) }}
                                                 </td>
                                                 <td>{{ $tagline->sign_date }}</td>
                                                 <td>

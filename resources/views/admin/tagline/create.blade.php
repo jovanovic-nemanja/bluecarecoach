@@ -56,6 +56,21 @@
                                 @endif
                             </div>
 
+                            <div class="form-group {{ $errors->has('type') ? 'has-error' : '' }}">
+                                <label class="col-form-label">Type</label>
+                                <div class="controls">
+                                    <select class="form-control" name="type" required>
+                                        <option value="1">Home screen area</option>
+                                        <option value="2">Profile screen area</option>
+                                    </select>
+                                </div>
+                                @if ($errors->has('type'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('type') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+
                             <div class="padding-bottom-30" style="text-align: center;">
                                 <div class="">
                                     <button type="submit" class="btn btn-primary gradient-blue submit_btn">Submit</button>

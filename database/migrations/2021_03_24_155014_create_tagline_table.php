@@ -17,6 +17,7 @@ class CreateTaglineTable extends Migration
             $table->increments('id');
 
             $table->text('description');
+            $table->integer('type');
             $table->datetime('sign_date');
             
             $table->timestamps();

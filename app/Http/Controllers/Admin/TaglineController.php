@@ -41,7 +41,8 @@ class TaglineController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(), [
-            'description' => 'required'
+            'description' => 'required',
+            'type' => 'required'
         ]);
 
         $dates = User::getformattime();
@@ -49,6 +50,7 @@ class TaglineController extends Controller
 
         $tagline = Tagline::create([
             'description' => $request->description,
+            'type' => $request->type,
             'sign_date' => $date
         ]);
 
@@ -89,13 +91,15 @@ class TaglineController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate(request(), [
-            'description' => 'required'
+            'description' => 'required',
+            'type' => 'required'
         ]);
 
         $record = Tagline::where('id', $id)->first();
 
         if (@$record) {
             $record->description = $request->description;
+            $record->type = $request->type;
 
             $record->update();
         }

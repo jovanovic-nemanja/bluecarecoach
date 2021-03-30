@@ -1010,11 +1010,18 @@ class UsersController extends Controller
             $extra_credentials_count = Credentials::where('created_by', $request->userid)->count();
         }
 
-        $taglines = Tagline::all();
-        if (count($taglines) > 0) {
-            $data['tagline'] = $taglines[0]['description'];
+        $hometagline = Tagline::where('type', 1)->get();
+        $profiletagline = Tagline::where('type', 2)->get();
+        if (count($hometagline) > 0) {
+            $data['tagline'] = $hometagline[0]['description'];
         }else{
             $data['tagline'] = "Standing with Frontline Caregivers";
+        }
+
+        if (count($profiletagline) > 0) {
+            $data['profiletagline'] = $profiletagline[0]['description'];
+        }else{
+            $data['profiletagline'] = "Caregiver Credentials, Jobs & Trainings";
         }
 
         $data['link'] = $link;

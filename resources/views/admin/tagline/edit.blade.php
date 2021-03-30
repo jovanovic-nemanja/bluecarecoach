@@ -47,13 +47,28 @@
                             <input type="hidden" name="_method" value="put">
 
                             <div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
-                                <label class="col-form-label">Title</label>
+                                <label class="col-form-label">Description</label>
                                 <div class="controls">
                                     <input type="text" class="form-control" name='description' placeholder="Description" required value="{{ $result->description }}">
                                 </div>
                                 @if ($errors->has('description'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('description') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+
+                            <div class="form-group {{ $errors->has('type') ? 'has-error' : '' }}">
+                                <label class="col-form-label">Type</label>
+                                <div class="controls">
+                                    <select class="form-control" name="type" required>
+                                        <option value="1">Home screen area</option>
+                                        <option value="2">Profile screen area</option>
+                                    </select>
+                                </div>
+                                @if ($errors->has('type'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('type') }}</strong>
                                     </span>
                                 @endif
                             </div>

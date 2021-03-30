@@ -15,6 +15,7 @@ class TaglineSeeder extends Seeder
         Tagline::create([
             'id' => 1,
             'descrption' => 'Standing with Frontline Caregivers',
+            'type' => 1,    //1: homescreen, 2: profile screen
             'sign_date' => date('y-m-d h:m:s') 
         ]);
     }
