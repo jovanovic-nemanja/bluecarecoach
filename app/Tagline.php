@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tagline extends Model
 {
-    public $fillable = ['description', 'sign_date'];
+    public $fillable = ['description', 'type', 'sign_date'];
     public $table = 'tagline';
 
     public static function getType($type) {
