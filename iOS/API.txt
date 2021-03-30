@@ -253,7 +253,8 @@
 	        "phone_number": "029292162",
 	        "sign_date": "2021-01-31 05:01:24",
 	        "created_at": "2021-01-31 17:26:24",
-	        "updated_at": "2021-01-31 17:26:24"
+	        "updated_at": "2021-01-31 17:26:24",
+	        "profiletagline": "Caregiver Credentials, Jobs & Trainings"
 	    },
 	    "msg": "Successfully Logged In.",
 	    "isNewUser": 1
@@ -380,7 +381,8 @@
 	        "phone_number": "029292162",
 	        "sign_date": "2021-01-31 05:01:24",
 	        "created_at": "2021-01-31 17:26:24",
-	        "updated_at": "2021-01-31 17:26:24"
+	        "updated_at": "2021-01-31 17:26:24",
+	        "profiletagline": "Caregiver Credentials, Jobs & Trainings"
 	    },
 	    "msg": "Successfully Logged In.",
 	    "isNewUser": 1
@@ -440,7 +442,8 @@
 	        "phone_number": "029292162",
 	        "sign_date": "2021-01-31 05:01:24",
 	        "created_at": "2021-01-31 17:26:24",
-	        "updated_at": "2021-01-31 17:26:24"
+	        "updated_at": "2021-01-31 17:26:24",
+	        "profiletagline": "Caregiver Credentials, Jobs & Trainings"
 	    },
 	    "msg": "Successfully Logged In.",
 	    "isNewUser": 1
@@ -500,7 +503,8 @@
 	        "phone_number": "029292162",
 	        "sign_date": "2021-01-31 05:01:24",
 	        "created_at": "2021-01-31 17:26:24",
-	        "updated_at": "2021-01-31 17:26:24"
+	        "updated_at": "2021-01-31 17:26:24",
+	        "profiletagline": "Caregiver Credentials, Jobs & Trainings"
 	    },
 	    "msg": "Successfully Logged In.",
 	    "isNewUser": 1
@@ -533,11 +537,11 @@
 	        "over_18": "1",
 	        "care_giving_license": null,
 	        "care_giving_experience": null,
-	        'looking_job' : null,
-	        'looking_job_zipcode' : null,
-	        'preferred_shift' : null,
-	        'desired_pay_from' : null,
-	        'desired_pay_to' : null,
+	        "looking_job": null,
+	        "looking_job_zipcode": null,
+	        "preferred_shift": null,
+	        "desired_pay_from": null,
+	        "desired_pay_to": null,
 	        "street1": "Serbia",
 	        "street2": "Beograd",
 	        "city": "Beograd",
@@ -557,15 +561,14 @@
 	        "email_verified_at": "1",
 	        "fb_id": null,
 	        "google_id": null,
-	        "apple_id": "123123",
+	        "apple_id": null,
 	        "phone_number": "029292162",
-	        "sign_date": "2021-01-31 05:01:24",
-	        "created_at": "2021-01-31 17:26:24",
-	        "updated_at": "2021-01-31 17:26:24",
-	        'profiletagline': "Caregiver Credentials, Jobs & Trainings"
+	        "sign_date": "2021-02-03 07:02:02",
+	        "created_at": "2021-02-03 06:45:02",
+	        "updated_at": "2021-02-03 06:45:02",
+	        "profiletagline": "Caregiver Credentials, Jobs & Trainings"
 	    },
-	    "msg": "Successfully Logged In.",
-	    "isNewUser": 1
+	    "msg": "Successfully Logged In."
 	}
 
 	{
