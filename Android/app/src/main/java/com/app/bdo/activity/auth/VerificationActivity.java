@@ -39,18 +39,23 @@ public class VerificationActivity extends AppCompatActivity implements View.OnCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         verificationBinding = DataBindingUtil.setContentView(this, R.layout.activity_verification);
 
+        /* Configure Naviagtion bar */
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("");
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.custom_back_btn_icon);
 
+        /* Button Listener */
         addBtnListener();
 
+        /* parse email */
         email = getIntent().getStringExtra("email");
     }
 
+    /* button actions init */
     private void addBtnListener() {
 
         verificationBinding.validateCode.setOnClickListener(this);
@@ -75,20 +80,26 @@ public class VerificationActivity extends AppCompatActivity implements View.OnCl
         });
     }
 
+    /* Validation */
     private boolean validate() {
+
         if (TextUtils.isEmpty(verificationBinding.codeEdit.getText().toString())) {
+
             verificationBinding.codeEdit.setError(getString(R.string.verificaion_code_error));
             return false;
         }
         return true;
     }
 
+    /* Verification method */
     private void sendCode() {
+
         if (validate()) {
             verifyCode();
         }
     }
 
+    /* Recreate Code */
     private void resendCode() {
 
         Loader.showLoader(this);
@@ -99,15 +110,21 @@ public class VerificationActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void run() {
                 try {
+
                     RequestBody body = Apiservice.getVerificationRequest(email);
+
                     String response = Apiservice.getInstance().makePost(Constants.EMAIL_VERIFICATION, body);
                     Logger.debug(TAG, response);
+
                     validateResults(response);
+
                 } catch (IOException e) {
                     e.printStackTrace();
+
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+
                             Loader.hide();
                             ToastUtils.show(VerificationActivity.this, e.getLocalizedMessage());
                         }
@@ -118,6 +135,8 @@ public class VerificationActivity extends AppCompatActivity implements View.OnCl
         });
 
     }
+
+    /* Verification Method */
 
     private void verifyCode() {
 
@@ -133,14 +152,17 @@ public class VerificationActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void run() {
                 try {
+
                     String response = Apiservice.getInstance().makePost(Constants.EMAIL_VALIDATE, body);
                     Logger.debug(TAG, response);
+
                     verifyResults(response);
                 } catch (IOException e) {
                     e.printStackTrace();
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+
                             Loader.hide();
                             ToastUtils.show(VerificationActivity.this, e.getLocalizedMessage());
                         }
@@ -152,6 +174,8 @@ public class VerificationActivity extends AppCompatActivity implements View.OnCl
 
     }
 
+    /* verify */
+
     private void verifyResults(String response) {
 
         runOnUiThread(new Runnable() {
@@ -160,16 +184,24 @@ public class VerificationActivity extends AppCompatActivity implements View.OnCl
                 Loader.hide();
                 try {
                     JSONObject jsonObject = new JSONObject(response);
+
                     Logger.debug(TAG, jsonObject.toString());
+
                     if (jsonObject.has("status")) {
+
                         String message = jsonObject.getString("msg");
+
                         if (jsonObject.getString("status").equals("success")) {
+
                             goToNext();
+
                         } else {
+
                             Loader.showAlert(VerificationActivity.this, "", message);
                         }
                     }
                 } catch (Exception e) {
+
                     Loader.showAlert(VerificationActivity.this, "", e.getLocalizedMessage());
 
                 }
@@ -178,12 +210,20 @@ public class VerificationActivity extends AppCompatActivity implements View.OnCl
 
     }
 
+    /* Redirect to user registration screen */
+
     private void goToNext() {
+
         Intent register = new Intent(this, Register.class);
+
         register.putExtra("email", email);
+
         startActivity(register);
+
         finish();
     }
+
+    /* Validation api response */
 
     private void validateResults(String response) {
 
@@ -192,13 +232,18 @@ public class VerificationActivity extends AppCompatActivity implements View.OnCl
             public void run() {
                 Loader.hide();
                 try {
+
                     JSONObject results = new JSONObject(response);
                     Logger.debug(TAG, "validateResults " + results);
+
                     if (results.has("status")) {
+
                         String message = results.getString("msg");
+
                         Loader.showAlert(VerificationActivity.this, "", message);
                     }
                 } catch (JSONException e) {
+
                     Logger.debug(TAG, "validateResults " + e.getLocalizedMessage());
                     e.printStackTrace();
                 }
@@ -206,6 +251,8 @@ public class VerificationActivity extends AppCompatActivity implements View.OnCl
         });
 
     }
+
+    /* Menu item onclick events */
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -217,21 +264,23 @@ public class VerificationActivity extends AppCompatActivity implements View.OnCl
         return true;
     }
 
+    /* OnClick events */
+
     @Override
     public void onClick(View view) {
 
         switch (view.getId()) {
             case R.id.validateCode:
-                Logger.debug(TAG, "sendcode clicked");
+
                 sendCode();
                 break;
 
             case R.id.reSendCode:
+
                 resendCode();
                 break;
 
         }
     }
-
 
 }

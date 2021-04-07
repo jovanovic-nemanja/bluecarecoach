@@ -14,4 +14,11 @@
     <dimen name="inner_frame_layout_padding">5dp</dimen>
     <dimen name="grid_expected_size">100</dimen>
     <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="scanPadding">16dp</dimen>
+    <dimen name="polygonViewCircleWidth">32dp</dimen>
+    <dimen name="polygonViewStrokeWidth">2dp</dimen>
+    <!-- ScanPadding must be half of polygonViewCircleWidth -->
+
+    <dimen name="bottom_bar_padding">15dp</dimen>
 </resources>

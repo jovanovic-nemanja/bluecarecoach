@@ -33,17 +33,23 @@ public class ForgotView extends AppCompatActivity implements View.OnClickListene
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         forgotViewBinding = DataBindingUtil.setContentView(this, R.layout.activity_forgot_view);
 
+        /* Configure Naviation Bar */
         ActionBar actionBar = getSupportActionBar();
+
         actionBar.setTitle("");
+
         actionBar.setDisplayHomeAsUpEnabled(true);
+
         actionBar.setHomeAsUpIndicator(R.drawable.custom_back_btn_icon);
 
+        /* Button listener */
         addBtnListener();
     }
 
-
+    /* Button Listeners */
     private void addBtnListener() {
 
         forgotViewBinding.sendcode.setOnClickListener(this);
@@ -61,18 +67,25 @@ public class ForgotView extends AppCompatActivity implements View.OnClickListene
 
             @Override
             public void afterTextChanged(Editable editable) {
+
                 forgotViewBinding.emailEdit.setError(null);
             }
         });
     }
 
+    /* Validate */
+
     private boolean validate() {
+
         if (TextUtils.isEmpty(forgotViewBinding.emailEdit.getText().toString())) {
+
             forgotViewBinding.emailEdit.setError(getString(R.string.email_valid_erro));
             return false;
         }
         return true;
     }
+
+    /* Menu onItem Listener */
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -84,16 +97,21 @@ public class ForgotView extends AppCompatActivity implements View.OnClickListene
         return true;
     }
 
+    /* Onclick Events */
     @Override
     public void onClick(View view) {
 
         switch (view.getId()) {
             case R.id.sendcode:
+
                 sendCode();
+
                 break;
 
         }
     }
+
+    /* To Send Password Reset Code */
 
     private void sendCode() {
         if (validate()) {
@@ -106,14 +124,18 @@ public class ForgotView extends AppCompatActivity implements View.OnClickListene
                 @Override
                 public void run() {
                     try {
+
                         String results = Apiservice.getInstance().makePost(Constants.FORGOT_PASWD, requestBody);
+
                         validateResults(results);
+
                     } catch (IOException e) {
                         e.printStackTrace();
 
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+
                                 Loader.hide();
                                 Loader.showAlert(ForgotView.this, "", e.getLocalizedMessage());
                             }
@@ -124,6 +146,8 @@ public class ForgotView extends AppCompatActivity implements View.OnClickListene
         }
     }
 
+    /* Validate Responses */
+
     private void validateResults(String results) {
 
         runOnUiThread(new Runnable() {
@@ -133,18 +157,25 @@ public class ForgotView extends AppCompatActivity implements View.OnClickListene
                 Loader.hide();
 
                 try {
+
                     JSONObject jsonObject = new JSONObject(results);
+
                     if (jsonObject.has("status")) {
+
                         String message = jsonObject.getString("msg");
 
                         if (jsonObject.getString("status").equals("success")) {
+
                             Loader.showAlert(ForgotView.this, "", message, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
+
                                     onBackPressed();
+
                                 }
                             });
                         } else {
+
                             Loader.showAlert(ForgotView.this, "", message);
                         }
 

@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:iconTint="@color/white"
-        app:showAsAction="ifRoom"
-        android:id="@+id/logout"
-        android:title="@string/logout"/>
+    <group >
+        <item android:title="@string/share"
+            android:id="@+id/share" />
+        <item android:title="@string/add_photos"
+            android:id="@+id/add_photos" />
+        <item android:title="@string/copy"
+            android:id="@+id/copy" />
+        <item android:title="@string/delete"
+            android:id="@+id/delete" />
+    </group>
 </menu>

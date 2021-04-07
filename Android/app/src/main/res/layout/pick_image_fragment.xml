@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    android:orientation="vertical">
+
+    <com.wonderkiln.camerakit.CameraView
+        android:id="@+id/camera"
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true" />
+
+    <TextView
+        android:padding="5dp"
+        android:gravity="center"
+        android:text="Position the document in view"
+        android:textSize="15sp"
+        android:textColor="#fff"
+        android:layout_above="@+id/bottomView"
+        android:id="@+id/hintView"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"/>
+    <RelativeLayout
+        android:background="@color/sky_blue_clr"
+        android:id="@+id/bottomView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:padding="15dp">
+
+        <Button
+            android:layout_alignParentLeft="true"
+            android:textColor="#fff"
+            android:text="Cancel"
+            android:id="@+id/cancelButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+             />
+
+        <ImageButton
+            android:visibility="gone"
+            android:id="@+id/selectButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+             />
+
+        <ImageButton
+            android:layout_centerInParent="true"
+            android:id="@+id/cameraButton"
+            android:layout_width="wrap_content"
+            android:tint="#fff"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_photo_camera_black_36dp" />
+    </RelativeLayout>
+
+</RelativeLayout>

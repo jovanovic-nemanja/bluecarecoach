@@ -8,16 +8,24 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.app.bdo.R;
 import com.app.bdo.activity.auth.LoginActivity;
+import com.app.bdo.helper.AppHelper;
 import com.app.bdo.utils.SharePrefUtils;
 
 public class SplashScreen extends AppCompatActivity {
 
     private Handler mWaitHandler = new Handler();
+    private int SPLASH_DURATION = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+
+        /* Setting current instances  */
+
+        AppHelper.getInstance().setmContext(this);
+
+        /* Delay screen tasks */
 
         mWaitHandler.postDelayed(new Runnable() {
             @Override
@@ -29,10 +37,12 @@ public class SplashScreen extends AppCompatActivity {
                 }
                 goToLoginView();
             }
-        }, 1000);
+        }, SPLASH_DURATION);
 
 
     }
+
+    /* Redirect to Main screen after user has session */
 
     private void goToHome() {
         Intent homeInent = new Intent(this, MainActivity.class);
@@ -40,6 +50,8 @@ public class SplashScreen extends AppCompatActivity {
         startActivity(homeInent);
         finish();
     }
+
+    /* Redirect to Login screen */
 
     private void goToLoginView() {
 
@@ -52,7 +64,11 @@ public class SplashScreen extends AppCompatActivity {
     public void onDestroy() {
         super.onDestroy();
 
-        //Remove all the callbacks otherwise navigation will execute even after activity is killed or closed.
+        /*
+
+         Remove all the callbacks otherwise navigation will execute even after activity is killed or closed.
+
+         */
         mWaitHandler.removeCallbacksAndMessages(null);
     }
 }

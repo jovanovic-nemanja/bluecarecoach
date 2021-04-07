@@ -11,13 +11,29 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+
+<!--    app:itemTextColor="@drawable/bottom_nav_icon_color_selector"-->
+<!--    app:itemIconTint="@drawable/bottom_nav_icon_color_selector" -->
+
+<com.google.android.material.bottomnavigation.BottomNavigationView
+    android:layout_height="55dp"
+    android:id="@+id/bottomBar"
+    app:menu="@menu/bottom_tab_menu"
+    app:itemBackground="@color/sky_blue_clr"
+    app:layout_constraintBottom_toBottomOf="parent"
+    android:layout_width="match_parent"
+    app:itemTextColor="@drawable/bottom_nav_icon_color_selector"
+    app:itemIconTint="@drawable/bottom_nav_icon_color_selector"
+    tools:ignore="MissingConstraints" />
+
     <com.google.android.material.tabs.TabLayout
+        android:visibility="gone"
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:layout_height="60dp"
+        android:background="@color/sky_blue_clr"
         android:elevation="20dp"
-        android:minHeight="?actionBarSize"
+        android:minHeight="60dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -15,6 +15,7 @@ import androidx.databinding.DataBindingUtil;
 import com.app.bdo.R;
 import com.app.bdo.activity.MainActivity;
 import com.app.bdo.databinding.ActivityLoginBinding;
+import com.app.bdo.helper.AppHelper;
 import com.app.bdo.helper.Constants;
 import com.app.bdo.model.User;
 import com.app.bdo.services.Apiservice;
@@ -40,26 +41,22 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.Arrays;
+
 import okhttp3.RequestBody;
-
-
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
-import android.util.Base64;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private String TAG = LoginActivity.class.getName();
+    private static final String EMAIL = "email";
+
     private final int RC_SIGN_IN = 201;
 
-    private ActivityLoginBinding loginBinding;
-    private CallbackManager callbackManager;
-    private GoogleSignInClient mGoogleSignInClient;
+    private String TAG = LoginActivity.class.getName();
 
-    private static final String EMAIL = "email";
+    private ActivityLoginBinding loginBinding;
+
+    private CallbackManager callbackManager;
+
+    private GoogleSignInClient mGoogleSignInClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,32 +71,38 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         initGoogle();
 
 
-//       try {
-//            PackageInfo info = getPackageManager().getPackageInfo(
-//                    getPackageName(),
-//                    PackageManager.GET_SIGNATURES);
-//            for (Signature signature : info.signatures) {
-//                MessageDigest md = MessageDigest.getInstance("SHA");
-//                md.update(signature.toByteArray());
-//                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
-//            }
-//        }
-//        catch (PackageManager.NameNotFoundException e) {
-//
-//        }
-//        catch (NoSuchAlgorithmException e) {
-//
-//        }
+      /*  try {
+            PackageInfo info = getPackageManager().getPackageInfo(
+                    getPackageName(),
+                    PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        }
+        catch (PackageManager.NameNotFoundException e) {
+
+        }
+        catch (NoSuchAlgorithmException e) {
+
+        } */
 
     }
 
+    /* setup google session */
+
     private void initGoogle() {
+
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
+
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
     }
+
+    /* setup FB session */
 
     private void initFb() {
 
@@ -133,6 +136,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
+    /* Setup Button Onclick events */
+
     private void addBtnListener() {
 
         loginBinding.signBtn.setOnClickListener(this);
@@ -159,11 +164,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             @Override
             public void afterTextChanged(Editable editable) {
+
                 loginBinding.emailEdit.setError(null);
+
                 loginBinding.passwordEdit.setError(null);
             }
         });
     }
+
+    /* onBack button event */
 
     @Override
     public void onBackPressed() {
@@ -171,38 +180,54 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Loader.showExitAlert(this, getString(R.string.ask_to_close_App));
     }
 
+    /* onClick Events */
+
     @Override
     public void onClick(View view) {
 
         switch (view.getId()) {
             case R.id.signBtn:
+
                 doLogin();
+
                 break;
 
             case R.id.signup_btn:
+
                 goToSignup();
+
                 break;
 
             case R.id.forgot_paswd_btn:
+
                 goToForgotView();
+
                 break;
 
             case R.id.fb_login_button:
+
                 doFbLogin();
+
                 break;
 
             case R.id.google_login_button:
+
                 doGoogleLogin();
+
                 break;
         }
     }
 
+    /* Google Login */
+
     private void doGoogleLogin() {
 
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
 
+        startActivityForResult(signInIntent, RC_SIGN_IN);
     }
+
+    /* FB Login */
 
     private void doFbLogin() {
 
@@ -211,36 +236,51 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         LoginManager.getInstance().logIn(this, Arrays.asList(EMAIL));
     }
 
+    /* ForGot Password view */
+
     private void goToForgotView() {
 
         Intent forgot = new Intent(this, ForgotView.class);
         startActivity(forgot);
     }
 
+    /* Signup View */
+
     private void goToSignup() {
 
         Intent signup = new Intent(this, Signup.class);
+
         startActivity(signup);
     }
+
+    /* Validate Auth  */
 
     private void doLogin() {
 
         if (validate()) {
+
             createLoginRequest();
         }
     }
 
+    /* Validation  */
+
     private boolean validate() {
+
         if (TextUtils.isEmpty(loginBinding.emailEdit.getText().toString())) {
+
             loginBinding.emailEdit.setError(getString(R.string.email_valid_erro));
             return false;
         }
         if (TextUtils.isEmpty(loginBinding.passwordEdit.getText().toString())) {
+
             loginBinding.passwordEdit.setError(getString(R.string.password_valid_erro));
             return false;
         }
         return true;
     }
+
+    /* Connect to server  */
 
     private void createLoginRequest() {
 
@@ -263,13 +303,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void run() {
                 try {
                     String response = Apiservice.getInstance().makePost(Constants.LOGIN_URL, body);
+
+                    Logger.debug("Login ","response => " + response);
+
                     validateLoginResults(response);
+
                 } catch (IOException e) {
                     e.printStackTrace();
+
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+
                             Loader.hide();
+
                             ToastUtils.show(LoginActivity.this, e.getLocalizedMessage());
                         }
                     });
@@ -280,19 +327,28 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
+    /* validateLoginResults */
+
     private void validateLoginResults(String response) {
+
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+
                 Logger.debug(TAG, response);
                 Loader.hide();
 
                 try {
                     JSONObject jsonObject = new JSONObject(response);
+
                     if (jsonObject.has("status")) {
+
                         String status = jsonObject.getString("status");
+
                         if (status.equals("failed")) {
+
                             String message = jsonObject.getString("msg");
+
                             Loader.showAlert(LoginActivity.this, getString(R.string.login_error), message);
                             return;
                         }
@@ -307,6 +363,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
+    /* parseLoginDetails */
+
     private void parseLoginDetails(JSONObject jsonObject) {
 
         try {
@@ -314,7 +372,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             Gson gson = new Gson();
 
+            Logger.debug("userData.toString() ", userData.toString());
+
+
             User user = gson.fromJson(userData.toString(), User.class);
+
+            AppHelper.getInstance().setUser(user);
+
+//            user.setId(userData.getInt("id"));
+
+            Logger.debug("user ", String.valueOf(user.getId()));
+
 
             SharePrefUtils.saveData(this, SharePrefUtils.SESSION_KEY, true);
 
@@ -322,9 +390,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             SharePrefUtils.saveData(this, SharePrefUtils.USER_DETAILS, results);
 
+
             Intent home = new Intent(this, MainActivity.class);
+
             home.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
             startActivity(home);
+
             finish();
 
         } catch (JSONException e) {
@@ -334,6 +406,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
+    /* Activity Callbacks */
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -341,6 +415,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             // The Task returned from this call is always completed, no need to attach
             // a listener.
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+
             handleSignInResult(task);
             return;
         }
@@ -348,6 +423,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+    /* Google sign in callbacks */
 
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
@@ -363,17 +440,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    /* Refresh ui */
+
     private void updateUI(GoogleSignInAccount account) {
         if (account != null) {
+
             Logger.debug(TAG, "Google signin" + account.getEmail());
             Logger.debug(TAG, "Google token" + account.getId());
 
             processGoogleLogin(account.getId());
 
         } else {
+
             ToastUtils.show(this, getString(R.string.google_login_erro));
         }
     }
+
+    /* Connect google login */
 
     private void processGoogleLogin(String id) {
 
@@ -385,13 +468,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void run() {
                 try {
+
                     String loginResults = Apiservice.getInstance().makePost(Constants.LOGIN_GOOGLE, requestBody);
+
                     validateLoginResults(loginResults);
+
                 } catch (IOException e) {
+
                     e.printStackTrace();
+
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+
                             Loader.hide();
                             Loader.showAlert(LoginActivity.this, "", e.getLocalizedMessage());
                         }
@@ -403,6 +492,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
+    /* Connect FB login */
+
     private void processFBLogin(String id) {
 
 
@@ -412,13 +503,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void run() {
                 try {
+
                     String loginResults = Apiservice.getInstance().makePost(Constants.LOGIN_FB, requestBody);
+
                     validateLoginResults(loginResults);
+
                 } catch (IOException e) {
                     e.printStackTrace();
+
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+
                             Loader.hide();
                             Loader.showAlert(LoginActivity.this, "", e.getLocalizedMessage());
                         }

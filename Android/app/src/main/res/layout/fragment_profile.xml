@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout >
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:background="@color/sky_blue_clr"
+        android:layout_height="60dp"
+        android:layout_width="match_parent">
+
+
+        <Button
+            android:layout_alignParentLeft="true"
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            android:id="@+id/saveBtn"
+            android:textSize="17sp"
+            android:textColor="@color/white"
+            android:text="@string/save"
+            android:textAllCaps="false"
+            android:background="@android:color/transparent"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
+        <TextView
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:text="@string/profile"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
+        <Button
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            android:id="@+id/logoutBtn"
+            android:textSize="17sp"
+            android:textColor="@color/white"
+            android:text="@string/logout"
+            android:textAllCaps="false"
+            android:background="@android:color/transparent"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+      android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/cornor_layout"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+
+
+        <TextView
+            android:layout_marginTop="5dp"
+            android:background="@drawable/cornor_textview"
+            android:gravity="center"
+            android:text="@string/personal"
+            android:layout_marginLeft="30dp"
+            android:textSize="14sp"
+            android:layout_weight="1"
+            android:textColor="@color/black"
+            android:id="@+id/personalText"
+            android:layout_height="40dp"
+            android:layout_marginBottom="5dp"
+            android:layout_width="0dp"/>
+
+        <TextView
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="30dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="center"
+            android:layout_toRightOf="@+id/personalText"
+            android:text="@string/job_training"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:id="@+id/job_training"
+            android:layout_height="40dp"
+            android:layout_width="0dp"/>
+
+
+    </LinearLayout>
+
+<!--<RelativeLayout-->
+<!--   android:layout_marginLeft="50dp"-->
+<!--    android:layout_marginRight="50dp"-->
+<!--    android:layout_marginTop="20dp"-->
+<!--    android:layout_marginBottom="20dp"-->
+<!--    android:background="@drawable/cornor_layout"-->
+<!--    android:gravity="center_horizontal"-->
+<!--    android:layout_height="50dp"-->
+<!--    android:layout_width="match_parent">-->
+
+<!--    <TextView-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        android:background="@drawable/cornor_textview"-->
+<!--        android:gravity="center"-->
+<!--        android:text="@string/personal"-->
+<!--        android:layout_marginLeft="30dp"-->
+<!--        android:textSize="14sp"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:id="@+id/personalText"-->
+<!--        android:layout_height="40dp"-->
+
+<!--        android:layout_marginBottom="8dp"-->
+<!--        android:layout_width="130dp"/>-->
+
+<!--    <TextView-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        android:layout_marginBottom="8dp"-->
+<!--        android:background="@null"-->
+<!--        android:layout_marginRight="30dp"-->
+<!--        android:gravity="center"-->
+<!--        android:layout_toRightOf="@+id/personalText"-->
+<!--        android:text="@string/job_training"-->
+<!--        android:textSize="14sp"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:id="@+id/job_training"-->
+<!--        android:layout_height="40dp"-->
+<!--        android:layout_width="130dp"/>-->
+
+<!--</RelativeLayout>-->
+
+
+<!--    <info.hoang8f.android.segmented.SegmentedGroup-->
+<!--        xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"-->
+<!--        android:id="@+id/segmented2"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="10dp"-->
+<!--        android:gravity="center"-->
+<!--        android:orientation="horizontal"-->
+<!--        segmentedgroup:sc_border_width="2dp"-->
+<!--        segmentedgroup:sc_corner_radius="10dp">-->
+
+<!--        <RadioButton-->
+<!--            android:id="@+id/personal"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/personal"-->
+<!--            style="@style/RadioButton"-->
+<!--             />-->
+
+<!--        <RadioButton-->
+<!--            android:id="@+id/job_training"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/job_training"-->
+<!--            style="@style/RadioButton" />-->
+<!--    </info.hoang8f.android.segmented.SegmentedGroup>  -->
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <ScrollView
+        android:id="@+id/personalView"
+        android:visibility="visible"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+
+            <ImageView
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/app_icon_128"
+                android:layout_height="120dp"
+                android:layout_width="120dp"/>
+
+            <TextView
+                android:id="@+id/appname"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:textColor="@color/blue_text_clr"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:text="@string/app_name_center"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"/>
+
+            <RelativeLayout
+                android:id="@+id/photolayout"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/addUserPhoto"
+                    android:layout_marginTop="16dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/add_photo_paceholder"
+                    android:layout_height="120dp"
+                    android:layout_width="120dp"/>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/PreviewUserPhoto"
+                    android:layout_marginTop="16dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/add_photo_paceholder"
+                    android:layout_height="120dp"
+                    android:layout_width="120dp"/>
+            </RelativeLayout>
+
+
+            <TextView
+                android:textSize="14sp"
+                android:layout_marginTop="24dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textColor="@color/light_grey_hint"
+                android:text="@string/firstname"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"/>
+
+            <EditText
+                android:padding="6dp"
+                android:background="@drawable/editext_border"
+                android:id="@+id/firstnameEdit"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_height="40dp"
+                android:layout_width="match_parent"/>
+
+            <TextView
+                android:textSize="14sp"
+                android:layout_marginTop="24dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textColor="@color/light_grey_hint"
+                android:text="@string/lastname"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"/>
+
+            <EditText
+                android:padding="6dp"
+                android:background="@drawable/editext_border"
+                android:id="@+id/lastNameEdit"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_height="40dp"
+                android:layout_width="match_parent"/>
+
+            <RelativeLayout
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent">
+
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:textSize="18sp"
+                    android:layout_marginTop="24dp"
+                    android:textColor="@color/black"
+                    android:text="@string/are_you_over_18"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"/>
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/ageSwitch"
+                    app:thumbTint="@color/sign_btn_clr"
+                    android:textIsSelectable="true"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"/>
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:textSize="14sp"
+                android:layout_marginTop="24dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textColor="@color/light_grey_hint"
+                android:text="@string/phinenumber"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"/>
+
+            <EditText
+                android:padding="6dp"
+                android:background="@drawable/editext_border"
+                android:id="@+id/phnenumberEdit"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_height="40dp"
+                android:layout_width="match_parent"/>
+
+
+            <TextView
+                android:textSize="14sp"
+                android:layout_marginTop="24dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textColor="@color/light_grey_hint"
+                android:text="@string/zipcode"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"/>
+
+            <EditText
+                android:padding="6dp"
+                android:background="@drawable/editext_border"
+                android:id="@+id/zipcodeEdit"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_height="40dp"
+                android:layout_width="match_parent"/>
+
+            <TextView
+                android:textSize="14sp"
+                android:layout_marginTop="24dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textColor="@color/light_grey_hint"
+                android:text="@string/license"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"/>
+
+            <com.jaredrummler.materialspinner.MaterialSpinner
+                android:background="@drawable/editext_border"
+                android:id="@+id/licenseEdit"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="8dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="100dp"
+                android:layout_width="match_parent"/>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+
+    <LinearLayout
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:id="@+id/job_training_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textSize="14sp"
+            android:textColor="@color/light_grey_hint"
+            android:textAllCaps="true"
+            android:text="@string/care_job"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+        <View
+            android:layout_marginTop="8dp"
+            android:background="@color/border_grey"
+            android:layout_height="1dp"
+            android:layout_width="match_parent"/>
+
+
+        <RelativeLayout
+            android:layout_marginTop="20dp"
+
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+
+            <TextView
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:textSize="18sp"
+                android:layout_marginTop="24dp"
+                android:textColor="@color/black"
+                android:text="@string/job_training"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"/>
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:id="@+id/job_training_switch"
+                app:thumbTint="@color/sign_btn_clr"
+                android:textIsSelectable="true"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"/>
+
+        </RelativeLayout>
+
+
+        <View
+            android:layout_marginTop="8dp"
+            android:background="@color/border_grey"
+            android:layout_height="1dp"
+            android:layout_width="match_parent"/>
+
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/job_training_details"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+
+
+
+            <RelativeLayout
+                android:id="@+id/skilllayout"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/listview"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"/>
+
+
+                <TextView
+                    android:id="@+id/addskill"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/listview"
+                    android:layout_alignParentLeft="true"
+                    android:textSize="14sp"
+                    android:textColor="@color/sky_blue_clr"
+                    android:textAllCaps="true"
+                    android:text="@string/add_skills"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"/>
+
+                <ImageView
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/listview"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/arrow_right"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"/>
+            </RelativeLayout>
+
+
+            <View
+                android:layout_marginTop="8dp"
+                android:background="@color/border_grey"
+                android:layout_height="1dp"
+                android:layout_width="match_parent"/>
+
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:textSize="14sp"
+            android:textColor="@color/light_grey_hint"
+            android:textAllCaps="true"
+            android:text="@string/care_training"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+        <View
+            android:layout_marginTop="8dp"
+            android:background="@color/border_grey"
+            android:layout_height="1dp"
+            android:layout_width="match_parent"/>
+
+        <RelativeLayout
+            android:id="@+id/my_training_layout"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+
+            <TextView
+                android:layout_alignParentLeft="true"
+                android:textSize="14sp"
+                android:textColor="@color/sky_blue_clr"
+                android:textAllCaps="true"
+                android:text="@string/my_training"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"/>
+
+            <TextView
+                android:gravity="center"
+                android:drawableRight="@drawable/arrow_right"
+                android:layout_alignParentRight="true"
+                android:textSize="14sp"
+                android:textColor="@color/light_grey_hint"
+                android:text=""
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_marginTop="8dp"
+            android:background="@color/border_grey"
+            android:layout_height="1dp"
+            android:layout_marginBottom="100dp"
+            android:layout_width="match_parent"/>
+
+
+    </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>
+
+
+</layout>

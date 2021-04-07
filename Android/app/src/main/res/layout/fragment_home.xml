@@ -1,166 +1,224 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-<LinearLayout
+<RelativeLayout
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/actionbar"
+        android:layout_alignParentTop="true"
+        android:background="@color/sky_blue_clr"
+        android:layout_height="60dp"
+        android:layout_width="match_parent">
+
+
+        <TextView
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:text="@string/dashboard"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
+
+    </RelativeLayout>
     <LinearLayout
-        android:layout_margin="20dp"
+        android:layout_below="@+id/actionbar"
+        android:background="@color/white"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:orientation="vertical"
+        android:weightSum="2"
         android:layout_height="match_parent"
         android:layout_width="match_parent">
 
-        <VideoView
-            android:id="@+id/videoview"
-            android:layout_height="200dp"
-            android:layout_width="match_parent"/>
+      <LinearLayout
+          android:orientation="vertical"
+          android:layout_height="0dp"
+          android:layout_weight="1"
+          android:gravity="center"
+          android:layout_gravity="center"
+          android:background="@color/white"
+          android:layout_width="match_parent">
+
+          <VideoView
+              android:background="@android:color/transparent"
+              android:id="@+id/videoview"
+              android:layout_height="match_parent"
+              android:layout_width="match_parent"/>
+
+      </LinearLayout>
+
+
 
 
         <ScrollView
-            android:layout_marginTop="40dp"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent">
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="40dp">
 
             <LinearLayout
+                android:id="@+id/filesContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:orientation="vertical"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent">
+                android:orientation="vertical">
 
                 <RelativeLayout
-                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_width="match_parent">
+                    android:orientation="horizontal">
 
                     <ImageView
-                        app:tint="@color/sky_blue_clr"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentLeft="true"
                         android:id="@+id/uploadicon"
-                        android:src="@drawable/home_icon"
+                        android:layout_width="27dp"
                         android:layout_height="27dp"
-                        android:layout_width="27dp"/>
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/upload_file"
+                        app:tint="@color/sky_blue_clr" />
 
                     <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="20dp"
-                        android:layout_toRightOf="@id/uploadicon"
+                        android:layout_marginRight="20dp"
                         android:layout_toLeftOf="@+id/uploadCredentialsCount"
-                        android:layout_marginRight="20dp"
-                        android:textSize="14sp"
-                        android:textColor="@color/black"
+                        android:layout_toRightOf="@id/uploadicon"
                         android:text="@string/upload_credentials"
-                        android:layout_height="wrap_content"
-                        android:layout_width="match_parent"/>
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
 
                     <TextView
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        android:text="0"
-                        android:textColor="@color/black"
                         android:id="@+id/uploadCredentialsCount"
+                        android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:layout_width="20dp"/>
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:text="0"
+                        android:textColor="@color/black" />
 
                 </RelativeLayout>
 
                 <View
-                    android:layout_marginTop="8dp"
-                    android:layout_marginLeft="40dp"
-                    android:background="@color/border_grey"
+                    android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_width="match_parent"/>
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/border_grey" />
 
                 <RelativeLayout
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_width="match_parent">
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
 
                     <ImageView
-                        app:tint="@color/sky_blue_clr"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentLeft="true"
                         android:id="@+id/expireicon"
-                        android:src="@drawable/home_icon"
+                        android:layout_width="27dp"
                         android:layout_height="27dp"
-                        android:layout_width="27dp"/>
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/extra_credential"
+                         />
 
                     <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="20dp"
-                        android:layout_toRightOf="@id/expireicon"
-                        android:layout_toLeftOf="@+id/expireCredentialsCount"
                         android:layout_marginRight="20dp"
-                        android:textSize="14sp"
+                        android:layout_toLeftOf="@+id/expireCredentialsCount"
+                        android:layout_toRightOf="@id/expireicon"
+                        android:text="@string/expire_credentials"
                         android:textColor="@color/black"
-                        android:text="@string/upload_credentials"
-                        android:layout_height="wrap_content"
-                        android:layout_width="match_parent"/>
+                        android:textSize="14sp" />
 
                     <TextView
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        android:text="0"
-                        android:textColor="@color/black"
                         android:id="@+id/expireCredentialsCount"
+                        android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:layout_width="20dp"/>
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:text="0"
+                        android:textColor="@color/black" />
 
                 </RelativeLayout>
 
                 <View
-                    android:layout_marginTop="8dp"
-                    android:layout_marginLeft="40dp"
-                    android:background="@color/border_grey"
+                    android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_width="match_parent"/>
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/border_grey" />
 
                 <RelativeLayout
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_width="match_parent">
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
 
                     <ImageView
-                        app:tint="@color/sky_blue_clr"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentLeft="true"
                         android:id="@+id/extraicon"
-                        android:src="@drawable/home_icon"
+                        android:layout_width="27dp"
                         android:layout_height="27dp"
-                        android:layout_width="27dp"/>
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/extra_cred_icon"
+                        app:tint="@color/sky_blue_clr" />
 
                     <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="20dp"
-                        android:layout_toRightOf="@id/extraicon"
-                        android:layout_toLeftOf="@+id/extraCredentialsCount"
                         android:layout_marginRight="20dp"
-                        android:textSize="14sp"
+                        android:layout_toLeftOf="@+id/extraCredentialsCount"
+                        android:layout_toRightOf="@id/extraicon"
+                        android:text="@string/extra_credentials"
                         android:textColor="@color/black"
-                        android:text="@string/upload_credentials"
-                        android:layout_height="wrap_content"
-                        android:layout_width="match_parent"/>
+                        android:textSize="14sp" />
 
                     <TextView
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        android:text="0"
-                        android:textColor="@color/black"
                         android:id="@+id/extraCredentialsCount"
+                        android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:layout_width="20dp"/>
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:text="0"
+                        android:textColor="@color/black" />
 
                 </RelativeLayout>
+
 
             </LinearLayout>
 
+
         </ScrollView>
 
-
     </LinearLayout>
-</LinearLayout>
+
+
+    <TextView
+        android:layout_marginBottom="70dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:layout_centerVertical="true"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:id="@+id/tagLine"
+        android:textColor="@color/sky_blue_clr"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"/>
+
+
+</RelativeLayout>
 </layout>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragments.document.DocumentFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <RelativeLayout
+        android:background="@color/sky_blue_clr"
+        android:layout_height="60dp"
+        android:layout_width="match_parent">
+
+        <ImageButton
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/add_icon"
+            android:id="@+id/addBtn"
+            android:background="@android:color/transparent"
+            android:layout_height="25dp"
+            android:layout_width="25dp"/>
+
+        <TextView
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:text="@string/credentials"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
+        <Button
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            android:id="@+id/emailBtn"
+            android:textSize="17sp"
+            android:textColor="@color/white"
+            android:text="@string/Email"
+            android:textAllCaps="false"
+            android:background="@android:color/transparent"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+        <Button
+
+            android:layout_margin="10dp"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/sky_blue_clr"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:text="@string/list"
+            android:background="@null"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/list"
+            android:layout_height="40dp"
+            android:layout_width="wrap_content"/>
+
+        <Button
+            android:layout_margin="10dp"
+
+            android:textAllCaps="false"
+            android:layout_weight="1"
+            android:backgroundTint="@color/white"
+            android:textSize="14sp"
+            android:background="@null"
+            android:textColor="@color/sky_blue_clr"
+            android:layout_centerInParent="true"
+            android:text="@string/attachment"
+            android:layout_centerVertical="true"
+            android:id="@+id/attachment"
+            android:layout_height="40dp"
+            android:layout_width="wrap_content"/>
+
+        <Button
+            android:layout_margin="10dp"
+            android:background="@null"
+            android:textAllCaps="false"
+            android:layout_weight="1"
+            android:layout_alignParentRight="true"
+            android:backgroundTint="@color/white"
+            android:textSize="14sp"
+            android:textColor="@color/sky_blue_clr"
+            android:text="@string/extras"
+            android:layout_centerVertical="true"
+            android:id="@+id/extras"
+            android:layout_height="40dp"
+            android:layout_width="wrap_content"/>
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listview"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="55dp"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"/>
+
+
+</LinearLayout>
+
+</layout>

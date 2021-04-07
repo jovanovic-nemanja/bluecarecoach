@@ -41,6 +41,8 @@ public class Signup extends AppCompatActivity implements View.OnClickListener {
 
         signupBinding = DataBindingUtil.setContentView(this, R.layout.activity_signup);
 
+        /* Configure Navigation bar */
+
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("");
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -48,6 +50,8 @@ public class Signup extends AppCompatActivity implements View.OnClickListener {
 
         addBtnListener();
     }
+
+    /* Button Listeners */
 
     private void addBtnListener() {
 
@@ -71,13 +75,19 @@ public class Signup extends AppCompatActivity implements View.OnClickListener {
         });
     }
 
+    /* Validation */
+
     private boolean validate() {
+
         if (TextUtils.isEmpty(signupBinding.emailEdit.getText().toString())) {
+
             signupBinding.emailEdit.setError(getString(R.string.email_valid_erro));
             return false;
         }
         return true;
     }
+
+    /* Sending verification code to email account */
 
     private void sendVerificationCode() {
 
@@ -93,14 +103,19 @@ public class Signup extends AppCompatActivity implements View.OnClickListener {
             @Override
             public void run() {
                 try {
+
                     String response = Apiservice.getInstance().makePost(Constants.EMAIL_VERIFICATION, body);
                     Logger.debug(TAG, "response");
+
                     validateResults(response);
+
                 } catch (IOException e) {
                     e.printStackTrace();
+
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+
                             Loader.hide();
                             ToastUtils.show(Signup.this, e.getLocalizedMessage());
                         }
@@ -112,6 +127,8 @@ public class Signup extends AppCompatActivity implements View.OnClickListener {
 
     }
 
+    /* Validation Api response */
+
     private void validateResults(String response) {
 
         runOnUiThread(new Runnable() {
@@ -119,14 +136,21 @@ public class Signup extends AppCompatActivity implements View.OnClickListener {
             public void run() {
                 Loader.hide();
                 try {
+
                     JSONObject results = new JSONObject(response);
+
                     Logger.debug(TAG, "validateResults " + results);
+
                     if (results.has("status")) {
+
                         String message = results.getString("msg");
+
                         if (results.getString("status").equals("success")) {
+
                             Loader.showAlert(Signup.this, "", message, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
+
                                     goToVerification();
 
                                 }
@@ -137,6 +161,7 @@ public class Signup extends AppCompatActivity implements View.OnClickListener {
 
                     }
                 } catch (JSONException e) {
+
                     Logger.debug(TAG, "validateResults " + e.getLocalizedMessage());
                     e.printStackTrace();
                 }
@@ -145,13 +170,18 @@ public class Signup extends AppCompatActivity implements View.OnClickListener {
 
     }
 
+    /* Redirect to Verification View */
     private void goToVerification() {
 
         Intent verifictionIntent = new Intent(this, VerificationActivity.class);
+
         verifictionIntent.putExtra("email", signupBinding.emailEdit.getText().toString());
+
         startActivity(verifictionIntent);
     }
 
+
+    /* Menu option onclick Events */
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -163,11 +193,14 @@ public class Signup extends AppCompatActivity implements View.OnClickListener {
         return true;
     }
 
+    /* Onclick Events */
+
     @Override
     public void onClick(View view) {
 
         switch (view.getId()) {
             case R.id.sendcode:
+
                 Logger.debug(TAG, "sendcode clicked");
                 sendCode();
                 break;
@@ -175,6 +208,7 @@ public class Signup extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
+    /* Create Verification code */
     private void sendCode() {
         if (validate()) {
             sendVerificationCode();
