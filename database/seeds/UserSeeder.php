@@ -25,7 +25,6 @@ class UserSeeder extends Seeder
         'password' => '$2y$10$43Lgdx7qDxGdj3cDyfcw4uLj5nVQ6vsQ3obexrb/axByYf4B6roZO', // 111111
         'phone_number' => '029292162',
         'gender' => 1,
-        'birthday' => '1999-10-29',
         'street1' => 'Serbia',
         'street2' => 'Beograd',
         'city' => 'Beograd',
