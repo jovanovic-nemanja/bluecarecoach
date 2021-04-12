@@ -1,0 +1,26 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'BluelyHub' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for BluelyHub
+
+  pod 'SwiftyJSON'
+  pod 'GoogleSignIn'
+  pod 'IQKeyboardManagerSwift'
+  pod 'Alamofire'
+  pod 'JGProgressHUD'
+  pod 'DatePickerDialog'
+  pod 'SwiftPhoneNumberFormatter'
+
+  pod 'FBSDKCoreKit'
+  pod 'FBSDKLoginKit'
+  
+  pod 'SDWebImage', '5.9.4'
+  pod 'VBRRollingPit'
+
+  pod 'PickerViewCell'
+  
+end
