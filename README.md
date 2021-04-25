@@ -1,9 +1,9 @@
-# L-Commerce
-Laravel Multivendor Marketplace Script
+## Bluely Credential Admin backend for Bluely Credential Mobile App
+Laravel Vue.js
 
-1,   .env
+1,   .env.example to copy/paste as .env
 2,   composer install
-3,   php artisan migrate --seed
+3,   php artisan key:generate, php artisan migrate --seed
 4,   npm install laravel-mix --save-dev
 	npm install vuex --save
 5,   npm cache clear --force
@@ -11,5 +11,4 @@ Laravel Multivendor Marketplace Script
 7,   npm run dev(watch)
 8,   php artisan serve
 
-/**** AuthenticatesUsers.php please move it to vendor\laravel\framework\src\Illuminate\Foundation\Auth
-*****/
+## AuthenticatesUsers.php please move it to vendor\laravel\framework\src\Illuminate\Foundation\Auth ##
