@@ -2,15 +2,14 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Schema;
+use App;
+use Cart;
+use App\User;
 use App\GeneralSetting;
 use App\LocalizationSetting;
-use Cart;
-use App;
-use App\User;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,7 +29,6 @@ class AppServiceProvider extends ServiceProvider
                     [
                         'general_setting' => GeneralSetting::first(),
                         'localization_setting' => LocalizationSetting::first(),
-                        // 'ordercount' => Order::salescount(auth()->id()) + Order::transactioncount(auth()->id()),
                     ]
                 );
             }
