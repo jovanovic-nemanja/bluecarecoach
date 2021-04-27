@@ -235,7 +235,7 @@ class UserextraViewController: UIViewController, UITableViewDelegate, UITableVie
         if MFMailComposeViewController.canSendMail() {
             showMailBtnView()
         } else {
-            UIManager.shared.showAlert(vc: self, title: "BluelyHub", message: "Please set up mail account in order to send email")
+            UIManager.shared.showAlert(vc: self, title: "Bluely Credentials", message: "Please set up mail account in order to send email")
         }
     }
 /*
@@ -367,7 +367,7 @@ class UserextraViewController: UIViewController, UITableViewDelegate, UITableVie
             
         case .denied, .restricted:
             let strMessage: String = "Please allow access to your photos."
-            let alertController = UIAlertController(title: "BluelyHub", message: strMessage, preferredStyle: .alert)
+            let alertController = UIAlertController(title: "Bluely Credentials", message: strMessage, preferredStyle: .alert)
             
             let cancelAction = UIAlertAction(title: "Ok", style: .default) { action in
                 self.dismiss(animated: true, completion: nil)
@@ -404,7 +404,7 @@ class UserextraViewController: UIViewController, UITableViewDelegate, UITableVie
             
         case .denied, .restricted:
             let strMessage: String = "Please allow access to your photos."
-            let alertController = UIAlertController(title: "BluelyHub", message: strMessage, preferredStyle: .alert)
+            let alertController = UIAlertController(title: "Bluely Credentials", message: strMessage, preferredStyle: .alert)
             
             let cancelAction = UIAlertAction(title: "Ok", style: .default) { action in
                 self.dismiss(animated: true, completion: nil)
@@ -609,7 +609,7 @@ extension UserextraViewController {
     @IBAction func mailDoneBtnPressed(_ sender: Any) {
         let mail = MFMailComposeViewController()
         mail.mailComposeDelegate = self
-        mail.setSubject("BluelyHub Credentials!")
+        mail.setSubject("Bluely Credentials!")
 
         let selectedCredentials = credentials.filter({$0.isSelected == true})
         selectedCredentials.forEach({

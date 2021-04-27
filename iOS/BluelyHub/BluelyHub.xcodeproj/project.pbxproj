@@ -498,14 +498,14 @@
 				CODE_SIGN_ENTITLEMENTS = BluelyHub/BluelyHub.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2UKYV73549;
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = GR8G7LX4YM;
 				INFOPLIST_FILE = BluelyHub/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.solarisdubai.bluelyhub;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -523,14 +523,14 @@
 				CODE_SIGN_ENTITLEMENTS = BluelyHub/BluelyHub.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2UKYV73549;
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = GR8G7LX4YM;
 				INFOPLIST_FILE = BluelyHub/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.solarisdubai.bluelyhub;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
