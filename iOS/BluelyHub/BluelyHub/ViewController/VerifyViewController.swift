@@ -72,7 +72,7 @@ class VerifyViewController: UIViewController, UITextFieldDelegate {
                 self.btnResend.isHidden = false
                 self.btnConfirm.isHidden = false
             } else {
-                UIManager.shared.showAlert(vc: self, title: "Error", message: message!)
+                UIManager.shared.showAlert(vc: self, title: "Validation Error", message: message!)
             }
         }
     }

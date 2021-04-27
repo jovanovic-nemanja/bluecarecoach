@@ -249,7 +249,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerView
 
         case .denied, .restricted:
             let strMessage: String = "Please allow access to your photos."
-            let alertController = UIAlertController(title: "ThatDubaiGirl", message: strMessage, preferredStyle: .alert)
+            let alertController = UIAlertController(title: "Bluely Credentials", message: strMessage, preferredStyle: .alert)
 
             let cancelAction = UIAlertAction(title: "Ok", style: .default) { action in
                 self.dismiss(animated: true, completion: nil)
@@ -286,7 +286,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerView
 
         case .denied, .restricted:
             let strMessage: String = "Please allow access to your photos."
-            let alertController = UIAlertController(title: "ThatDubaiGirl", message: strMessage, preferredStyle: .alert)
+            let alertController = UIAlertController(title: "Bluely Credentials", message: strMessage, preferredStyle: .alert)
 
             let cancelAction = UIAlertAction(title: "Ok", style: .default) { action in
                 self.dismiss(animated: true, completion: nil)
@@ -784,14 +784,14 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         
         let submitAction = UIAlertAction(title: "Submit", style: .default) { [unowned controller] _ in
             if fieldIndex == 1 {
-                self.lookingZipCode = Int(controller.textFields![0].text!)!
+                self.lookingZipCode = Int(controller.textFields![0].text!) ?? 0
                 self.tableView.reloadData()
             } else if fieldIndex == 2 {
                 self.experiencedYears = Int(controller.textFields![0].text!)!
                 self.tableView.reloadData()
             } else if fieldIndex == 4 {
-                self.payMin = Int(controller.textFields![0].text!)!
-                self.payMax = Int(controller.textFields![1].text!)!
+                self.payMin = Int(controller.textFields![0].text!) ?? 0
+                self.payMax = Int(controller.textFields![1].text!) ?? 0
                 self.tableView.reloadData()
             }
         }

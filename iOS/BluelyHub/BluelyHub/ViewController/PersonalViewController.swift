@@ -58,7 +58,7 @@ class PersonalViewController: UIViewController, UITextFieldDelegate, UIPickerVie
             picker.dataSource = self
         }
 
-        tfPhoneNumber.config.defaultConfiguration = PhoneFormat(defaultPhoneFormat: "(###) ###-##-##")
+        tfPhoneNumber.config.defaultConfiguration = PhoneFormat(defaultPhoneFormat: "(###) ###-####")
         tfPhoneNumber.prefix = "+1 "
         
         if let params = signupParams {
@@ -150,7 +150,7 @@ class PersonalViewController: UIViewController, UITextFieldDelegate, UIPickerVie
 
         case .denied, .restricted:
             let strMessage: String = "Please allow access to your photos."
-            let alertController = UIAlertController(title: "ThatDubaiGirl", message: strMessage, preferredStyle: .alert)
+            let alertController = UIAlertController(title: "Bluely Credentials", message: strMessage, preferredStyle: .alert)
 
             let cancelAction = UIAlertAction(title: "Ok", style: .default) { action in
                 self.dismiss(animated: true, completion: nil)
@@ -187,7 +187,7 @@ class PersonalViewController: UIViewController, UITextFieldDelegate, UIPickerVie
 
         case .denied, .restricted:
             let strMessage: String = "Please allow access to your photos."
-            let alertController = UIAlertController(title: "ThatDubaiGirl", message: strMessage, preferredStyle: .alert)
+            let alertController = UIAlertController(title: "Bluely Credentials", message: strMessage, preferredStyle: .alert)
 
             let cancelAction = UIAlertAction(title: "Ok", style: .default) { action in
                 self.dismiss(animated: true, completion: nil)
@@ -234,7 +234,7 @@ class PersonalViewController: UIViewController, UITextFieldDelegate, UIPickerVie
     
     @IBAction func onSave(_ sender: Any) {
         if !isPhotoSelected {
-            UIManager.shared.showAlert(vc: self, title: "ThatDubaiGirl", message: "Please select profile picture.")
+            UIManager.shared.showAlert(vc: self, title: "Bluely Credentials", message: "Please select profile picture.")
             return
         }
 
