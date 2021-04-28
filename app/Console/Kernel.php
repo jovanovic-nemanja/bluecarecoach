@@ -27,8 +27,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('expiredcredential:sendemail')
-                 // ->daily(); //Run the task daily
-                ->everyMinute();
+                ->everyMinute(); //Run the task every minutes
     }
 
     /**
