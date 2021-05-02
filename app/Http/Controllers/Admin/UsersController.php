@@ -120,11 +120,11 @@ class UsersController extends Controller
         $str = rand(100000, 999999);
         $data = [];
         $data['name'] = 'Welcome User,';
-        $data['body'] = 'Hello! Welcome to Bluely hub. Thank you for registering with us. To complete your sign up process please verify your email address by entering the following code (' . $str . ') on the home screen.';
+        $data['body'] = 'Hello! Welcome to Bluely Credentials. Thank you for registering with us. To complete your sign up process please verify your email address by entering the following code (' . $str . ') on the home screen.';
 
         $useremail = $request['email'];
-        $username = 'Bluely hub';
-        $subject = "Verify your email for Bluely hub";
+        $username = 'Bluely Credentials';
+        $subject = "Verify your email for Bluely Credentials";
 
         try {
             Mail::send('frontend.mail.mail', $data, function($message) use ($username, $useremail, $subject) {
@@ -831,8 +831,8 @@ class UsersController extends Controller
         // $data['email'] = $request['email'];
 
         $useremail = $request['email'];
-        $username = 'Bluely Hub';
-        $subject = "Bluely Hub : Reset Password";
+        $username = 'Bluely Credentials';
+        $subject = "Bluely Credentials : Reset Password";
 
         try {
             Mail::send('frontend.mail.mail_forgotpassword', $data, function($message) use ($username, $useremail, $subject) {
