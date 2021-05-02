@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "closure #1 in HomeViewController.onDelete():HomeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "DataManager.currentUser?.id">
+            </PersistentString>
+            <PersistentString
+               value = "                self.sel_cre_uid">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CredentialViewController.viewDidLoad():CredentialViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "APIManager.imagePath + file_link!">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
