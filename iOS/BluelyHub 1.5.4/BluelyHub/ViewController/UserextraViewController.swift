@@ -37,7 +37,7 @@ class UserextraViewController: UIViewController, UITableViewDelegate, UITableVie
     var ocrText = String()
     var scannedImages = [UIImage]()
     var scanImageView = UIImage()
-    var oneLong = UIImage()
+    var oneLong: UIImage?
     private var ocrRequest = VNRecognizeTextRequest(completionHandler: nil)
     var pdfFile : PDFDocument?
     // vairables for scanning images ends here
@@ -465,16 +465,49 @@ class UserextraViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
-    func showAlertController(_ credential:Credential) {
+    func showScannerController() {
         guard VNDocumentCameraViewController.isSupported else {
             return
         }
         
-        self.curCredential = credential
         self.scannedImages = [UIImage]()
         let scanVC = VNDocumentCameraViewController()
         scanVC.delegate = self
         self.present(scanVC, animated: true)
+    }
+    
+    func showAlertController(_ credential:Credential) {
+        self.ocrText = ""
+        self.pdfFile = nil
+        self.oneLong = nil
+
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let actionCamera = UIAlertAction(title: "Take Photo", style: .default, handler: { (alert: UIAlertAction!) -> Void in
+            self.curCredential = credential
+            self.openImagePicker(sourceType: .camera)
+        })
+        
+        let actionLibrary = UIAlertAction(title: "Choose from Gallery", style: .default, handler: { (alert: UIAlertAction!) -> Void in
+            self.curCredential = credential
+            self.openImagePicker(sourceType: .photoLibrary)
+        })
+        
+        let actionScanner = UIAlertAction(title: "Use Scanner", style: .default, handler: { (alert: UIAlertAction!) -> Void in
+            self.curCredential = credential
+            self.showScannerController()
+        })
+        
+        let actionCancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (alert: UIAlertAction!) -> Void in
+            self.curCredential = nil
+        })
+        
+        alertController.addAction(actionCamera)
+        alertController.addAction(actionLibrary)
+        alertController.addAction(actionScanner)
+        alertController.addAction(actionCancel)
+        
+        self.present(alertController, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -510,7 +543,7 @@ extension UserextraViewController: UINavigationControllerDelegate, UIImagePicker
         
         UIManager.shared.showHUD(view: self.view, title: "Uploading...")
         
-        APIManager.shared.uploadCredentialFile(params, oneLong, pdf: pdfFile!, ocrString: ocrText, type: type,{ (success, credentials, msg) in
+        APIManager.shared.uploadCredentialFile(params, oneLong, pdf: pdfFile, ocrString: ocrText, type: type,{ (success, credentials, msg) in
             UIManager.shared.hideHUD()
             
             if success {
@@ -532,6 +565,8 @@ extension UserextraViewController: UINavigationControllerDelegate, UIImagePicker
             image = possibleImage
         }
         
+        self.oneLong = image!
+
         picker.dismiss(animated: true) {
             if image != nil {
                 let myDatePicker: UIDatePicker = UIDatePicker()
@@ -540,7 +575,7 @@ extension UserextraViewController: UINavigationControllerDelegate, UIImagePicker
                 let alertController = UIAlertController(title: "Choose Expire Date\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .alert)
                 alertController.view.addSubview(myDatePicker)
                 let selectAction = UIAlertAction(title: "Ok", style: .default, handler: { _ in
-                    //self.uploadCredential(myDatePicker.date, image!, type: .image)
+                    self.uploadCredential(myDatePicker.date, type: .image)
                 })
                 let skipAction = UIAlertAction(title: "Skip", style: .default) { _ in
                 }
@@ -697,7 +732,6 @@ extension UserextraViewController: VNDocumentCameraViewControllerDelegate {
                 self.pdfFile = self.scannedImages.makePDF()
                 self.oneLong = self.scannedImages.stitchImages(isVertical: true)
                 
-                
                 let myDatePicker: UIDatePicker = UIDatePicker()
                 myDatePicker.frame = CGRect(x: 0, y: 15, width: 270, height: 200)
                 myDatePicker.datePickerMode = .date
@@ -759,8 +793,6 @@ extension UserextraViewController: VNDocumentCameraViewControllerDelegate {
         
         self.present(alertController, animated: true, completion: nil)
     }
-    
-    
 }
 
 

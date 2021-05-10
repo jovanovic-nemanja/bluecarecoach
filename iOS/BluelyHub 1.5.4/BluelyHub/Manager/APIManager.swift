@@ -545,33 +545,29 @@ class APIManager {
         }
     }
     
-    func uploadCredentialFile(_ params: JSON, _ image:UIImage, pdf: PDFDocument, ocrString: String, type: UploadedType,_ callback: @escaping (Bool, Credentials?, String?) -> Void) {
+    func uploadCredentialFile(_ params: JSON, _ image:UIImage?, pdf: PDFDocument?, ocrString: String?, type: UploadedType,_ callback: @escaping (Bool, Credentials?, String?) -> Void) {
         let urlString = urlMain + EndPoint.uploadCredentialFile.rawValue
         let url = URL(string: urlString)
-        let imageData = image.jpegData(compressionQuality: 0.8)
-        let pdfData = pdf.dataRepresentation()
-        let stringData = ocrString.data(using: .utf8)
         
         AF.upload(multipartFormData: { multipartFormData in
             for (key, value) in params {
                 multipartFormData.append(value.stringValue.data(using: .utf8)!, withName: key)
             }
             
-            if type == .image{
-                if let data = imageData {
+            if type == .image {
+                if let data = image!.jpegData(compressionQuality: 0.8) {
                     multipartFormData.append(data, withName: "credentialfile", fileName: "\(Date.init().timeIntervalSince1970).jpeg", mimeType: "image/jpeg")
                 }
             }
-            else if type == .pdf{
-                if let data = pdfData {
+            else if type == .pdf {
+                if let data = pdf!.dataRepresentation() {
                     multipartFormData.append(data, withName: "credentialfile", fileName: "\(Date.init().timeIntervalSince1970).pdf", mimeType: "application/pdf")
                 }
-            } else if type == .text{
-                if let data = stringData {
+            } else if type == .text {
+                if let data = ocrString!.data(using: .utf8) {
                     multipartFormData.append(data, withName: "credentialfile", fileName: "\(Date.init().timeIntervalSince1970).txt", mimeType: "text/plain")
                 }
             }
-            
         },
         to: url!, method: .post , headers: nil)
         .responseJSON(completionHandler: { (response) in
