@@ -14,8 +14,8 @@
             filePath = "BluelyHub/ViewController/UserextraViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "617"
-            endingLineNumber = "617"
+            startingLineNumber = "652"
+            endingLineNumber = "652"
             landmarkName = "mailDoneBtnPressed(_:)"
             landmarkType = "7">
          </BreakpointContent>
