@@ -2,6 +2,7 @@ package com.app.bdo.fragments.profile;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -24,6 +25,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.app.bdo.R;
 import com.app.bdo.activity.MainActivity;
+import com.app.bdo.activity.auth.LoginActivity;
 import com.app.bdo.databinding.FragmentProfileBinding;
 import com.app.bdo.fragments.profile.JobItem;
 import com.app.bdo.fragments.profile.JobItemAdapter;
@@ -195,6 +197,40 @@ public class ProfileFragment extends Fragment {
                 item.setPosition(skillsCount);
                 item.setType("skills");
                 showEditOption(-1, item);
+            }
+        });
+
+        profileBinding.deleteAccountBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                askDeleteAccountPermission();
+            }
+        });
+    }
+
+    private void askDeleteAccountPermission() {
+
+        Loader.showAlert(getContext(), getString(R.string.do_want_delete_account), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                Loader.showLoader(getContext());
+
+                AsyncTask.execute(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        AppHelper.getInstance().deleteAccount(ProfileFragment.this);
+
+                    }
+                });
+
+            }
+        }, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
             }
         });
     }
@@ -839,5 +875,45 @@ public class ProfileFragment extends Fragment {
         jobItemAdapter.updatetem(data);
 
 
+    }
+
+    public void onAccountDeleted(boolean b) {
+
+        Loader.hide();
+
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                if(b){
+                    Loader.showAlert(getContext(),"", getString(R.string.sucess_delete_account), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.cancel();
+                            clearApp();
+
+                        }
+                    });
+                }else{
+                    Loader.showAlert(getContext(),getString(R.string.error), getString(R.string.error_delete_account), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.cancel();
+                        }
+                    });
+                }
+            }
+        });
+
+
+    }
+
+    private void clearApp() {
+
+        AppHelper.getInstance().clearData(getActivity());
+
+        Intent auth = new Intent(getActivity(), LoginActivity.class);
+
+        startActivity(auth);
     }
 }

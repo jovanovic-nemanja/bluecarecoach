@@ -16,6 +16,7 @@ import com.app.bdo.fragments.document.DocumentDetailsView;
 import com.app.bdo.fragments.document.DocumentFragment;
 import com.app.bdo.fragments.home.HomeData;
 import com.app.bdo.fragments.home.HomeFragment;
+import com.app.bdo.fragments.profile.ProfileFragment;
 import com.app.bdo.model.User;
 import com.app.bdo.services.Apiservice;
 import com.app.bdo.utils.Logger;
@@ -747,5 +748,29 @@ public class AppHelper {
 
 
         return null;
+    }
+
+
+    public void deleteAccount(ProfileFragment fragment) {
+
+        RequestBody body = Apiservice.getInstance().createDeleteAccount(getUser().getId());
+
+        try {
+            String results =  Apiservice.getInstance().makePost(Constants.DELETE_ACCOUNT,body);
+            if(results != null){
+                JSONObject jsonObject = new JSONObject(results.toString());
+                if (jsonObject.has("status") && jsonObject.getString("status").equals("success")) {
+                    fragment.onAccountDeleted(true);
+                    return;
+                }
+            }
+            fragment.onAccountDeleted(false);
+        } catch (IOException e) {
+            fragment.onAccountDeleted(false);
+            e.printStackTrace();
+        }catch (JSONException e) {
+            fragment.onAccountDeleted(false);
+            e.printStackTrace();
+        }
     }
 }
