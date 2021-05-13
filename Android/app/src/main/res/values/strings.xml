@@ -123,4 +123,11 @@
     <string name="preferred_shift">Preferred Shift</string>
     <string name="desired_pay_to">Desired Pay</string>
     <string name="delete_account">Delete Account</string>
+    <string name="take_photo">Take photo</string>
+    <string name="choose_from_gallery">Choose from gallery</string>
+    <string name="use_scanner">Use Scanner</string>
+    <string name="do_want_delete_account">Are you sure want to delete this account ?</string>
+    <string name="sucess_delete_account">Successfully deleted account</string>
+    <string name="error_delete_account">Unable to delete your account, please contact application support team</string>
+    <string name="upload_document">Choose document</string>
 </resources>

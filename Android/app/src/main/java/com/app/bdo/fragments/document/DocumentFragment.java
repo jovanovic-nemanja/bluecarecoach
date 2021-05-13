@@ -1,8 +1,10 @@
 package com.app.bdo.fragments.document;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -20,6 +22,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.databinding.DataBindingUtil;
@@ -41,6 +45,7 @@ import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
+import com.opensooq.supernova.gligar.GligarPicker;
 import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
@@ -51,6 +56,7 @@ import java.util.Date;
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
+import static com.facebook.FacebookSdk.getCacheDir;
 
 //import com.github.haggholm.scanlibrary.ScanActivity;
 //import com.github.haggholm.scanlibrary.ScanConstants;
@@ -70,6 +76,10 @@ public class DocumentFragment extends Fragment implements View.OnClickListener {
 
     private int REQUEST_CODE = 99;
 
+    private int REQUEST_CODE_CHOOSE = 300;
+
+    private int REQUEST_PERMISSION = 100;
+
     CredentialData credentialData;
 
     Uri selectedUri;
@@ -79,6 +89,8 @@ public class DocumentFragment extends Fragment implements View.OnClickListener {
     int selectedView = 0;
 
     Bitmap selectedBitmap;
+
+    private Boolean showCamera = false;
 
 
     public DocumentFragment() {
@@ -373,12 +385,28 @@ public class DocumentFragment extends Fragment implements View.OnClickListener {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+        if (requestCode == REQUEST_PERMISSION && resultCode == Activity.RESULT_OK) {
+
+            requestPhoto(showCamera);
+        }
+
+        else if (requestCode == REQUEST_CODE_CHOOSE && resultCode == Activity.RESULT_OK) {
+
+            String pathsList[] = data.getExtras().getStringArray(GligarPicker.IMAGES_RESULT);
+            String selectedImage = pathsList[0];
+            Logger.debug("Matisse", "selectedImage: " + selectedImage);
+
+            openCropper(Uri.fromFile(new File(selectedImage)));
+
+        }
+
+        else if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
 
             Uri uri = data.getExtras().getParcelable(ScanConstants.SCANNED_RESULT);
 
-            UCrop.of(uri, createImageFile())
-                    .start(getContext(), this);
+            Logger.debug("scanner results ", "uri" + uri);
+
+            openCropper(uri);
 
         } else if (resultCode == RESULT_OK && requestCode == UCrop.REQUEST_CROP) {
 
@@ -400,6 +428,16 @@ public class DocumentFragment extends Fragment implements View.OnClickListener {
             final Throwable cropError = UCrop.getError(data);
             Logger.debug("Crop ", "Erro" + cropError);
         }
+    }
+
+    private void openCropper(Uri uri) {
+
+        selectedUri = Uri.fromFile(new File(getCacheDir(), "SampleCropImage.png"));
+
+        Logger.debug("scanner selectedUri ", "> " + selectedUri);
+
+        UCrop.of(uri,selectedUri)
+                .start(getContext(), this);
     }
 
     //    attachmentBtn  enable/disable
@@ -589,7 +627,7 @@ public class DocumentFragment extends Fragment implements View.OnClickListener {
 
     //    Ask ExpireDate option
     public void askExpireDateSelection() {
-
+        showCamera = false;
         Loader.askFileExpire(getContext(), this);
 
     }
@@ -676,7 +714,7 @@ public class DocumentFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onPermissionGranted() {
 
-                askCredentialFile();
+                askChoices();
 
             }
 
@@ -695,9 +733,77 @@ public class DocumentFragment extends Fragment implements View.OnClickListener {
 
     }
 
+    private void askChoices() {
+
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+        alertDialog.setTitle(getString(R.string.upload_document));
+        String[] items = {getString(R.string.take_photo),getString(R.string.choose_from_gallery),getString(R.string.use_scanner)};
+        alertDialog.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch(which) {
+                    case 0:
+                        showCamera = true;
+                        openImagehooser(showCamera);
+                        break;
+                    case 1:
+                        showCamera = false;
+                        openImagehooser(showCamera);
+                        break;
+                    case 2:
+                        openScanner();
+                        break;
+
+                }
+            }
+        });
+        alertDialog.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+        AlertDialog alert = alertDialog.create();
+        alert.setCanceledOnTouchOutside(false);
+        alert.show();
+
+    }
+
+    private void openImagehooser(Boolean showCamera) {
+        askForPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, REQUEST_PERMISSION);
+    }
+
+    // Check permission
+    private void askForPermission(String permission, Integer requestCode) {
+        if (ContextCompat.checkSelfPermission(getActivity(), permission) != PackageManager.PERMISSION_GRANTED) {
+
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), permission)) {
+
+                //This is called if user has denied the permission before
+                //In this case I am just asking the permission again
+                ActivityCompat.requestPermissions(getActivity(), new String[]{permission}, requestCode);
+
+            } else {
+
+                ActivityCompat.requestPermissions(getActivity(), new String[]{permission}, requestCode);
+            }
+        } else {
+            requestPhoto(showCamera);
+        }
+    }
+
+    // open image picker
+    private void requestPhoto(Boolean showCamera) {
+        new GligarPicker()
+                .cameraDirect(showCamera)
+                .limit(1).requestCode(REQUEST_CODE_CHOOSE).withFragment(this).show();
+
+    }
+
 //    open Camera
 
-    private void askCredentialFile() {
+    private void openScanner() {
 
         int preference = ScanConstants.OPEN_CAMERA;
 
@@ -812,6 +918,9 @@ public class DocumentFragment extends Fragment implements View.OnClickListener {
     public void onEditDocument(CredentialData data) {
 
         credentialData = data;
+
+        // askChoices();
+
         upLoadCredentials(Integer.parseInt(data.getId()));
 
     }
@@ -829,4 +938,6 @@ public class DocumentFragment extends Fragment implements View.OnClickListener {
         AppHelper.getInstance().deleteCredentials(extra, extra ? data.getId() : data.getCre_uid(), null, DocumentFragment.this);
 
     }
+
+
 }

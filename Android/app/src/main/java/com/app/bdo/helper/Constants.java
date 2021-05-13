@@ -22,6 +22,7 @@ public class Constants {
     public static final String DELETE_CREDENTIALS = BASE_URL + "deleteCredentialuser";
     public static final String DELETE_EXTRA_CREDENTIALS = BASE_URL + "deleteExtracredential";
     public static final String UPDATE_PROFILE = BASE_URL + "updateAccount";
+    public static final String DELETE_ACCOUNT = BASE_URL + "deleteAccount";
     public static final String UPLOAD_PATH = "https://bluecarecoach.com/uploads/";
     public static final String NOT_SET = "Not set";
 

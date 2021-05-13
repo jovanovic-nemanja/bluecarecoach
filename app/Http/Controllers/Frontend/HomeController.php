@@ -89,12 +89,11 @@ class HomeController extends Controller
             $twilio = new Client($sid, $token); 
              
             $message = $twilio->messages 
-                ->create("+381644090800", // to 
-                    array(        
-                        "messagingServiceSid" => "MGc32c6183ab3b25449a7a827a8e20b4b4",      
+                ->create("+15037917848",
+                    [
                         "body" => "Hello! Welcome to Bluely document organizer.",
                         "from" => "+17013803018"
-                    ) 
+                    ] 
                 );
         } catch (TwilioException $e) {
             $result = 'Twilio replied with: ' . $e;

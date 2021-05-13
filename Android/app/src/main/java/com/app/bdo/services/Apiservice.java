@@ -299,4 +299,15 @@ public class Apiservice {
 
     }
 
+    public RequestBody createDeleteAccount(int id) {
+        JSONObject json = new JSONObject();
+        try {
+            json.put("userid", id);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return RequestBody.Companion.create(json.toString(), Apiservice.JSON);
+    }
 }
