@@ -732,7 +732,12 @@ class UsersController extends Controller
         $created_by = $request->userid;
 
         $user = User::where('id', $id)->first();
-        $caregiving_license = $user->care_giving_license;
+        if (@$user) {
+            $caregiving_license = $user->care_giving_license;
+        }else{
+            $caregiving_license = '';
+        }
+        
         if(@$caregiving_license == NULL) {
             $result = DB::table('credentials')
                             ->leftJoin('credential_users', function ($join) use ($id) {
@@ -1008,7 +1013,12 @@ class UsersController extends Controller
         }
 
         $user = User::where('id', $request->userid)->first();
-        $care_giving_license = $user->care_giving_license;
+        if (@$user) {
+            $care_giving_license = $user->care_giving_license;
+        }else{
+            $care_giving_license = '';
+        }
+        
         if (@$care_giving_license) {
             $query = "JSON_CONTAINS(care_licenses, ".$care_giving_license.", '$')=1";
             
