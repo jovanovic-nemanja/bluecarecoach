@@ -10,7 +10,7 @@ android {
         applicationId "com.bluelyhub"
         minSdkVersion 23
         targetSdkVersion 30
-        versionCode 5
+        versionCode 8
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -32,8 +32,8 @@ android {
     buildTypes {
 
         release {
-            shrinkResources true
-            minifyEnabled true
+           /* shrinkResources true
+            minifyEnabled true */
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

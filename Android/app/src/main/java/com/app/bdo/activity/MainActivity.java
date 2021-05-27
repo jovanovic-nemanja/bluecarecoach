@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 //       Permission setup
         checkPermission();
 
-//        AppHelper.getInstance().initDownloadconfig(this,100);
+        AppHelper.getInstance().initDownloadconfig(this,100);
 
     }
 
