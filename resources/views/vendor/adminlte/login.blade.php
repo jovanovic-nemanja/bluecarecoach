@@ -15,7 +15,7 @@
         <div class="d-flex flex-column-auto flex-column pt-lg-40 pt-15" style="padding-top: 0px !important;">
             <!--begin::Aside header-->
             <a href="{{ route('home') }}" class="text-center mb-10">
-                <img src="{{ asset('images/logo1.jpg') }}" class="" alt="" style="width: 100%; height: 100%;" />
+                <img src="{{ asset('images/bluecarecoach.jpg') }}" class="" alt="" style="width: 100%; height: 100%;" />
             </a>
             <!--end::Aside header-->
         </div>
