@@ -1,6 +1,9 @@
 https://bluecarecoach.com/
 
-## Bluely Credential Admin backend for Bluely Credential Mobile App
+https://apps.apple.com/bw/app/bluely-document-organizer/id1551355871
+https://play.google.com/store/apps/details?id=com.bluelyhub
+
+## Bluely Credentials Admin backend for Bluely Credential Mobile App
 Laravel Vue.js
 
 1,   .env.example to copy/paste as .env
