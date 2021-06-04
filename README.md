@@ -1,4 +1,4 @@
-https://bluecarecoach.com/
+https://bluecarecoach.com/login
 
 ## Bluely Credential Admin backend for Bluely Credential Mobile App
 Laravel Vue.js
