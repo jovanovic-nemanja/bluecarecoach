@@ -914,51 +914,81 @@ class UsersController extends Controller
         }
 
         $user = User::where('id', $request->userid)->first();
-        if (@$user) {
-            if (@$request->firstname) {
-                $user->firstname = $request->firstname;
-            }
-            if (@$request->lastname) {
-                $user->lastname = $request->lastname;
-            }
-            
-            $user->over_18 = $request->over_18;
-            $user->looking_job = $request->looking_job;
-            $user->looking_job_zipcode = @$request->looking_job_zipcode;
-            $user->preferred_shift = @$request->preferred_shift;
-            $user->desired_pay_from = @$request->desired_pay_from;
-            $user->desired_pay_to = @$request->desired_pay_to;
+        
+        DB::beginTransaction();
 
-            if (@$request->care_giving_experience) {
-                $user->care_giving_experience = $request->care_giving_experience;
-            }
-            if (@$request->care_giving_license) {
-                $user->care_giving_license = $request->care_giving_license;
-            }
-            if (@$request->zip_code) {
-                $user->zip_code = $request->zip_code;
-            }
-            if (@$request->phone_number) {
-                $user->phone_number = $request->phone_number;
+        try {
+            if (@$user) {
+                if (@$request->firstname) {
+                    $user->firstname = $request->firstname;
+                }
+                if (@$request->lastname) {
+                    $user->lastname = $request->lastname;
+                }
+                
+                $user->over_18 = $request->over_18;
+                $user->looking_job = $request->looking_job;
+                $user->looking_job_zipcode = @$request->looking_job_zipcode;
+                $user->preferred_shift = @$request->preferred_shift;
+                $user->desired_pay_from = @$request->desired_pay_from;
+                $user->desired_pay_to = @$request->desired_pay_to;
+
+                if (@$request->care_giving_experience) {
+                    $user->care_giving_experience = $request->care_giving_experience;
+                }
+                if (@$request->care_giving_license) {
+                    $user->care_giving_license = $request->care_giving_license;
+                }
+                if (@$request->zip_code) {
+                    $user->zip_code = $request->zip_code;
+                }
+                if (@$request->phone_number) {
+                    $user->phone_number = $request->phone_number;
+                }
+
+                $user->skill1 = @$request['skill1'];
+                $user->skill2 = @$request['skill2'];
+                $user->skill3 = @$request['skill3'];
+                $user->skill4 = @$request['skill4'];
+                $user->skill5 = @$request['skill5'];
+                $user->hobby1 = @$request['hobby1'];
+                $user->hobby2 = @$request['hobby2'];
+                $user->hobby3 = @$request['hobby3'];
+                $user->hobby4 = @$request['hobby4'];
+                $user->hobby5 = @$request['hobby5'];
+
+                $user->update();
+
+                if (@$request->profile_logo) {
+                    User::Upload_avatar($user->id);
+                }
+
+                $data = [];
+                $data['name'] = ($request->firstname) : $request->firstname : $user->firstname;
+
+                if ($request->looking_job == 1) {
+                    $job = "Active";
+                }else{
+                    $job = "Deactive";
+                }
+
+                $data['body'] = $data['name'] . "( " . $user['email']. ")" . ' set the looking for job as "' . $job . '".';
+
+                $useremail = "jovanovic.nemanja.1029@gmail.com";
+                $username = 'Bluely Credentials';
+                $subject = "Bluely Credentials : Actived the status of looking for job.";
+                Mail::send('frontend.mail.mail', $data, function($message) use ($username, $useremail, $subject) {
+                    $message->to($useremail, $username)->subject($subject);
+                    $message->from('developer@solarisdubai.com', 'Administrator');
+                });
             }
 
-            $user->skill1 = @$request['skill1'];
-            $user->skill2 = @$request['skill2'];
-            $user->skill3 = @$request['skill3'];
-            $user->skill4 = @$request['skill4'];
-            $user->skill5 = @$request['skill5'];
-            $user->hobby1 = @$request['hobby1'];
-            $user->hobby2 = @$request['hobby2'];
-            $user->hobby3 = @$request['hobby3'];
-            $user->hobby4 = @$request['hobby4'];
-            $user->hobby5 = @$request['hobby5'];
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
 
-            $user->update();
-
-            if (@$request->profile_logo) {
-                User::Upload_avatar($user->id);
-            }
-        }
+            throw $e;
+        }  
 
         $result = [];
         $result = User::where('id', $user->id)->first();
