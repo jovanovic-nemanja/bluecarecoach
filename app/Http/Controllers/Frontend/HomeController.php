@@ -81,6 +81,50 @@ class HomeController extends Controller
         return view('frontend.home', compact('users'));
     }
 
+    /**
+     * Show the application users info by filtered looking for job status 0 or 1.
+     * @author Nemanja
+     * @since 2021-06-08
+     * @return \Illuminate\Http\Response
+     */
+    public function indexbyfilter(Request $request)
+    {
+        if (@$request->looking_job) {
+            if ($request->looking_job == "1") {
+                $users = DB::table('users')
+                            ->select('users.*', 'caregiving_licenses.name as license')
+                            ->Join('role_user', 'role_user.user_id', '=', 'users.id')
+                            ->LeftJoin('caregiving_licenses', 'caregiving_licenses.id', '=', 'users.care_giving_license')
+                            ->where('role_user.role_id', 3)
+                            ->where('users.looking_job', 1)
+                            ->get();
+
+                $actived = "1";
+            }else{
+                $users = DB::table('users')
+                            ->select('users.*', 'caregiving_licenses.name as license')
+                            ->Join('role_user', 'role_user.user_id', '=', 'users.id')
+                            ->LeftJoin('caregiving_licenses', 'caregiving_licenses.id', '=', 'users.care_giving_license')
+                            ->where('role_user.role_id', 3)
+                            ->where('users.looking_job', '!=', 1)
+                            ->get();
+
+                $actived = "2";
+            }                
+        }else{
+            $users = DB::table('users')
+                        ->select('users.*', 'caregiving_licenses.name as license')
+                        ->Join('role_user', 'role_user.user_id', '=', 'users.id')
+                        ->LeftJoin('caregiving_licenses', 'caregiving_licenses.id', '=', 'users.care_giving_license')
+                        ->where('role_user.role_id', 3)
+                        ->get();
+
+            $actived = "0";
+        }
+
+        return view('frontend.indexhome', compact('users', 'actived'));
+    }
+
     public function sendSMS(Request $request)
     {
         try {
