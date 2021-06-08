@@ -964,7 +964,7 @@ class UsersController extends Controller
                 }
 
                 $data = [];
-                $data['name'] = ($request->firstname) : $request->firstname : $user->firstname;
+                $data['name'] = ($request->firstname) ? $request->firstname : $user->firstname;
 
                 if ($request->looking_job == 1) {
                     $job = "Active";
