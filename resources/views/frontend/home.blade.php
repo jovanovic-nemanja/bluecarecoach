@@ -49,6 +49,7 @@
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>License</th>
+                                    <th>Looking For Job</th>
                                     <th>Experience</th>
                                     <th>ZipCode</th>
                                     <th>Phone</th>
@@ -66,6 +67,7 @@
                                                 </td>
                                                 <td>{{ $user->email }}</td>
                                                 <td>{{ $user->license }}</td>
+                                                <td>{{ ($user->looking_job == 1) ? "Actived" : "Deactived" }}</td>
                                                 <td>{{ $user->care_giving_experience." Years" }}</td>
                                                 <td>{{ $user->zip_code }}</td>
                                                 <td>{{ $user->phone_number }}</td>
