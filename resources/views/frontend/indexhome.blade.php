@@ -37,11 +37,11 @@
                         </div>
                         <div class="card-right d-flex align-items-center">
                             <input type="hidden" id="env_domain_url" value="{{ env('APP_URL') }}" />
-
+                            
                             <select class="form-control looking_job mr-2" id="looking_job" required>
                                 <option value="">Choose Nurse...</option>
-                                <option value="1">Actived</option>
-                                <option value="2">Deactived</option>
+                                <option value="1" <?php if($actived == 1){echo 'selected';} ?>>Actived</option>
+                                <option value="2" <?php if($actived == 2){echo 'selected';} ?>>Deactived</option>
                             </select>
 
                             <button name="search" id="search" class="btn btn-success btn-sm form-control font-weight-bolder">Search</button>

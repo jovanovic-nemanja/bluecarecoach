@@ -18,4 +18,22 @@ $(function() {
             $('#Monthly_area').show();
         }
     });
+
+    $("#looking_job").change(function() {
+        var looking_job = $(this).val();
+        var href = $("#env_domain_url").val();
+        window.location.href =
+            href +
+            "/indexbyfilter?looking_job=" +
+            looking_job;
+    });
+
+    $('#search').click(function() {
+        var looking_job = $('#looking_job').val();
+        var href = $("#env_domain_url").val();
+        window.location.href =
+            href +
+            "/indexbyfilter?looking_job=" +
+            looking_job;
+    })
 }) 

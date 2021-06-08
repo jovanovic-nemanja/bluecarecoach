@@ -15,6 +15,7 @@ Auth::routes();
 
 Route::get('/', 'Frontend\HomeController@index')->name('home');
 Route::get('/home', 'Frontend\HomeController@index')->name('home');
+Route::get('/indexbyfilter', 'Frontend\HomeController@indexbyfilter')->name('indexbyfilter');
 
 Route::get('/admin/general', 'Admin\GeneralSettingsController@index')->name('admin.generalsetting');
 Route::put('/admin/general/update/{generalsetting}', 'Admin\GeneralSettingsController@update')->name('admin.generalsetting.update');
