@@ -5,8 +5,8 @@ package com.app.bdo.helper;
  */
 public class Constants {
 
-    public static final String WEB_URL = "https://bluecarecoach.com";
-    public static final String BASE_URL = "https://bluecarecoach.com/api/v1/";
+    public static final String WEB_URL = "https://www.bluecareapp.org";
+    public static final String BASE_URL = "https://www.bluecareapp.org/api/v1/";
     public static final String LOGIN_URL = BASE_URL + "login";
     public static final String LOGIN_FB = BASE_URL + "loginUserwithFacebook";
     public static final String LOGIN_GOOGLE = BASE_URL + "loginwithGoogle";
@@ -23,7 +23,7 @@ public class Constants {
     public static final String DELETE_EXTRA_CREDENTIALS = BASE_URL + "deleteExtracredential";
     public static final String UPDATE_PROFILE = BASE_URL + "updateAccount";
     public static final String DELETE_ACCOUNT = BASE_URL + "deleteAccount";
-    public static final String UPLOAD_PATH = "https://bluecarecoach.com/uploads/";
+    public static final String UPLOAD_PATH = "https://www.bluecareapp.org/uploads/";
     public static final String NOT_SET = "Not set";
 
 }
