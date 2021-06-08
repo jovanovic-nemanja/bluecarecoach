@@ -31,9 +31,14 @@ $(function() {
     $('#search').click(function() {
         var looking_job = $('#looking_job').val();
         var href = $("#env_domain_url").val();
-        window.location.href =
-            href +
-            "/indexbyfilter?looking_job=" +
-            looking_job;
+        if (looking_job) {
+            window.location.href =
+                href +
+                "/indexbyfilter?looking_job=" +
+                looking_job;    
+        }else{
+            alert('Please choose anything in dropdown menu.');
+            return;
+        }        
     })
 }) 
