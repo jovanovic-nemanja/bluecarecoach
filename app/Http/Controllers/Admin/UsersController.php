@@ -974,7 +974,7 @@ class UsersController extends Controller
 
                 $data['body'] = $data['name'] . "( " . $user['email']. ")" . ' set the looking for job as "' . $job . '".';
 
-                $useremail = "jovanovic.nemanja.1029@gmail.com";
+                $useremail = "core.solutions06@gmail.com";
                 $username = 'Bluely Credentials';
                 $subject = "Bluely Credentials : Actived the status of looking for job.";
                 Mail::send('frontend.mail.mail', $data, function($message) use ($username, $useremail, $subject) {
