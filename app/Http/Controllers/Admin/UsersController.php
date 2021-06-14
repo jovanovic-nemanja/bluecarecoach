@@ -977,10 +977,10 @@ class UsersController extends Controller
                 $useremail = "core.solutions06@gmail.com";
                 $username = 'Bluely Credentials';
                 $subject = "Bluely Credentials : Actived the status of looking for job.";
-                Mail::send('frontend.mail.mail', $data, function($message) use ($username, $useremail, $subject) {
-                    $message->to($useremail, $username)->subject($subject);
-                    $message->from('developer@solarisdubai.com', 'Administrator');
-                });
+                // Mail::send('frontend.mail.mail', $data, function($message) use ($username, $useremail, $subject) {
+                //     $message->to($useremail, $username)->subject($subject);
+                //     $message->from('developer@solarisdubai.com', 'Administrator');
+                // });
             }
 
             DB::commit();
