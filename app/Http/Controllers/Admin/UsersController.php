@@ -129,7 +129,7 @@ class UsersController extends Controller
         try {
             Mail::send('frontend.mail.mail', $data, function($message) use ($username, $useremail, $subject) {
                 $message->to($useremail, $username)->subject($subject);
-                $message->from('solaris.dubai@gmail.com', 'Administrator');
+                $message->from('core.solutions06@gmail.com', 'Bluely Credentials');
             });
 
             $verifyuser = Verifyemails::where('email', $useremail)->first();
@@ -560,6 +560,29 @@ class UsersController extends Controller
                 ]);
             }
 
+            if (@$request->expire_date) {
+                $datetime1 = date_create($request->expire_date);
+                $datetime2 = date_create(date('Y-m-d'));
+                $interval = date_diff($datetime1, $datetime2);
+
+                if ($interval->format('%a') < 31) {
+                    $userInfo = User::where('id', $request['userid'])->first();
+                    $username = $userInfo->firstname;
+                    $useremail = $userInfo->email;
+                    $credentialInfo = Credentials::where('id', $credential->id)->first();
+
+                    $subject = "Please check and update your credential document. It can be expire in 1 month.";
+                    $data = [];
+                    $data['name'] = $username;
+                    $data['body'] = "Hello! Welcome to Bluely Credentials. Thank you for uploaded your credential document. <br> Your credential can be expire in 1 month now. Please check it and update your credential - ".$credentialInfo->title.". <br> Thanks for your checking our E-mail. <br> Kindly regards. <br> Bluely Credentials.";
+
+                    Mail::send('frontend.mail.expiredemail', $data, function($message) use ($username, $useremail, $subject) {
+                        $message->to($useremail, $username)->subject($subject);
+                        $message->from('core.solutions06@gmail.com', 'Bluely Credentials');
+                    });
+                }
+            }
+
             Credentialusers::Upload_credentialfile($credential->id);
 
             $data = $this->getCredentialdata($request->userid, $credential->id);
@@ -842,7 +865,7 @@ class UsersController extends Controller
         try {
             Mail::send('frontend.mail.mail_forgotpassword', $data, function($message) use ($username, $useremail, $subject) {
                 $message->to($useremail, $username)->subject($subject);
-                $message->from('solaris.dubai@gmail.com', 'Administrator');
+                $message->from('core.solutions06@gmail.com', 'Bluely Credentials');
             });
 
             DB::commit();
@@ -979,7 +1002,7 @@ class UsersController extends Controller
                 $subject = "Bluely Credentials : Actived the status of looking for job.";
                 Mail::send('frontend.mail.mail', $data, function($message) use ($username, $useremail, $subject) {
                     $message->to($useremail, $username)->subject($subject);
-                    $message->from('developer1@solarisdubai.com', 'Administrator');
+                    $message->from('developer1@solarisdubai.com', 'Bluely Credentials');
                 });
             }
 

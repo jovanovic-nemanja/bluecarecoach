@@ -67,15 +67,15 @@ class ExpiredCredentialCommand extends Command
                     $username = $expiredCredential->firstname;
                     $useremail = $expiredCredential->email;
 
-                    $subject = "Please check and update your credential. It can be expire in 1 months.";
+                    $subject = "Please check and update your credential document. It can be expire in 1 month.";
                     $data = [];
                     $data['name'] = $username;
-                    $data['body'] = "Hello! Welcome to Bluely Credentials. Thank you for uploading credentials. <br> Your credential can be expire in 1 months now. Please check it and update your credential - ".$expiredCredential->title.". <br> Thanks for your checking our E-mail. <br> Kindly regards.";
+                    $data['body'] = "Hello! Welcome to Bluely Credentials. Thank you for uploaded your credential document. <br> Your credential can be expire in 1 month now. Please check it and update your credential - ".$expiredCredential->title.". <br> Thanks for your checking our E-mail. <br> Kindly regards. <br> Bluely Credentials.";
 
                     if ($diff_in_months < 31) {
                         Mail::send('frontend.mail.expiredemail', $data, function($message) use ($username, $useremail, $subject) {
                             $message->to($useremail, $username)->subject($subject);
-                            $message->from('solaris.dubai@gmail.com', 'Administrator');
+                            $message->from('core.solutions06@gmail.com', 'Bluely Credentials');
                         });
                     }
                 }
