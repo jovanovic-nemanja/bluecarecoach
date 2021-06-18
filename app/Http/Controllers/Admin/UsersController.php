@@ -569,7 +569,7 @@ class UsersController extends Controller
                     $userInfo = User::where('id', $request['userid'])->first();
                     $username = $userInfo->firstname;
                     $useremail = $userInfo->email;
-                    $credentialInfo = Credentials::where('id', $credential->id)->first();
+                    $credentialInfo = Credentials::where('id', $credential->credentialid)->first();
 
                     $subject = "Please check and update your credential document. It can be expire in 1 month.";
                     $data = [];
