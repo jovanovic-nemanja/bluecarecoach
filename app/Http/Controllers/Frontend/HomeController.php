@@ -133,7 +133,7 @@ class HomeController extends Controller
             $twilio = new Client($sid, $token); 
              
             $message = $twilio->messages 
-                ->create("+971586770127",
+                ->create("971586770127",
                     [
                         "body" => "Hello! Welcome to Bluely document organizer.",
                         "from" => "971586770127"
