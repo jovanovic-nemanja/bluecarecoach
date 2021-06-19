@@ -135,7 +135,8 @@ class HomeController extends Controller
             $message = $twilio->messages 
                 ->create("971586770127",
                     [
-                        "body" => "Hello! Welcome to Bluely document organizer.",
+                        "body" => "Hello, Nebiyu. This is testing SMS for bluely credentials reminder.",
+                        "messagingServiceSid" => "MG382133b2805f802d765df54ae3f4ec9d",  
                         "from" => "16466813771"
                     ] 
                 );
