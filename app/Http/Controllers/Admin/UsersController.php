@@ -11,6 +11,7 @@ use App\RoleUser;
 use Carbon\Carbon;
 use App\Credentials;
 use App\Verifyemails;
+use App\EmailSettings;
 use App\Credentialusers;
 use App\Caregivinglicenses;
 use Illuminate\Http\Request;
@@ -118,18 +119,19 @@ class UsersController extends Controller
         DB::beginTransaction();
 
         $str = rand(100000, 999999);
+        $emailsettings = EmailSettings::where('type', 1)->first();
         $data = [];
-        $data['name'] = 'Welcome User,';
+        $data['name'] = $emailsettings->content_name;
         $data['body'] = 'Hello! Welcome to Bluely Credentials. Thank you for registering with us. To complete your sign up process please verify your email address by entering the following code (' . $str . ') on the home screen.';
 
         $useremail = $request['email'];
         $username = 'Bluely Credentials';
-        $subject = "Verify your email for Bluely Credentials";
+        $subject = $emailsettings->subject;
 
         try {
-            Mail::send('frontend.mail.mail', $data, function($message) use ($username, $useremail, $subject) {
+            Mail::send('frontend.mail.mail', $data, function($message) use ($username, $useremail, $subject, $emailsettings) {
                 $message->to($useremail, $username)->subject($subject);
-                $message->from('core.solutions06@gmail.com', 'Bluely Credentials');
+                $message->from($emailsettings->from_address, $emailsettings->from_title);
             });
 
             $verifyuser = Verifyemails::where('email', $useremail)->first();
@@ -571,14 +573,16 @@ class UsersController extends Controller
                     $useremail = $userInfo->email;
                     $credentialInfo = Credentials::where('id', $credential->credentialid)->first();
 
-                    $subject = "Please check and update your credential document. It can be expire in 1 month.";
+                    $emailsettings = EmailSettings::where('type', 5)->first();
+
+                    $subject = $emailsettings->subject;
                     $data = [];
                     $data['name'] = $username;
                     $data['body'] = "Hello! Welcome to Bluely Credentials. Thank you for uploaded your credential document. <br> Your credential can be expire in 1 month now. Please check it and update your credential - ".$credentialInfo->title.". <br> Thanks for your checking our E-mail. <br> Kindly regards. <br> Bluely Credentials.";
 
-                    Mail::send('frontend.mail.expiredemail', $data, function($message) use ($username, $useremail, $subject) {
+                    Mail::send('frontend.mail.expiredemail', $data, function($message) use ($username, $useremail, $subject, $emailsettings) {
                         $message->to($useremail, $username)->subject($subject);
-                        $message->from('core.solutions06@gmail.com', 'Bluely Credentials');
+                        $message->from($emailsettings->from_address, $emailsettings->from_title);
                     });
                 }
             }
@@ -848,24 +852,22 @@ class UsersController extends Controller
         DB::beginTransaction();
 
         $token = substr("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", mt_rand(0, 51), 1).substr(md5(time()), 1);
-
+        $emailsettings = EmailSettings::where('type', 2)->first();
         $data = [];
-        $data['name'] = 'User!';
+        $data['name'] = $emailsettings->content_name;
         $data['resetLink'] = env('APP_URL') . 'users/resetpwd/' . $token;
-        $data['body'] = 'You are receiving this email because we received a password reset request for your account.';
-        $data['pre_footer'] = 'If you did not request a password reset, no further action is required. <br> Best Regards. <br> BLUELY.';
+        $data['body'] = $emailsettings->content_body;
+        $data['pre_footer'] = $emailsettings->pre_footer;
         $data['footer'] = 'If you’re having trouble clicking the "Reset Password" button, copy and paste the URL below <br> into your web browser: <a href="' . $data['resetLink'] . '" target="_blank">' . $data['resetLink'] . '</a>';
-        
-        // $data['email'] = $request['email'];
 
         $useremail = $request['email'];
-        $username = 'Bluely Credentials';
-        $subject = "Bluely Credentials : Reset Password";
+        $username = $emailsettings->from_title;
+        $subject = $emailsettings->subject;
 
         try {
-            Mail::send('frontend.mail.mail_forgotpassword', $data, function($message) use ($username, $useremail, $subject) {
+            Mail::send('frontend.mail.mail_forgotpassword', $data, function($message) use ($username, $useremail, $subject, $emailsettings) {
                 $message->to($useremail, $username)->subject($subject);
-                $message->from('core.solutions06@gmail.com', 'Bluely Credentials');
+                $message->from($emailsettings->from_address, $emailsettings->from_title);
             });
 
             DB::commit();
@@ -996,13 +998,15 @@ class UsersController extends Controller
                 }
 
                 $data['body'] = $data['name'] . "( " . $user['email']. ")" . ' set the looking for job as "' . $job . '".';
-
+                
+                $emailsettings = EmailSettings::where('type', 3)->first();
+                
                 $useremail = "core.solutions06@gmail.com";
-                $username = 'Bluely Credentials';
-                $subject = "Bluely Credentials : Actived the status of looking for job.";
-                Mail::send('frontend.mail.mail', $data, function($message) use ($username, $useremail, $subject) {
+                $username = $emailsettings->from_title;
+                $subject = $emailsettings->subject;
+                Mail::send('frontend.mail.mail', $data, function($message) use ($username, $useremail, $subject, $emailsettings) {
                     $message->to($useremail, $username)->subject($subject);
-                    $message->from('developer1@solarisdubai.com', 'Bluely Credentials');
+                    $message->from($emailsettings->from_address, $emailsettings->from_title);
                 });
             }
 

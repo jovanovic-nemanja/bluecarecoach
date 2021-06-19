@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\User;
 use Carbon\Carbon;
+use App\EmailSettings;
 use App\Credentialusers;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -67,15 +68,17 @@ class ExpiredCredentialCommand extends Command
                     $username = $expiredCredential->firstname;
                     $useremail = $expiredCredential->email;
 
-                    $subject = "Please check and update your credential document. It can be expire in 1 month.";
+                    $emailsettings = EmailSettings::where('type', 4)->first();
+
+                    $subject = $emailsettings->subject;
                     $data = [];
                     $data['name'] = $username;
                     $data['body'] = "Hello! Welcome to Bluely Credentials. Thank you for uploaded your credential document. <br> Your credential can be expire in 1 month now. Please check it and update your credential - ".$expiredCredential->title.". <br> Thanks for your checking our E-mail. <br> Kindly regards. <br> Bluely Credentials.";
 
                     if ($diff_in_months < 31) {
-                        Mail::send('frontend.mail.expiredemail', $data, function($message) use ($username, $useremail, $subject) {
+                        Mail::send('frontend.mail.expiredemail', $data, function($message) use ($username, $useremail, $subject, $emailsettings) {
                             $message->to($useremail, $username)->subject($subject);
-                            $message->from('core.solutions06@gmail.com', 'Bluely Credentials');
+                            $message->from($emailsettings->from_address, $emailsettings->from_title);
                         });
                     }
                 }

@@ -56,3 +56,6 @@ Route::POST('/users/resetUserpassword', 'Admin\UsersController@resetUserpassword
 
 Route::resource('tagline', 'Admin\TaglineController');
 Route::get('/tagline', 'Admin\TaglineController@index')->name('tagline.index');
+
+Route::resource('emailsettings', 'Admin\EmailSettingsController');
+Route::get('/emailsettings', 'Admin\EmailSettingsController@index')->name('emailsettings.index');

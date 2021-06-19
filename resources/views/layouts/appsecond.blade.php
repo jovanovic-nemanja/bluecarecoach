@@ -8,7 +8,7 @@
     <div id="kt_header_mobile" class="header-mobile header-mobile-fixed">
         <!--begin::Logo-->
         <a href="{{ route('home') }}">
-            <img alt="Logo" src="{{ asset('images/logo1.jpg') }}" class="logo-default max-h-30px" />
+            <img alt="Logo" src="{{ asset('images/bluecarecoach.jpg') }}" class="logo-default max-h-30px" />
         </a>
         <!--end::Logo-->
         <!--begin::Toolbar-->
