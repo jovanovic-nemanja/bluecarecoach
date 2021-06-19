@@ -128,15 +128,15 @@ class HomeController extends Controller
     public function sendSMS(Request $request)
     {
         try {
-            $sid    = "AC72b4c566329baa752d3f08b804f5a845"; 
-            $token  = "7170609fa2ba7ac52d47d73130f984d7"; 
+            $sid    = "ACd4e5ed72783f7d33ef1f0b3347c407ba"; 
+            $token  = "ddca32cc5409e5343a40f1176f82382f"; 
             $twilio = new Client($sid, $token); 
              
             $message = $twilio->messages 
-                ->create("+15037917848",
+                ->create("+971586770127",
                     [
                         "body" => "Hello! Welcome to Bluely document organizer.",
-                        "from" => "+17013803018"
+                        "from" => "+971586770127"
                     ] 
                 );
         } catch (TwilioException $e) {
