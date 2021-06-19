@@ -136,7 +136,7 @@ class HomeController extends Controller
                 ->create("+971586770127",
                     [
                         "body" => "Hello! Welcome to Bluely document organizer.",
-                        "from" => "+971586770127"
+                        "from" => "971586770127"
                     ] 
                 );
         } catch (TwilioException $e) {
