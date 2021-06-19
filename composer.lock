@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2291cb405057c0c8793c7510b1cb7ce6",
+    "content-hash": "a7440ca7152ad2eda5e1d21f364c69c0",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -3089,6 +3089,56 @@
             "time": "2017-11-27T11:13:29+00:00"
         },
         {
+            "name": "twilio/sdk",
+            "version": "6.25.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twilio/twilio-php.git",
+                "reference": "95a8fcb82d2be26da01102f4c9498b7c1ea07cef"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twilio/twilio-php/zipball/95a8fcb82d2be26da01102f4c9498b7c1ea07cef",
+                "reference": "95a8fcb82d2be26da01102f4c9498b7c1ea07cef",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "require-dev": {
+                "guzzlehttp/guzzle": "^6.3 || ^7.0",
+                "phpunit/phpunit": ">=4.5",
+                "theseer/phpdox": "^0.12.0"
+            },
+            "suggest": {
+                "guzzlehttp/guzzle": "An HTTP client to execute the API requests"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Twilio\\": "src/Twilio/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Twilio API Team",
+                    "email": "api@twilio.com"
+                }
+            ],
+            "description": "A PHP wrapper for Twilio's API",
+            "homepage": "http://github.com/twilio/twilio-php",
+            "keywords": [
+                "api",
+                "sms",
+                "twilio"
+            ],
+            "time": "2021-06-16T19:21:16+00:00"
+        },
+        {
             "name": "vlucas/phpdotenv",
             "version": "v2.5.1",
             "source": {
@@ -3352,6 +3402,50 @@
                 "test"
             ],
             "time": "2016-01-20T08:20:44+00:00"
+        },
+        {
+            "name": "laracademy/generators",
+            "version": "3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laracademy/generators.git",
+                "reference": "7092283ec2d0986ae720f674f98d19ad2964a89c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laracademy/generators/zipball/7092283ec2d0986ae720f674f98d19ad2964a89c",
+                "reference": "7092283ec2d0986ae720f674f98d19ad2964a89c",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Laracademy\\Generators\\GeneratorsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laracademy\\Generators\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael McMullen",
+                    "email": "michael@laracademy.co"
+                }
+            ],
+            "description": "This package will generate a Laravel Model based on your database table itself, filling in the required fields automatically.",
+            "keywords": [
+                "generators",
+                "laravel"
+            ],
+            "time": "2021-03-24T15:24:58+00:00"
         },
         {
             "name": "mockery/mockery",
