@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             SettingSeeder::class,
             CredentialsSeeder::class,
+            EmailSettingsSeeder::class,
             CaregivinglicensesSeeder::class,
        ]);
     }

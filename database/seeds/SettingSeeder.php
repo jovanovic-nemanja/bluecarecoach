@@ -15,17 +15,17 @@ class SettingSeeder extends Seeder
     {
         GeneralSetting::create([
         	'id' => 1,
-        	'site_name' => 'Blue Care Hub',
-        	'site_title' => 'Mambo Dubai Multivendor Marketplace',
-        	'site_subtitle' => 'Your Awesome Marketplace',
-        	'site_desc' => 'Buy . Sell . Admin',
-            'site_footer' => '© Copyright 2020 - City of UAE Dubai. All rights reserved.'
+        	'site_name' => 'Bluecarecoach',
+        	'site_title' => 'Bluely Credentials Web',
+        	'site_subtitle' => 'Bluely Credentials Document',
+        	'site_desc' => 'Bluely Credentials Document',
+            'site_footer' => '© Copyright 2021 - Bluely Credentials Development Team. All rights reserved.'
         ]);
 
         LocalizationSetting::create([
             'id' => 1,
-            'language' => 'aed',
-            'currency' => 'AED',
+            'language' => 'en',
+            'currency' => 'USD',
         ]);
     }
 }
