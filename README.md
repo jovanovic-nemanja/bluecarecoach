@@ -16,4 +16,3 @@ https://play.google.com/store/apps/details?id=com.bluelyhub
 7,   npm run dev(watch)
 8,   php artisan serve
 
-## AuthenticatesUsers.php please move it to vendor\laravel\framework\src\Illuminate\Foundation\Auth ##
