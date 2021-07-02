@@ -557,7 +557,7 @@ class UsersController extends Controller
                     'userid' => $request['userid'],
                     'credentialid' => $request['credentialid'],
                     'file_name' => $request['credentialfile'],
-                    'expire_date' => $request['expire_date'],
+                    'expire_date' => @$request['expire_date'],
                     'sign_date' => date('Y-m-d h:i:s'),
                 ]);
             }
