@@ -569,11 +569,21 @@ class UsersController extends Controller
 
                 if ($interval->format('%a') < 31) {
                     $userInfo = User::where('id', $request['userid'])->first();
-                    $username = $userInfo->firstname;
-                    $useremail = $userInfo->email;
-                    $credentialInfo = Credentials::where('id', $credential->credentialid)->first();
-
                     $emailsettings = EmailSettings::where('type', 5)->first();
+                    
+                    if(@$userInfo->firstname) {
+                        $username = $userInfo->firstname;
+                    }else{
+                        $username = "User";
+                    }
+
+                    if(@$userInfo->email) {
+                        $useremail = $userInfo->email;    
+                    }else{
+                        $useremail = $emailsettings->from_address;
+                    }
+
+                    $credentialInfo = Credentials::where('id', $credential->credentialid)->first();
 
                     $subject = $emailsettings->subject;
                     $data = [];
@@ -716,7 +726,7 @@ class UsersController extends Controller
         }
 
         $user = User::where('id', $request->userid)->first();
-        $caregiving_license = $user->care_giving_license;
+        $caregiving_license = (@$user->care_giving_license) ? $user->care_giving_license : "1";
         
         $record = Credentials::create([
             'title' => $request->title,
@@ -989,7 +999,19 @@ class UsersController extends Controller
                 }
 
                 $data = [];
-                $data['name'] = ($request->firstname) ? $request->firstname : $user->firstname;
+                if(@$user->firstname) {
+                    $uFirstname = $user->firstname;
+                }else{
+                    $uFirstname = "User";
+                }
+
+                if(@$user->email) {
+                    $uEmail = $user->email;
+                }else{
+                    $uEmail = "bluely@user.com";
+                }
+
+                $data['name'] = ($request->firstname) ? $request->firstname : $uFirstname;
 
                 if ($request->looking_job == 1) {
                     $job = "Active";
@@ -997,7 +1019,7 @@ class UsersController extends Controller
                     $job = "Deactive";
                 }
 
-                $data['body'] = $data['name'] . "( " . $user['email']. ")" . ' set the looking for job as "' . $job . '".';
+                $data['body'] = $data['name'] . "( " . $uEmail. ")" . ' set the looking for job as "' . $job . '".';
                 
                 $emailsettings = EmailSettings::where('type', 3)->first();
                 
