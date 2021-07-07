@@ -1,4 +1,4 @@
-@extends('layouts.appsecond', ['menu' => 'emailsettings'])
+@extends('layouts.appsecond', ['menu' => 'defaultemail'])
 
 @section('content')
 	@if(session('flash'))
@@ -16,7 +16,7 @@
                     <!--begin::Page Heading-->
                     <div class="d-flex align-items-baseline flex-wrap mr-5">
                         <!--begin::Page Title-->
-                        <h2 class="d-flex align-items-center text-dark font-weight-bold my-1 mr-3">Email Template Settings</h2>
+                        <h2 class="d-flex align-items-center text-dark font-weight-bold my-1 mr-3">Default Email Setting</h2>
                         <!--end::Page Title-->
                         <!--begin::Breadcrumb-->
                         <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold my-2 p-0">
@@ -41,10 +41,9 @@
                 <div class="card card-custom">
                     <div class="card-header">
                         <div class="card-title">
-                            <h3 class="card-label">Email Template Settings</h3>
+                            <h3 class="card-label">Default Receiver Email address will be define here. </h3>
                         </div>
                         <div class="card-toolbar">
-                            <a href="{{ route('emailsettings.create') }}" class="btn btn-primary font-weight-bolder">Add</a>
                         </div>
                     </div>
                         
@@ -54,42 +53,24 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Type</th>
-                                    <th>From Address</th>
-                                    <th>From Title</th>
-                                    <th>Subject</th>
+                                    <th>Address</th>
                                     <th>Date</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php 
-                                    if($emailsettings) {
+                                    if($defaultemail) {
                                         $i = 1;
-                                        foreach($emailsettings as $emailsetting) { ?>
+                                        foreach($defaultemail as $de) { ?>
                                             <tr>
                                                 <td>{{ $i }}</td>
                                                 <td>
-                                                    {{ App\EmailSettings::getType($emailsetting->type) }}
+                                                    {{ $de->address }}
                                                 </td>
+                                                <td>{{ $de->sign_date }}</td>
                                                 <td>
-                                                    {{ $emailsetting->from_address }}
-                                                </td>
-                                                <td>
-                                                    {{ $emailsetting->from_title }}
-                                                </td>
-                                                <td>
-                                                    {{ $emailsetting->subject }}
-                                                </td>
-                                                <td>{{ $emailsetting->sign_date }}</td>
-                                                <td>
-                                                    <a href="{{ route('emailsettings.show', $emailsetting->id) }}" class="btn btn-success">Edit</a>
-                                                    <a href="" onclick="event.preventDefault(); document.getElementById('delete-form-{{$emailsetting->id}}').submit();" class="btn btn-primary">Delete</a>
-
-                                                    <form id="delete-form-{{$emailsetting->id}}" action="{{ route('emailsettings.destroy', $emailsetting->id) }}" method="POST" style="display: none;">
-                                                        <input type="hidden" name="_method" value="delete">
-                                                        @csrf
-                                                    </form>
+                                                    <a href="{{ route('defaultemail.show', $de->id) }}" class="btn btn-success">Edit</a>
                                                 </td>
                                             </tr>
                                 <?php $i++; } }else{ ?>

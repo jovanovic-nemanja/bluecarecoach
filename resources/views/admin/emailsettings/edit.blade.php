@@ -17,12 +17,12 @@
                     <!--begin::Page Heading-->
                     <div class="d-flex align-items-baseline flex-wrap mr-5">
                         <!--begin::Page Title-->
-                        <h2 class="d-flex align-items-center text-dark font-weight-bold my-1 mr-3">Edit Email Setting</h2>
+                        <h2 class="d-flex align-items-center text-dark font-weight-bold my-1 mr-3">Edit Email Template Setting</h2>
                         <!--end::Page Title-->
                         <!--begin::Breadcrumb-->
                         <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold my-2 p-0">
                             <li class="breadcrumb-item">
-                                <a href="{{ route('emailsettings.index') }}" class="text-muted">Email Settings &nbsp;</a>
+                                <a href="{{ route('emailsettings.index') }}" class="text-muted">Email Template Settings &nbsp;</a>
                             </li>
                         </ul>
                         <!--end::Breadcrumb-->
@@ -43,6 +43,8 @@
                     <div class="card-body">
                         <form action="{{ route('emailsettings.update', $emailsettings->id) }}" method="POST">
                             @csrf
+
+                            <input type="hidden" name="_method" value="put">
 
                             <div class="form-group">
                                 <label class="col-form-label">Type</label>

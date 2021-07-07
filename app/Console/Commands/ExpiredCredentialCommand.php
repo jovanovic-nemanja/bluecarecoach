@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\User;
 use Carbon\Carbon;
 use App\EmailSettings;
+use App\DefaultEmail;
 use App\Credentialusers;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -66,7 +67,19 @@ class ExpiredCredentialCommand extends Command
                     $diff_in_months = $today->diffInDays($expire_date);
 
                     $username = $expiredCredential->firstname;
+                    if (@$username) {
+                        // code...
+                    }else{
+                        $username = "Bluely Credentials";
+                    }
+                    
                     $useremail = $expiredCredential->email;
+                    if (@$useremail) {
+                        // code...
+                    }else{
+                        $defaultemail = DefaultEmail::latest()->take(1)->first();
+                        $useremail = ($defaultemail->address != "") ? $defaultemail->address : "core.solutions06@gmail.com";
+                    }
 
                     $emailsettings = EmailSettings::where('type', 4)->first();
 

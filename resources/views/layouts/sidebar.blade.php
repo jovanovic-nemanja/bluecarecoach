@@ -45,7 +45,7 @@
                     </div>
                 </li>
 
-                <li class="menu-item menu-item-submenu <?= ($menu == 'credentials' || $menu == 'care_giving_licenses' || $menu == 'video' || $menu == 'tagline' || $menu == 'emailsettings') ? "menu-item-open" : "" ?> menu-item-here" aria-haspopup="true" data-menu-toggle="hover">
+                <li class="menu-item menu-item-submenu <?= ($menu == 'credentials' || $menu == 'care_giving_licenses' || $menu == 'video' || $menu == 'tagline' || $menu == 'emailsettings' || $menu == "defaultemail") ? "menu-item-open" : "" ?> menu-item-here" aria-haspopup="true" data-menu-toggle="hover">
                     <a href="javascript:;" class="menu-link menu-toggle">
                         <span class="svg-icon svg-icon-primary svg-icon-2x">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -120,7 +120,7 @@
 
                             <li class="menu-item menu-item-parent" aria-haspopup="true">
                                 <span class="menu-link">
-                                    <span class="menu-text">Email Settings</span>
+                                    <span class="menu-text">Email Template Settings</span>
                                 </span>
                             </li>
                             <li class="menu-item <?= ($menu == "emailsettings") ? "menu-item-active" : "" ?>" aria-haspopup="true">
@@ -128,7 +128,21 @@
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
-                                    <span class="menu-text">Email Settings</span>
+                                    <span class="menu-text">Email Template Settings</span>
+                                </a>
+                            </li>
+
+                            <li class="menu-item menu-item-parent" aria-haspopup="true">
+                                <span class="menu-link">
+                                    <span class="menu-text">Default Email Address</span>
+                                </span>
+                            </li>
+                            <li class="menu-item <?= ($menu == "defaultemail") ? "menu-item-active" : "" ?>" aria-haspopup="true">
+                                <a href="{{ route('defaultemail.index') }}" class="menu-link <?= ($menu == "defaultemail") ? "menu-item-active" : "" ?>">
+                                    <i class="menu-bullet menu-bullet-dot">
+                                        <span></span>
+                                    </i>
+                                    <span class="menu-text">Default Email Address</span>
                                 </a>
                             </li>
                         </ul>
