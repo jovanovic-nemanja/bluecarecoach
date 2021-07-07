@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use App\Credentials;
 use App\Verifyemails;
 use App\EmailSettings;
+use App\DefaultEmail;
 use App\Credentialusers;
 use App\Caregivinglicenses;
 use Illuminate\Http\Request;
@@ -580,7 +581,9 @@ class UsersController extends Controller
                     if(@$userInfo->email) {
                         $useremail = $userInfo->email;    
                     }else{
-                        $useremail = $emailsettings->from_address;
+                        // $useremail = $emailsettings->from_address;
+                        $defaultemail = DefaultEmail::latest()->take(1)->first();
+                        $useremail = ($defaultemail->address != "") ? $defaultemail->address : "core.solutions06@gmail.com";
                     }
 
                     $credentialInfo = Credentials::where('id', $credential->credentialid)->first();
@@ -1008,7 +1011,8 @@ class UsersController extends Controller
                 if(@$user->email) {
                     $uEmail = $user->email;
                 }else{
-                    $uEmail = "bluely@user.com";
+                    $defaultemail = DefaultEmail::latest()->take(1)->first();
+                    $uEmail = ($defaultemail->address != "") ? $defaultemail->address : "core.solutions06@gmail.com";
                 }
 
                 $data['name'] = ($request->firstname) ? $request->firstname : $uFirstname;
@@ -1023,7 +1027,7 @@ class UsersController extends Controller
                 
                 $emailsettings = EmailSettings::where('type', 3)->first();
                 
-                $useremail = "core.solutions06@gmail.com";
+                $useremail = $uEmail;
                 $username = $emailsettings->from_title;
                 $subject = $emailsettings->subject;
                 Mail::send('frontend.mail.mail', $data, function($message) use ($username, $useremail, $subject, $emailsettings) {

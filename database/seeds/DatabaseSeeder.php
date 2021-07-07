@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             CredentialsSeeder::class,
             EmailSettingsSeeder::class,
             CaregivinglicensesSeeder::class,
+            DefaultEmailSeeder::class,
        ]);
     }
 }

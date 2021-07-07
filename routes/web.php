@@ -59,3 +59,7 @@ Route::get('/tagline', 'Admin\TaglineController@index')->name('tagline.index');
 
 Route::resource('emailsettings', 'Admin\EmailSettingsController');
 Route::get('/emailsettings', 'Admin\EmailSettingsController@index')->name('emailsettings.index');
+
+
+Route::resource('defaultemail', 'Admin\DefaultEmailController');
+Route::get('/defaultemail', 'Admin\DefaultEmailController@index')->name('defaultemail.index');
