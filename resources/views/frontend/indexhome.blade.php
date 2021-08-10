@@ -39,9 +39,9 @@
                             <input type="hidden" id="env_domain_url" value="{{ env('APP_URL') }}" />
                             
                             <select class="form-control looking_job mr-2" id="looking_job" required>
-                                <option value="">Choose Nurse...</option>
-                                <option value="1" <?php if($actived == 1){echo 'selected';} ?>>Actived</option>
-                                <option value="2" <?php if($actived == 2){echo 'selected';} ?>>Deactived</option>
+                                <option value="">Choose the status...</option>
+                                <option value="1" <?php if($actived == 1){echo 'selected';} ?>>Looking for job</option>
+                                <option value="2" <?php if($actived == 2){echo 'selected';} ?>>Not interested</option>
                             </select>
 
                             <button name="search" id="search" class="btn btn-success btn-sm form-control font-weight-bolder">Search</button>
@@ -75,7 +75,7 @@
                                                 </td>
                                                 <td>{{ $user->email }}</td>
                                                 <td>{{ $user->license }}</td>
-                                                <td>{{ ($user->looking_job == 1) ? "Actived" : "Deactived" }}</td>
+                                                <td>{{ ($user->looking_job == 1) ? "Looking for job" : "Not interested" }}</td>
                                                 <td>{{ $user->care_giving_experience." Years" }}</td>
                                                 <td>{{ $user->zip_code }}</td>
                                                 <td>{{ $user->phone_number }}</td>
