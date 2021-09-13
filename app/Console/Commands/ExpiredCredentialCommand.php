@@ -14,6 +14,9 @@ use Mail;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
+use Twilio\Rest\Client; 
+use Twilio\Jwt\AccessToken;
+
 class ExpiredCredentialCommand extends Command
 {
     /**
@@ -93,6 +96,23 @@ class ExpiredCredentialCommand extends Command
                             $message->to($useremail, $username)->subject($subject);
                             $message->from($emailsettings->from_address, $emailsettings->from_title);
                         });
+
+                        try {
+                            $sid    = "AC516417926bf23caea041dac3fb03b0a8"; 
+                            $token  = "407af46055e64028142d538eab532526"; 
+                            $twilio = new Client($sid, $token); 
+                             
+                            $message = $twilio->messages 
+                                ->create("+12068329507",
+                                    [
+                                        "body" => "Hello, Aman. I'm Nemanja. This is testing SMS for bluely credentials reminder.",
+                                        "messagingServiceSid" => "MG755786902d0d907c8f94f94faf422ca3"
+                                        // "from" => "16466813771"
+                                    ] 
+                                );
+                        } catch (TwilioException $e) {
+                            $result = 'Twilio replied with: ' . $e;
+                        }
                     }
                 }
             }
