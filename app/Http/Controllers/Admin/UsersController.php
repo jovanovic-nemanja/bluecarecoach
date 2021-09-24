@@ -28,7 +28,7 @@ use Illuminate\Support\Facades\Validator;
 class UsersController extends Controller
 {
     public function __construct(){
-        $this->middleware(['auth', 'admin'])->except(['store', 'emailverify', 'validateCode', 'loginUserwithApple', 'loginUserwithGoogle', 'loginUserwithFacebook', 'loginUser', 'logout', 'uploadCredentialFile', 'deleteCredentialuser', 'forgotpassword', 'resetpwd', 'resetUserpassword', 'getUserinformation', 'getCredentials', 'getLicenses', 'updateAccount', 'addCredential', 'saveSkillandhobby', 'getvideolink', 'deleteExtracredential', 'deleteAccount']);
+        $this->middleware(['auth', 'admin'])->except(['store', 'emailverify', 'validateCode', 'loginUserwithApple', 'loginUserwithGoogle', 'loginUserwithFacebook', 'loginUser', 'logout', 'uploadCredentialFile', 'deleteCredentialuser', 'forgotpassword', 'resetpwd', 'resetUserpassword', 'getUserinformation', 'getCredentials', 'getLicenses', 'updateAccount', 'addCredential', 'saveSkillandhobby', 'getvideolink', 'deleteExtracredential', 'deleteAccount', 'UsersController']);
     }
 
     /**
@@ -1267,5 +1267,19 @@ class UsersController extends Controller
         }
 
         return response()->json(['status' => "success", 'data' => "", 'msg' => 'Successfully deleted account.']);
+    }
+
+    /**
+     * External API for bluecarehub.com
+     *
+     * @since 2021-09-24
+     * @author Nemanja
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getUserswithLookingjob(Request $request)
+    {
+        $list = User::where('looking_job', 1)->get();
+        return $list;
     }
 }
