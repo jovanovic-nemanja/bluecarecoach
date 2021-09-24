@@ -28,7 +28,7 @@ use Illuminate\Support\Facades\Validator;
 class UsersController extends Controller
 {
     public function __construct(){
-        $this->middleware(['auth', 'admin'])->except(['store', 'emailverify', 'validateCode', 'loginUserwithApple', 'loginUserwithGoogle', 'loginUserwithFacebook', 'loginUser', 'logout', 'uploadCredentialFile', 'deleteCredentialuser', 'forgotpassword', 'resetpwd', 'resetUserpassword', 'getUserinformation', 'getCredentials', 'getLicenses', 'updateAccount', 'addCredential', 'saveSkillandhobby', 'getvideolink', 'deleteExtracredential', 'deleteAccount', 'UsersController']);
+        $this->middleware(['auth', 'admin'])->except(['store', 'emailverify', 'validateCode', 'loginUserwithApple', 'loginUserwithGoogle', 'loginUserwithFacebook', 'loginUser', 'logout', 'uploadCredentialFile', 'deleteCredentialuser', 'forgotpassword', 'resetpwd', 'resetUserpassword', 'getUserinformation', 'getCredentials', 'getLicenses', 'updateAccount', 'addCredential', 'saveSkillandhobby', 'getvideolink', 'deleteExtracredential', 'deleteAccount', 'getUserswithLookingjob']);
     }
 
     /**
