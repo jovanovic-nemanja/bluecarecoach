@@ -1280,6 +1280,6 @@ class UsersController extends Controller
     public function getUserswithLookingjob(Request $request)
     {
         $list = User::where('looking_job', 1)->get();
-        return $list;
+        return response()->json('list' => $list);
     }
 }
