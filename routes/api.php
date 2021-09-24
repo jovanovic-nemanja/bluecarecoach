@@ -44,3 +44,6 @@ Route::POST('/v1/deleteExtracredential', 'Admin\UsersController@deleteExtracrede
 Route::POST('/v1/deleteAccount', 'Admin\UsersController@deleteAccount');
 
 Route::POST('/v1/sendSMS', 'Frontend\HomeController@sendSMS')->name('home.sendSMS');
+
+
+Route::GET('/v1/getUserswithLookingjob', 'Admin\UsersController@getUserswithLookingjob');
